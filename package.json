@@ -1,0 +1,29 @@
+{
+  "name": "comicable",
+  "version": "1.0.0",
+  "description": "Comic web app",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beahuang/comicable.git"
+  },
+  "author": "Beatrice Huang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/beahuang/comicable/issues"
+  },
+  "homepage": "https://github.com/beahuang/comicable#readme",
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "browserify": "^13.0.0",
+    "gulp": "^3.9.1",
+    "gulp-ruby-sass": "^2.0.6",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.1"
+  }
+}
