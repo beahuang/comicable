@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html lang="en" ng-app="comicableApp">
 <head>
     <meta charset="UTF-8">
     <title>Comicable</title>
-    <script src="/js/main.js"></script>
+    <script src="/main.js"></script>
 </head>
 <body>
-    <div ng-controller="MainController">
-        <h1>{{ message }}</h1>
+    <div id="main">
+        <div ng-view></div>
     </div>
 </body>
 </html>
