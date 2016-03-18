@@ -1,22 +1,30 @@
-var gulp = require( 'gulp' )
-var sass = require( 'gulp-ruby-sass' )
-var browserSync = require( 'browser-sync' )
-var browserify = require( 'browserify' )
-var source = require( 'vinyl-source-stream' )
+var gulp = require( 'gulp' );
+var sass = require( 'gulp-sass' );
+var browserSync = require( 'browser-sync' );
+var browserify = require( 'browserify' );
+var source = require( 'vinyl-source-stream' );
+var imagemin = require('gulp-imagemin');
+var cache = require('gulp-cache');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+
+
 
 var srcPaths = {
-  js: 'app/main.js',
-  comps: 'app/components/**/*',
-  images: '',
-  styles: ''
+  jsPath: ['app/**/*.js', '!app/third-party.js'],
+  thirdPartyJsPath: 'app/third-party.js',
+  compsPath: 'app/components/**/*',
+  imagesPath: 'app/images/**',
+  stylesPath: 'app/styles/**/*.scss'
 };
 
 var distPaths = {
   root: 'dist/',
-  comps: 'dist/components',
-  images: 'dist/images',
-  styles: 'dist/styles',
-  html: 'dist/index.html'
+  scriptsPath: 'dist/scripts',
+  compsPath: 'dist/components',
+  imagesPath: 'dist/images',
+  stylesPath: 'dist/styles',
+  htmlPath: 'dist/index.html'
 }
 
 gulp.task( 'serve', function() {
@@ -27,33 +35,51 @@ gulp.task( 'serve', function() {
       }
     });
 
-    gulp.watch( srcPaths.js, [ 'browserify', browserSync.reload ] )
-    gulp.watch( srcPaths.styles, [ 'sass' ] );
-    gulp.watch( distPaths.html ).on( 'change', browserSync.reload );
-    gulp.watch( srcPaths.comps, ['copyComponents', browserSync.reload]);
 });
 
-gulp.task( 'browserify', function() {
-    return browserify( srcPaths.js )
-        .bundle()
-        .pipe( source( 'main.js' ) )
-        .pipe( gulp.dest( distPaths.root ) );
+gulp.task( 'concatScripts', function() {
+    return gulp.src( srcPaths.jsPath )
+    .pipe( concat( 'main.js' ) )
+    .pipe( gulp.dest( distPaths.scriptsPath ) )
 })
 
-gulp.task( 'sass', function() {
+gulp.task( 'compileThirdParty', function() {
+    return browserify( srcPaths.thirdPartyJsPath )
+        .bundle()
+        .pipe( source( 'third-party.js' ) )
+        .pipe( gulp.dest( distPaths.scriptsPath ) );
+})
+
+gulp.task( 'sassCompile', function() {
     return gulp.src( srcPaths.styles )
-        .pipe( sass() )
-        .pipe( gulp.dest( distPaths.js ) )
+        .pipe(sass().on('error', sass.logError))
+        .pipe( gulp.dest( distPaths.stylesPath ) )
         .pipe( browserSync.stream() );
 });
 
+gulp.task('imageMin', function(){
+  gulp.src( srcPaths.imagesPath )
+    .pipe( cache(
+      imagemin ( {
+         optimizationLevel: 3,
+         progressive: true,
+         interlaced: true
+       } ) ) )
+    .pipe( gulp.dest( distPaths.imagesPath ) );
+});
+
 gulp.task( 'copyComponents', function() {
-  return gulp.src( srcPaths.comps )
-        .pipe( gulp.dest( distPaths.comps ) );
+  return gulp.src( srcPaths.compsPath )
+        .pipe( gulp.dest( distPaths.compsPath ) );
 })
 
 gulp.task( 'watch', function() {
-    gulp.watch( srcPaths.js, [ 'browserify' ] )
+  gulp.watch( srcPaths.jsPath, [ 'concatScripts', browserSync.reload ] );
+  gulp.watch( srcPaths.thirdPartyJsPath, [ 'compileThirdParty', browserSync.reload ] );
+  gulp.watch( srcPaths.imagesPath, [ 'imageMin' ] );
+  gulp.watch( srcPaths.stylesPath, [ 'sassCompile' ] );
+  gulp.watch( distPaths.htmlPath, [ browserSync.reload] );
+  gulp.watch( srcPaths.compsPath, ['copyComponents', browserSync.reload ] );
 })
 
 gulp.task( 'default', [ 'serve', 'watch' ] );

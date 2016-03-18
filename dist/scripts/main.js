@@ -33,3 +33,21 @@ function( $routeProvider ) {
         redirectTo: '/'
     });
 }]);
+
+var comicableApp = angular.module( 'comicableApp' );
+
+comicableApp.controller( 'loginController', function( $scope ) {
+    $scope.message = 'Login Controller works';
+});
+
+comicableApp.controller( 'mySeriesController', function( $scope ) {
+    $scope.message = 'My Series Controller works'
+})
+
+comicableApp.controller( 'releasedIssuesController', function( $scope ) {
+    $scope.message = 'Released Issues Controller works'
+})
+
+comicableApp.controller( 'readingListController', function( $scope ) {
+    $scope.message = 'Reading List Controller works'
+})
