@@ -1,3 +1,3 @@
 comicableApp.controller( 'mySeriesController', function( $scope ) {
-    $scope.message = 'My Series Controller works'
+    $scope.message = 'My Series'
 })

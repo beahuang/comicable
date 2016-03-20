@@ -11,7 +11,7 @@ var uglify = require('gulp-uglify');
 
 
 var srcPaths = {
-  jsPath: ['app/**/*.js', '!app/third-party.js'],
+  jsPath: [ 'app/**/*.js', '!app/third-party.js' ],
   thirdPartyJsPath: 'app/third-party.js',
   compsPath: 'app/components/**/*',
   imagesPath: 'app/images/**',
@@ -32,7 +32,9 @@ gulp.task( 'serve', function() {
     browserSync.init({
       server: {
           baseDir: "./dist/"
-      }
+      },
+      port: 8080,
+      open: false
     });
 
 });
@@ -51,7 +53,7 @@ gulp.task( 'compileThirdParty', function() {
 })
 
 gulp.task( 'sassCompile', function() {
-    return gulp.src( srcPaths.styles )
+    return gulp.src( srcPaths.stylesPath )
         .pipe(sass().on('error', sass.logError))
         .pipe( gulp.dest( distPaths.stylesPath ) )
         .pipe( browserSync.stream() );

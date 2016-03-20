@@ -23,10 +23,10 @@ function( $routeProvider ) {
         controller  : 'releasedIssuesController'
     })
 
-    // route for the Reading List page
-    .when( '/reading-list', {
-        templateUrl : 'components/released-issues/reading-list.html',
-        controller  : 'readingListController'
+    // route for the My Favorites page
+    .when( '/my-favorites', {
+        templateUrl : 'components/my-favorites/my-favorites.html',
+        controller  : 'myFavoritesController'
     })
 
     .otherwise({
@@ -37,17 +37,17 @@ function( $routeProvider ) {
 var comicableApp = angular.module( 'comicableApp' );
 
 comicableApp.controller( 'loginController', function( $scope ) {
-    $scope.message = 'Login Controller works';
+    $scope.message = 'Login / Register';
 });
 
+comicableApp.controller( 'myFavoritesController', function( $scope ) {
+    $scope.message = 'My Favorites Controller works'
+})
+
 comicableApp.controller( 'mySeriesController', function( $scope ) {
-    $scope.message = 'My Series Controller works'
+    $scope.message = 'My Series'
 })
 
 comicableApp.controller( 'releasedIssuesController', function( $scope ) {
     $scope.message = 'Released Issues Controller works'
-})
-
-comicableApp.controller( 'readingListController', function( $scope ) {
-    $scope.message = 'Reading List Controller works'
 })

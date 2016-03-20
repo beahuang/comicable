@@ -1,4 +1,212 @@
-@import 'base/mixins';
-@import 'base/normalize';
-@import 'base/fonts';
- 
+@import './base/mixins';
+@import './base/normalize';
+@import './base/fonts';
+
+/* Variables
+   ========================================================================== */
+
+// Wrapper
+$container: 1080px;
+
+// Breakpoints
+$mobile: 760px;
+$tablet: 960px;
+$mobile-landscape: 400px;
+
+// Colors
+
+
+/* Structure
+   ========================================================================== */
+
+.container {
+  max-width: $container;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+}
+
+/* Global
+   ========================================================================== */
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.btn {
+  -webkit-appearance: none;
+  border: none;
+  background: none;
+  background-color: white;
+  padding: 7px 60px;
+  border: 1px solid black;
+}
+
+h1 {
+  margin: 0;
+}
+
+/* Header
+   ========================================================================== */
+
+header {
+  background-color: gray;
+  height: 65px;
+  div {
+    display: inline-block;
+    vertical-align: middle;
+    .login-state,
+    .logo-wrapper {
+      position: absolute;
+      top: 5px;
+    }
+  }
+}
+
+.logo-wrapper {
+  img {
+    height: 100px;
+    width: auto;
+    display: block;
+    margin-top: -10px;
+  }
+}
+
+.login-state {
+  right: 20px;
+
+  .logged-in {
+    display: none;
+    * {
+      vertical-align: middle;
+      display: inline-block;
+    }
+  }
+}
+
+body.logged-in {
+  .login-state .logged-in {
+    display: inline-block;
+  }
+  .login-state .not-logged-in {
+    display: none;
+  }
+}
+
+/* Navigation
+   ========================================================================== */
+
+nav {
+  background-color: rgba(3,26,40,0.7);
+  padding: 15px 0px;
+  margin-top: -62px;
+  ul {
+    padding: 0;
+    li {
+      display: inline-block;
+      padding: 5px 35px 5px 0;
+      &.selected:after {
+        content: "";
+        display: block;
+        padding-top: 3px;
+        border-bottom: 2px solid white;
+      }
+      a {
+        color: white;
+      }
+    }
+  }
+}
+
+/* Navigation
+   ========================================================================== */
+
+.banner {
+  background: url("../images/banner.jpg");
+  background-size: cover;
+  background-position: center top;
+  height: 350px;
+}
+
+/* Components
+   ========================================================================== */
+
+.title {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.login-box {
+  width: 500px;
+  margin: 0 auto;
+  background: lightgray;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+form {
+  input {
+    margin: 10px 0;
+  }
+  label {
+    min-width: 110px;
+    display: inline-block;
+  }
+  .btn {
+    margin-top: 15px;
+  }
+}
+
+#my-series {
+  .upload {
+    float: right;
+    margin-top: -40px;
+  }
+}
+.filtering {
+  padding: 20px;
+}
+.comic-grid {
+  background: gray;
+  min-height: 500px;
+  padding: 0;
+  .comic-box{
+    position: relative;
+    width: 24.6%;
+    overflow: hidden;
+    background: #4679BD;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 1px solid black;
+    @include break($tablet) {
+      width: 32.8%;
+    }
+    @include break($mobile) {
+      width: 100%;
+    }
+  }
+  .comic-box:before{
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+  .comic-content{
+    position:  absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: white;
+    text-align: center;
+  }
+}

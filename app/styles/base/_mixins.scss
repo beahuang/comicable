@@ -1,1 +1,223 @@
+/* ==========================================================================
+   Mixins
+   ========================================================================== */
 
+/*
+@name: background-clip
+@description: prevents background from busting out of containing element.
+*/
+
+@mixin background-clip {
+    -webkit-background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box;
+}
+
+/*
+@name: background-cover
+@description: makes image resize to container
+*/
+
+@mixin background-cover {
+  -webkit-background-size: cover;
+     -moz-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+}
+
+/*
+@name: box-shadow
+@description: applies a CSS3 box shadow to element
+*/
+
+@mixin box-shadow($props) {
+  -webkit-box-shadow: $props;
+     -moz-box-shadow: $props;
+          box-shadow: $props;
+}
+
+/*
+@name: break
+@description: applies a max-width media query breakpoint.
+*/
+
+@mixin break($size) {
+  @media (max-width: $size) { @content; }
+}
+
+/*
+@name: break-min
+@description: applies a max-width media query breakpoint.
+*/
+
+@mixin break-min($size) {
+  @media (min-width: $size) { @content; }
+}
+
+/*
+@name: break-max-height
+@description: applies a max-height media query breakpoint.
+*/
+
+@mixin break-max-height($size) {
+  @media (max-height: $size) { @content; }
+}
+
+/*
+@name: clear
+@description: clears floats within element applied.
+*/
+
+@mixin clear {
+  *zoom: 1;
+  &:before, &:after { content: " "; display: table; }
+  &:after { clear: both; }
+}
+
+/*
+@name: font-size
+@description: uses rems from a pixel baseline.
+*/
+
+@mixin font-size($sizeValue: 1.6) {
+  font-size: ($sizeValue * 10) + px;
+  font-size: $sizeValue + rem;
+}
+
+/*
+@name: fullscreen
+@description: positions an element to the size of the viewport.
+*/
+
+@mixin fullscreen($zindex: 1) {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: $zindex;
+    top: 0;
+    left: 0;
+}
+
+/*
+@name: list-reset
+@description: remove base styles for lists
+*/
+
+@mixin list-reset {
+  list-style: none; margin: 0; padding: 0;
+  ul, li { list-style: none; margin: 0; padding: 0; }
+}
+
+/*
+@name: placeholder-color
+@description: sets the color for placeholder text on inputs
+*/
+
+@mixin placeholder-color($color) {
+  &::-webkit-input-placeholder { color: $color !important; }
+  &:-moz-placeholder { color: $color; }
+  &::-moz-placeholder { color: $color; }
+  &:-ms-input-placeholder { color: $color; }
+}
+
+/*
+@name: retina
+@description: makes images look good on both retina and normal screens.
+*/
+
+@mixin retina($image, $width, $height) {
+  @media (min--moz-device-pixel-ratio: 1.3),
+         (-o-min-device-pixel-ratio: 2.6/2),
+         (-webkit-min-device-pixel-ratio: 1.3),
+         (min-device-pixel-ratio: 1.3),
+         (min-resolution: 1.3dppx) {
+
+    background-image: url($image);
+    background-size: $width $height; }
+}
+
+/*
+@name: rounded-corners
+@description: applies a cross-browser (within reason) CSS3 border radius.
+*/
+
+@mixin rounded-corners($radius) {
+  @include background-clip;
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+       -o-border-radius: $radius;
+          border-radius: $radius;
+}
+
+/*
+@name: rotate
+@description: applies a cross-browser (within reason) CSS3 rotate transform.
+*/
+
+@mixin rotate($deg) {
+  -ms-transform: rotate($deg);
+  -webkit-transform: rotate($deg);
+  transform: rotate($deg);
+}
+
+/*
+@name: scale
+@description: applies a cross-browser (within reason) CSS3 scale transform.
+*/
+
+@mixin scale($size) {
+  -ms-transform: scale($size);
+  -webkit-transform: scale($size);
+  transform: scale($size);
+}
+
+/*
+@name: transition
+@description: applies a cross-browser (within reason) CSS3 animation.
+*/
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin bouncetransition {
+  @include transition(all 0.3s cubic-bezier(.59,.27,0,1.09));
+}
+
+/*
+@name: vertical-align
+@description: vertically centers the object.
+*/
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+/*
+@name: abs-pos
+@description: absolutely positions
+*/
+@mixin abs-pos ($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+/*
+@name: webkit-flickr
+@description: prevents webkit text flickr
+*/
+@mixin webkit-flickr {
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+}

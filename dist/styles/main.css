@@ -1,3 +1,82 @@
+/* ==========================================================================
+   Mixins
+   ========================================================================== */
+/*
+@name: background-clip
+@description: prevents background from busting out of containing element.
+*/
+/*
+@name: background-cover
+@description: makes image resize to container
+*/
+/*
+@name: box-shadow
+@description: applies a CSS3 box shadow to element
+*/
+/*
+@name: break
+@description: applies a max-width media query breakpoint.
+*/
+/*
+@name: break-min
+@description: applies a max-width media query breakpoint.
+*/
+/*
+@name: break-max-height
+@description: applies a max-height media query breakpoint.
+*/
+/*
+@name: clear
+@description: clears floats within element applied.
+*/
+/*
+@name: font-size
+@description: uses rems from a pixel baseline.
+*/
+/*
+@name: fullscreen
+@description: positions an element to the size of the viewport.
+*/
+/*
+@name: list-reset
+@description: remove base styles for lists
+*/
+/*
+@name: placeholder-color
+@description: sets the color for placeholder text on inputs
+*/
+/*
+@name: retina
+@description: makes images look good on both retina and normal screens.
+*/
+/*
+@name: rounded-corners
+@description: applies a cross-browser (within reason) CSS3 border radius.
+*/
+/*
+@name: rotate
+@description: applies a cross-browser (within reason) CSS3 rotate transform.
+*/
+/*
+@name: scale
+@description: applies a cross-browser (within reason) CSS3 scale transform.
+*/
+/*
+@name: transition
+@description: applies a cross-browser (within reason) CSS3 animation.
+*/
+/*
+@name: vertical-align
+@description: vertically centers the object.
+*/
+/*
+@name: abs-pos
+@description: absolutely positions
+*/
+/*
+@name: webkit-flickr
+@description: prevents webkit text flickr
+*/
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Set default font family to sans-serif.
@@ -352,3 +431,159 @@ table {
 td,
 th {
   padding: 0; }
+
+/* Variables
+   ========================================================================== */
+/* Structure
+   ========================================================================== */
+.container {
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: block;
+  position: relative; }
+
+/* Global
+   ========================================================================== */
+a {
+  color: black;
+  text-decoration: none; }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+
+.btn {
+  -webkit-appearance: none;
+  border: none;
+  background: none;
+  background-color: white;
+  padding: 7px 60px;
+  border: 1px solid black; }
+
+h1 {
+  margin: 0; }
+
+/* Header
+   ========================================================================== */
+header {
+  background-color: gray;
+  height: 65px; }
+  header div {
+    display: inline-block;
+    vertical-align: middle; }
+    header div .login-state,
+    header div .logo-wrapper {
+      position: absolute;
+      top: 5px; }
+
+.logo-wrapper img {
+  height: 100px;
+  width: auto;
+  display: block;
+  margin-top: -10px; }
+
+.login-state {
+  right: 20px; }
+  .login-state .logged-in {
+    display: none; }
+    .login-state .logged-in * {
+      vertical-align: middle;
+      display: inline-block; }
+
+body.logged-in .login-state .logged-in {
+  display: inline-block; }
+
+body.logged-in .login-state .not-logged-in {
+  display: none; }
+
+/* Navigation
+   ========================================================================== */
+nav {
+  background-color: rgba(3, 26, 40, 0.7);
+  padding: 15px 0px;
+  margin-top: -62px; }
+  nav ul {
+    padding: 0; }
+    nav ul li {
+      display: inline-block;
+      padding: 5px 35px 5px 0; }
+      nav ul li.selected:after {
+        content: "";
+        display: block;
+        padding-top: 3px;
+        border-bottom: 2px solid white; }
+      nav ul li a {
+        color: white; }
+
+/* Navigation
+   ========================================================================== */
+.banner {
+  background: url("../images/banner.jpg");
+  background-size: cover;
+  background-position: center top;
+  height: 350px; }
+
+/* Components
+   ========================================================================== */
+.title {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+
+.login-box {
+  width: 500px;
+  margin: 0 auto;
+  background: lightgray;
+  padding: 50px 20px;
+  text-align: center; }
+
+form input {
+  margin: 10px 0; }
+
+form label {
+  min-width: 110px;
+  display: inline-block; }
+
+form .btn {
+  margin-top: 15px; }
+
+#my-series .upload {
+  float: right;
+  margin-top: -40px; }
+
+.filtering {
+  padding: 20px; }
+
+.comic-grid {
+  background: gray;
+  min-height: 500px;
+  padding: 0; }
+  .comic-grid .comic-box {
+    position: relative;
+    width: 24.6%;
+    overflow: hidden;
+    background: #4679BD;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 1px solid black; }
+    @media (max-width: 960px) {
+      .comic-grid .comic-box {
+        width: 32.8%; } }
+    @media (max-width: 760px) {
+      .comic-grid .comic-box {
+        width: 100%; } }
+  .comic-grid .comic-box:before {
+    content: "";
+    display: block;
+    padding-top: 100%; }
+  .comic-grid .comic-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: white;
+    text-align: center; }

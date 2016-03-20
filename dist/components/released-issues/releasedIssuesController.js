@@ -1,3 +1,3 @@
-comicableApp.controller( 'readingListController', function( $scope ) {
-    $scope.message = 'Reading List Controller works'
+comicableApp.controller( 'releasedIssuesController', function( $scope ) {
+    $scope.message = 'Released Issues Controller works'
 })
