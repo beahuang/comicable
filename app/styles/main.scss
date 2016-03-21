@@ -191,6 +191,10 @@ form {
     @include break($mobile) {
       width: 100%;
     }
+    &:hover {
+      background: grayscale(#4679BD);
+      cursor: pointer;
+    }
   }
   .comic-box:before{
     content: "";
@@ -217,6 +221,59 @@ form {
   }
 }
 
+.favorited {
+  .icon-heart-filled {
+    display: block;
+  }
+  .icon-heart-outline {
+    display: none;
+  }
+}
+
+.icon-heart-filled {
+  display: none;
+  position: absolute;
+  right: 3px;
+  top: -25px;
+  &:before {
+    font-size: 1.3em;
+    cursor: pointer;
+  }
+}
+
+.icon-heart-outline {
+  position: absolute;
+  right: 3px;
+  top: -25px;
+  &:before {
+    font-size: 1.3em;
+    cursor: pointer;
+  }
+}
+
+.comic-details {
+  img {
+    width: 24%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .details {
+    display: inline-block;
+    width: 75%;
+    vertical-align: middle;
+  }
+  ul {
+    a {
+      min-width: 200px;
+      display: inline-block;
+    }
+  }
+  .icon-check {
+    color: green;
+    margin-left: 5px;
+  }
+}
+
 #my-favorites .comic-list {
   background: gray;
   color: white;
@@ -224,6 +281,8 @@ form {
   .comic-box {
     margin: 20px 0;
     width: 100%;
+    background: #4679BD;
+    border: 1px solid black;
     img, .description {
       display: inline-block;
       vertical-align: middle;
@@ -289,3 +348,31 @@ form {
   #my-series {
     overflow: auto;
   }
+
+/* Issue Reader
+========================================================================== */
+.reader {
+  img {
+    width: 90%;
+    margin: 0 auto;
+    display: block;
+  }
+  .controls {
+    height: 30px;
+    padding: 20px 0;
+    > div {
+      width: 90%;
+      text-align: right;
+    }
+  }
+  .icon-arrow-left, .icon-arrow-right {
+    position: absolute;
+    font-size: 1.5em;
+  }
+  .icon-arrow-left {
+    left: 50px;
+  }
+  .icon-arrow-right {
+    right: 50px;
+  }
+}

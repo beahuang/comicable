@@ -17,7 +17,11 @@
   <div class="container comic-grid">
     <div class="comic-box">
       <div class="comic-content">
-        <img src="images/batman-cover.jpg" alt="batman endgame cover"/>
+        <div ng-class="class">
+          <span ng-click="addToFavorites()" class="icon-heart-outline"></span>
+          <span ng-click="removeFromFavorites()" class="icon-heart-filled"></span>
+        </div>
+        <img src="images/batman-cover.jpg" alt="batman endgame cover" ng-click="showDetails()"/>
         <p>Batman - End Game</p>
       </div>
     </div>
@@ -69,6 +73,5 @@
         <p>Batman - End Game</p>
       </div>
     </div>
-
   </div>
 </div>

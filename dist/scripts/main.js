@@ -33,10 +33,20 @@ function( $routeProvider ) {
         controller  : 'myFavoritesController'
     })
 
+    // route for the My Favorites page
+    .when( '/issue-reader', {
+        templateUrl : 'components/issue-reader/issue-reader.html',
+        controller  : 'issueReaderController'
+    })
+
     .otherwise({
         redirectTo: '/'
     });
 }]);
+
+comicableApp.controller( 'issueReaderController', function( $scope ) {
+    $scope.message = 'Issue Reader'
+})
 
 var comicableApp = angular.module( 'comicableApp' );
 
@@ -81,6 +91,43 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService ) 
                 console.log( result );
             });
         });
+    }
+
+    $scope.showDetails = function() {
+        ModalService.showModal( {
+            templateUrl: "components/modals/show-details.html",
+            controller: "modalController"
+        } ).then( function( modal ) {
+            modal.element.modal();
+            modal.close.then( function( result ) {
+                console.log( result );
+            });
+        });
+    }
+
+    $scope.addToFavorites = function() {
+        ModalService.showModal( {
+            templateUrl: "components/modals/confirm.html",
+            controller: "modalController"
+        } ).then( function( modal ) {
+            modal.element.modal();
+            modal.close.then( function( result ) {
+                $scope.changeHeartClass();
+            });
+        });
+    }
+
+    $scope.class = "";
+    $scope.changeHeartClass = function() {
+        if ($scope.class === "") {
+            $scope.class = "favorited";
+        } else {
+            $scope.class = "";
+        }
+    }
+
+    $scope.removeFromFavorites = function() {
+
     }
 })
 

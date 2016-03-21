@@ -33,6 +33,12 @@ function( $routeProvider ) {
         controller  : 'myFavoritesController'
     })
 
+    // route for the My Favorites page
+    .when( '/issue-reader', {
+        templateUrl : 'components/issue-reader/issue-reader.html',
+        controller  : 'issueReaderController'
+    })
+
     .otherwise({
         redirectTo: '/'
     });
