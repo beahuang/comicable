@@ -176,8 +176,6 @@ form {
 }
 
 .comic-grid {
-  background: gray;
-  min-height: 500px;
   padding: 0;
   .comic-box{
     position: relative;
@@ -216,8 +214,27 @@ form {
       width: 65%;
       margin: 0 auto;
     }
-    p {
+  }
+}
 
+#my-favorites .comic-list {
+  background: gray;
+  color: white;
+  padding: 20px;
+  .comic-box {
+    margin: 20px 0;
+    width: 100%;
+    img, .description {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    img {
+      width: 25%;
+    }
+    .description {
+      width: 74%;
+      padding: 20px;
+      box-sizing: border-box;
     }
   }
 }
@@ -246,6 +263,14 @@ form {
   }
 }
 
+.filtering {
+  overflow: auto;
+  .btn {
+    float: right;
+    margin-top: -35px;
+  }
+}
+
 /* Login Box
    ========================================================================== */
 
@@ -263,8 +288,4 @@ form {
 
   #my-series {
     overflow: auto;
-    .upload {
-      float: right;
-      margin-top: -40px;
-    }
   }

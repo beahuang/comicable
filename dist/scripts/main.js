@@ -65,7 +65,7 @@ comicableApp.controller( 'modalController', function( $scope, ModalService, clos
 });
 
 comicableApp.controller( 'myFavoritesController', function( $scope ) {
-    $scope.message = 'My Favorites Controller works'
+    $scope.message = 'Favorites List'
 })
 
 comicableApp.controller( 'mySeriesController', function( $scope, ModalService ) {
@@ -85,5 +85,5 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService ) 
 })
 
 comicableApp.controller( 'releasedIssuesController', function( $scope ) {
-    $scope.message = 'Released Issues Controller works'
+    $scope.message = 'Released Issues'
 })

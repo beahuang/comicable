@@ -556,8 +556,6 @@ form .btn {
   padding: 20px; }
 
 .comic-grid {
-  background: gray;
-  min-height: 500px;
   padding: 0; }
   .comic-grid .comic-box {
     position: relative;
@@ -594,6 +592,23 @@ form .btn {
       width: 65%;
       margin: 0 auto; }
 
+#my-favorites .comic-list {
+  background: gray;
+  color: white;
+  padding: 20px; }
+  #my-favorites .comic-list .comic-box {
+    margin: 20px 0;
+    width: 100%; }
+    #my-favorites .comic-list .comic-box img, #my-favorites .comic-list .comic-box .description {
+      display: inline-block;
+      vertical-align: middle; }
+    #my-favorites .comic-list .comic-box img {
+      width: 25%; }
+    #my-favorites .comic-list .comic-box .description {
+      width: 74%;
+      padding: 20px;
+      box-sizing: border-box; }
+
 .modal {
   background: white;
   border: 1px solid black;
@@ -614,6 +629,12 @@ form .btn {
   .modal .modal-footer {
     padding-top: 20px; }
 
+.filtering {
+  overflow: auto; }
+  .filtering .btn {
+    float: right;
+    margin-top: -35px; }
+
 /* Login Box
    ========================================================================== */
 .login-box {
@@ -627,6 +648,3 @@ form .btn {
   ========================================================================== */
 #my-series {
   overflow: auto; }
-  #my-series .upload {
-    float: right;
-    margin-top: -40px; }
