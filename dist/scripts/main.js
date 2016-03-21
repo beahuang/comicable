@@ -62,7 +62,7 @@ comicableApp.controller( 'modalController', function( $scope, ModalService, clos
 
   $scope.inputDetails = function() {
       ModalService.showModal( {
-          templateUrl: "components/modals/uploadDetails.html",
+          templateUrl: "components/modals/upload-details.html",
           controller: "modalController"
       } ).then( function( modal ) {
           modal.element.modal();
@@ -71,7 +71,28 @@ comicableApp.controller( 'modalController', function( $scope, ModalService, clos
           });
       });
   }
-
+  $scope.inputCreditCard = function() {
+      ModalService.showModal( {
+          templateUrl: "components/modals/card-details.html",
+          controller: "modalController"
+      } ).then( function( modal ) {
+          modal.element.modal();
+          modal.close.then( function( result ) {
+              console.log( result );
+          });
+      });
+  }
+  $scope.confirmPurchase = function() {
+      ModalService.showModal( {
+          templateUrl: "components/modals/confirm-purchase.html",
+          controller: "modalController"
+      } ).then( function( modal ) {
+          modal.element.modal();
+          modal.close.then( function( result ) {
+              console.log( result );
+          });
+      });
+  }
 });
 
 comicableApp.controller( 'myFavoritesController', function( $scope ) {
@@ -131,6 +152,18 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService ) 
     }
 })
 
-comicableApp.controller( 'releasedIssuesController', function( $scope ) {
+comicableApp.controller( 'releasedIssuesController', function( $scope, ModalService ) {
     $scope.message = 'Released Issues'
+
+    $scope.showPurchaseDetails = function() {
+        ModalService.showModal( {
+            templateUrl: "components/modals/show-purchase-details.html",
+            controller: "modalController"
+        } ).then( function( modal ) {
+            modal.element.modal();
+            modal.close.then( function( result ) {
+                console.log( result );
+            });
+        });
+    }
 })

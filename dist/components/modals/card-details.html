@@ -1,0 +1,26 @@
+<div class="modal">
+   <div class="modal-content">
+     <div class="modal-header">
+       <a class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</a>
+       <h3 class="modal-title">Input Card Information</h4>
+     </div>
+     <div class="modal-body">
+        <form>
+           <label for="cardName">Name: </label>
+           <input type="text" id="cardName" name="cardName"/>
+           <br />
+           <label for="cardNumber">Card Number:</label>
+           <input type="text" id="cardNumber" name="cardNumber"/>
+           <br />
+           <label for="cardExp">Expiration Date:</label>
+           <input type="text" id="cardExp" name="cardExp"/>
+           <br />
+           <label for="cardCVV">CVV:</label>
+           <input type="text" id="cardCVV" name="cardCVV"/>
+        </form>
+     </div>
+     <div class="modal-footer">
+       <button class="btn" ng-click="confirmPurchase()" data-dismiss="modal">Purchase</button>
+     </div>
+   </div>
+ </div>

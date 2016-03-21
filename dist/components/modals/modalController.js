@@ -6,7 +6,7 @@ comicableApp.controller( 'modalController', function( $scope, ModalService, clos
 
   $scope.inputDetails = function() {
       ModalService.showModal( {
-          templateUrl: "components/modals/uploadDetails.html",
+          templateUrl: "components/modals/upload-details.html",
           controller: "modalController"
       } ).then( function( modal ) {
           modal.element.modal();
@@ -15,5 +15,26 @@ comicableApp.controller( 'modalController', function( $scope, ModalService, clos
           });
       });
   }
-
+  $scope.inputCreditCard = function() {
+      ModalService.showModal( {
+          templateUrl: "components/modals/card-details.html",
+          controller: "modalController"
+      } ).then( function( modal ) {
+          modal.element.modal();
+          modal.close.then( function( result ) {
+              console.log( result );
+          });
+      });
+  }
+  $scope.confirmPurchase = function() {
+      ModalService.showModal( {
+          templateUrl: "components/modals/confirm-purchase.html",
+          controller: "modalController"
+      } ).then( function( modal ) {
+          modal.element.modal();
+          modal.close.then( function( result ) {
+              console.log( result );
+          });
+      });
+  }
 });

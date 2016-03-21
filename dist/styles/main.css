@@ -664,23 +664,23 @@ form .btn {
     font-size: 1.3em;
     cursor: pointer; }
 
-.comic-details img {
-  width: 24%;
-  display: inline-block;
-  vertical-align: middle; }
-
-.comic-details .details {
-  display: inline-block;
-  width: 75%;
-  vertical-align: middle; }
-
-.comic-details ul a {
-  min-width: 200px;
-  display: inline-block; }
-
-.comic-details .icon-check {
-  color: green;
-  margin-left: 5px; }
+.comic-details {
+  width: 500px; }
+  .comic-details img {
+    width: 24%;
+    display: inline-block;
+    vertical-align: middle; }
+  .comic-details .details {
+    display: inline-block;
+    width: 75%;
+    vertical-align: middle;
+    font-size: 0.8em; }
+  .comic-details ul a {
+    min-width: 200px;
+    display: inline-block; }
+  .comic-details .icon-check {
+    color: green;
+    margin-left: 5px; }
 
 #my-favorites .comic-list {
   background: gray;
