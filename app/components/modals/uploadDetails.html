@@ -1,0 +1,28 @@
+<div class="modal">
+   <div class="modal-content">
+     <div class="modal-header">
+       <a class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</a>
+       <h3 class="modal-title">Comic Issue Details</h4>
+     </div>
+     <div class="modal-body">
+        <form>
+           <label for="cover">Cover Image:</label>
+           <input type="file" id="cover"/>
+           <br/>
+           <label for="issueTitle">Issue Title: </label>
+           <input type="text" id="issueTitle" name="issueTitle"/>
+           <br />
+           <label for="issueNumber">Issue Number:</label>
+           <input type="text" id="issueNumber" name="issueNumber"/>
+           <br />
+           <label for="issueAuthor">Issue Author:</label>
+           <input type="text" id="issueAuthor" name="issueAuthor"/>
+           <br />
+           <textarea rows="4" cols="50" placeholder="Write a description for this issue..."></textarea>
+        </form>
+     </div>
+     <div class="modal-footer">
+       <button class="btn" ng-click="close()" data-dismiss="modal">Confirm Details</button>
+     </div>
+   </div>
+ </div>

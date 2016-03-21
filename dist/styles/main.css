@@ -445,6 +445,9 @@ th {
   display: block;
   position: relative; }
 
+#main {
+  margin-bottom: 50px; }
+
 /* Global
    ========================================================================== */
 a {
@@ -462,7 +465,14 @@ ul {
   background: none;
   background-color: white;
   padding: 7px 60px;
-  border: 1px solid black; }
+  border: 1px solid black;
+  cursor: pointer; }
+  .btn:hover {
+    background-color: gray;
+    color: white; }
+
+.link {
+  text-decoration: underline; }
 
 h1 {
   margin: 0; }
@@ -504,8 +514,7 @@ body.logged-in .login-state .not-logged-in {
    ========================================================================== */
 nav {
   background-color: rgba(3, 26, 40, 0.7);
-  padding: 15px 0px;
-  margin-top: -62px; }
+  padding: 15px 0px; }
   nav ul {
     padding: 0; }
     nav ul li {
@@ -527,18 +536,11 @@ nav {
   background-position: center top;
   height: 350px; }
 
-/* Components
+/* Global Components
    ========================================================================== */
 .title {
   padding-top: 20px;
   padding-bottom: 20px; }
-
-.login-box {
-  width: 500px;
-  margin: 0 auto;
-  background: lightgray;
-  padding: 50px 20px;
-  text-align: center; }
 
 form input {
   margin: 10px 0; }
@@ -550,10 +552,6 @@ form label {
 form .btn {
   margin-top: 15px; }
 
-#my-series .upload {
-  float: right;
-  margin-top: -40px; }
-
 .filtering {
   padding: 20px; }
 
@@ -563,15 +561,15 @@ form .btn {
   padding: 0; }
   .comic-grid .comic-box {
     position: relative;
-    width: 24.6%;
+    width: 25%;
     overflow: hidden;
     background: #4679BD;
-    display: inline-block;
+    float: left;
     box-sizing: border-box;
     border: 1px solid black; }
     @media (max-width: 960px) {
       .comic-grid .comic-box {
-        width: 32.8%; } }
+        width: 33.333%; } }
     @media (max-width: 760px) {
       .comic-grid .comic-box {
         width: 100%; } }
@@ -581,9 +579,54 @@ form .btn {
     padding-top: 100%; }
   .comic-grid .comic-content {
     position: absolute;
-    top: 0;
+    top: 20px;
     left: 0;
     bottom: 0;
     right: 0;
     color: white;
-    text-align: center; }
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px; }
+    .comic-grid .comic-content img {
+      height: 95%;
+      width: 65%;
+      margin: 0 auto; }
+
+.modal {
+  background: white;
+  border: 1px solid black;
+  position: absolute;
+  top: 50%;
+  left: 33%;
+  padding: 20px !important; }
+  .modal .close {
+    padding: 0;
+    border: none;
+    right: 0;
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    cursor: pointer; }
+    .modal .close:hover {
+      color: darkred; }
+  .modal .modal-footer {
+    padding-top: 20px; }
+
+/* Login Box
+   ========================================================================== */
+.login-box {
+  width: 500px;
+  margin: 0 auto;
+  background: lightgray;
+  padding: 50px 20px;
+  text-align: center; }
+
+/* My Series
+  ========================================================================== */
+#my-series {
+  overflow: auto; }
+  #my-series .upload {
+    float: right;
+    margin-top: -40px; }

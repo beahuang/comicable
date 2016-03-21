@@ -1,4 +1,8 @@
-var comicableApp = angular.module( 'comicableApp', ['ngRoute'] )
+var comicableApp = angular.module( 'comicableApp',
+                                    [
+                                     'ngRoute',
+                                     'angularModalService'
+                                    ] )
 
 comicableApp.config( ['$routeProvider',
 function( $routeProvider ) {

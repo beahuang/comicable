@@ -1,4 +1,8 @@
-var comicableApp = angular.module( 'comicableApp', ['ngRoute'] )
+var comicableApp = angular.module( 'comicableApp',
+                                    [
+                                     'ngRoute',
+                                     'angularModalService'
+                                    ] )
 
 comicableApp.config( ['$routeProvider',
 function( $routeProvider ) {
@@ -40,12 +44,44 @@ comicableApp.controller( 'loginController', function( $scope ) {
     $scope.message = 'Login / Register';
 });
 
+comicableApp.controller( 'modalController', function( $scope, ModalService, close ) {
+
+  $scope.close = function( result ) {
+    close(result, 500);
+  };
+
+  $scope.inputDetails = function() {
+      ModalService.showModal( {
+          templateUrl: "components/modals/uploadDetails.html",
+          controller: "modalController"
+      } ).then( function( modal ) {
+          modal.element.modal();
+          modal.close.then( function( result ) {
+              console.log( result );
+          });
+      });
+  }
+
+});
+
 comicableApp.controller( 'myFavoritesController', function( $scope ) {
     $scope.message = 'My Favorites Controller works'
 })
 
-comicableApp.controller( 'mySeriesController', function( $scope ) {
-    $scope.message = 'My Series'
+comicableApp.controller( 'mySeriesController', function( $scope, ModalService ) {
+    $scope.message = 'My Series';
+
+    $scope.show = function() {
+        ModalService.showModal( {
+            templateUrl: "components/modals/upload.html",
+            controller: "modalController"
+        } ).then( function( modal ) {
+            modal.element.modal();
+            modal.close.then( function( result ) {
+                console.log( result );
+            });
+        });
+    }
 })
 
 comicableApp.controller( 'releasedIssuesController', function( $scope ) {
