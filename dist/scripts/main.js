@@ -148,7 +148,7 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService ) 
     }
 
     $scope.removeFromFavorites = function() {
-
+        $scope.changeHeartClass();
     }
 })
 

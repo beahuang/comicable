@@ -517,8 +517,28 @@ ul {
     background-color: gray;
     color: white; }
 
-.link {
-  text-decoration: underline; }
+.link, .link-dark {
+  position: relative;
+  color: #eef640; }
+  .link:after, .link-dark:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 0;
+    height: 2px;
+    display: block;
+    background: white;
+    -webkit-transition: all 0.3s cubic-bezier(0.59, 0.27, 0, 1.09);
+    -moz-transition: all 0.3s cubic-bezier(0.59, 0.27, 0, 1.09);
+    -o-transition: all 0.3s cubic-bezier(0.59, 0.27, 0, 1.09);
+    transition: all 0.3s cubic-bezier(0.59, 0.27, 0, 1.09); }
+  .link:hover:after, .link-dark:hover:after {
+    width: 100%; }
+
+.link-dark {
+  color: black; }
+  .link-dark:after {
+    background: black; }
 
 h1 {
   margin: 0; }
@@ -675,31 +695,14 @@ form .btn {
     width: 75%;
     vertical-align: middle;
     font-size: 0.8em; }
+  .comic-details ul li {
+    padding-bottom: 5px; }
   .comic-details ul a {
-    min-width: 200px;
+    margin-right: 150px;
     display: inline-block; }
   .comic-details .icon-check {
     color: green;
     margin-left: 5px; }
-
-#my-favorites .comic-list {
-  background: gray;
-  color: white;
-  padding: 20px; }
-  #my-favorites .comic-list .comic-box {
-    margin: 20px 0;
-    width: 100%;
-    background: #4679BD;
-    border: 1px solid black; }
-    #my-favorites .comic-list .comic-box img, #my-favorites .comic-list .comic-box .description {
-      display: inline-block;
-      vertical-align: middle; }
-    #my-favorites .comic-list .comic-box img {
-      width: 25%; }
-    #my-favorites .comic-list .comic-box .description {
-      width: 74%;
-      padding: 20px;
-      box-sizing: border-box; }
 
 .modal {
   background: white;
@@ -740,6 +743,27 @@ form .btn {
   ========================================================================== */
 #my-series {
   overflow: auto; }
+
+/* Issue Reader
+========================================================================== */
+#my-favorites .comic-list {
+  background: gray;
+  color: white;
+  padding: 20px; }
+  #my-favorites .comic-list .comic-box {
+    margin: 20px 0;
+    width: 100%;
+    background: #4679BD;
+    border: 1px solid black; }
+    #my-favorites .comic-list .comic-box img, #my-favorites .comic-list .comic-box .description {
+      display: inline-block;
+      vertical-align: middle; }
+    #my-favorites .comic-list .comic-box img {
+      width: 25%; }
+    #my-favorites .comic-list .comic-box .description {
+      width: 74%;
+      padding: 20px;
+      box-sizing: border-box; }
 
 /* Issue Reader
 ========================================================================== */
