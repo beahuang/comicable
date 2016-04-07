@@ -1,5 +1,5 @@
 comicableApp.controller( 'releasedIssuesController', function( $scope, ModalService ) {
-    $scope.message = 'Released Issues'
+    $scope.message = 'Week of April 5 - 10'
 
     $scope.showPurchaseDetails = function() {
         ModalService.showModal( {

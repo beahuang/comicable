@@ -15,6 +15,11 @@ $mobile-landscape: 400px;
 
 // Colors
 $link-light: rgb(238, 246, 64);
+$light-gray: #D8D8D8;
+$dark-gray: #6C6C6C;
+$light-blue: #3CA6B7;
+$dark-blue: #272641;
+$lime-green: #DDE62C;
 
 /* Structure
    ========================================================================== */
@@ -36,15 +41,15 @@ $link-light: rgb(238, 246, 64);
 /* Global
    ========================================================================== */
 
-a {
-  color: black;
-  text-decoration: none;
-}
-
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+img {
+  width: 100%;
+  max-height: 100%;
 }
 
 .btn {
@@ -55,6 +60,7 @@ ul {
   padding: 7px 60px;
   border: 1px solid black;
   cursor: pointer;
+  display: inline-block;
   &:hover {
     background-color: gray;
     color: white;
@@ -85,33 +91,80 @@ ul {
   }
 }
 
+input {
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}
+
+/* Typography
+   ========================================================================== */
+body {
+  font-family: AkkuratLightRegular;
+}
+
 h1 {
-  margin: 0;
+  font-family: AkkuratRegular;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  font-size: 25px;
+}
+
+h2 {
+  font-family: AkkuratRegular;
+  font-size: 18px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+select {
+  text-transform: none;
+-webkit-appearance: none;
+border: none;
+background: none;
+}
+
+.label {
+  font-family: AkkuratBold;
+}
+
+.ab-light-background {
+  color: #333;
+}
+.ab-dark-background {
+  color: #fff;
 }
 
 /* Header
    ========================================================================== */
 
 header {
-  background-color: gray;
-  height: 65px;
+  background-color: $dark-blue;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  a {
+    color: white;
+  }
   div {
     display: inline-block;
     vertical-align: middle;
-    .login-state,
-    .logo-wrapper {
-      position: absolute;
-      top: 5px;
-    }
   }
 }
 
 .logo-wrapper {
+  margin-left: -35px;
   img {
-    height: 100px;
+    height: 120px;
     width: auto;
     display: block;
-    margin-top: -10px;
+    margin-top: 5px;
   }
 }
 
@@ -140,13 +193,19 @@ body.logged-in {
    ========================================================================== */
 
 nav {
-  background-color: rgba(3,26,40,0.7);
-  padding: 15px 0px;
+  display: inline-block;
+  margin: 0 20px 0 20px;
   ul {
     padding: 0;
     li {
       display: inline-block;
       padding: 5px 35px 5px 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+      &:last-of-type {
+        padding-right: 10px;
+      }
       &.selected:after {
         content: "";
         display: block;
@@ -160,21 +219,36 @@ nav {
   }
 }
 
-/* Navigation
+/* Filtering
+   ========================================================================== */
+
+.filter-container {
+  margin-right: 20px;
+  position: relative;
+  input#filter {
+    padding: 7px 26px;
+  }
+  &.icon-search:before {
+    top: 10px;
+    left: 6px;
+    position: absolute;
+    color: gray;
+  }
+}
+
+/* Banner
    ========================================================================== */
 
 .banner {
-  background: url("../images/banner.jpg");
-  background-size: cover;
-  background-position: center top;
-  height: 350px;
+  min-height: 350px;
 }
 
 /* Global Components
    ========================================================================== */
 
 .title {
-  padding-top: 20px;
+  margin: 0;
+  padding-top: 45px;
   padding-bottom: 20px;
 }
 
@@ -191,83 +265,31 @@ form {
   }
 }
 
-.filtering {
-  padding: 20px;
-}
-
 .comic-grid {
   padding: 0;
   .comic-box{
     position: relative;
-    width: 25%;
+    width: 20%;
     overflow: hidden;
-    background: #4679BD;
     float: left;
     box-sizing: border-box;
-    border: 1px solid black;
     @include break($tablet) {
-      width: 33.333%;
+      width: 25%;
     }
     @include break($mobile) {
-      width: 100%;
+      width: 50%;
     }
     &:hover {
       background: grayscale(#4679BD);
       cursor: pointer;
     }
   }
-  .comic-box:before{
-    content: "";
-    display: block;
-    padding-top: 100%;
-  }
   .comic-content{
-    position:  absolute;
-    top: 20px;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    color: white;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin: 20px;
     img {
-      height: 95%;
-      width: 65%;
-      margin: 0 auto;
+      width: 85%;
+      margin: 20px auto;
     }
-  }
-}
-
-.favorited {
-  .icon-heart-filled {
-    display: block;
-  }
-  .icon-heart-outline {
-    display: none;
-  }
-}
-
-.icon-heart-filled {
-  display: none;
-  position: absolute;
-  right: 3px;
-  top: -25px;
-  &:before {
-    font-size: 1.3em;
-    cursor: pointer;
-  }
-}
-
-.icon-heart-outline {
-  position: absolute;
-  right: 3px;
-  top: -25px;
-  &:before {
-    font-size: 1.3em;
-    cursor: pointer;
   }
 }
 
@@ -323,11 +345,39 @@ form {
   }
 }
 
-.filtering {
-  overflow: auto;
-  .btn {
-    float: right;
-    margin-top: -35px;
+.featured-comic-wrapper {
+  background: $light-gray;
+  color: black;
+  .featured-comic {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0;
+    .featured-comic__cover {
+      display: inline-block;
+      width: 33%;
+      padding: 20px;
+      box-sizing: border-box;
+      vertical-align: middle;
+    }
+    .featured-comic__details {
+      width: 66%;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .featured-comic__title, .featured-comic__author {
+      display: inline-block;
+      box-sizing: border-box;
+      width: 50%;
+      float: left;
+    }
+    .featured-comic__description {
+      clear: both;
+      padding-top: 5px;
+    }
+    .label {
+      display: block;
+      margin-bottom: 5px;
+    }
   }
 }
 
@@ -350,18 +400,82 @@ form {
     overflow: auto;
   }
 
-
-/* Issue Reader
-========================================================================== */
-#my-favorites .comic-list {
-  background: gray;
-  color: white;
-  padding: 20px;
-  .comic-box {
-    margin: 20px 0;
+  .sort-wrapper {
+    max-width: 600px;
     width: 100%;
-    background: #4679BD;
-    border: 1px solid black;
+    padding: 20px 0;
+    h2:after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      margin-top: 7px;
+      background-color: $light-gray;
+    }
+    .sort-by {
+        cursor: pointer;
+        .icon-arrow-right:before {
+          font-size: 12px;
+          margin-right: 5px;
+        }
+        .select, .filter--favorites {
+          display: inline-block;
+          width: 32%;
+          vertical-align: top;
+        }
+        .dropdown {
+          width: 70%;
+          margin-left: 10%;
+        }
+    }
+  }
+
+  .upload-wrapper {
+    background: $light-gray;
+    padding: 35px 0;
+  }
+
+  .favorited {
+    .icon-heart-filled {
+      display: block;
+    }
+    .icon-heart-outline {
+      display: none;
+    }
+  }
+
+  .icon-heart-filled {
+    display: none;
+    position: absolute;
+    right: 3px;
+    top: -25px;
+    &:before {
+      font-size: 1.3em;
+      cursor: pointer;
+    }
+  }
+
+  .icon-heart-outline {
+    position: absolute;
+    right: 3px;
+    top: -25px;
+    &:before {
+      font-size: 1.3em;
+      cursor: pointer;
+    }
+  }
+
+
+/* Currently Reading
+========================================================================== */
+#currently-reading .comic-list {
+  color: white;
+  overflow: auto;
+  .comic-box {
+    padding: 20px;
+    width: 50%;
+    box-sizing: border-box;
+    float: left;
     img, .description {
       display: inline-block;
       vertical-align: middle;
@@ -376,6 +490,27 @@ form {
     }
   }
 }
+
+.add-to-list-wrapper {
+  max-width: 600px;
+  width: 100%;
+  padding: 5px 0 50px;
+  .add-to-list {
+    &:before, &:after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: $light-gray;
+    }
+    input {
+      padding: 7px 0;
+      height: 35px;
+      width: 100%;
+    }
+  }
+}
+
 
 /* Issue Reader
 ========================================================================== */

@@ -7,12 +7,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="scripts/third-party.js"></script>
     <script src="scripts/main.js"></script>
+    <link rel="icon" type="image/png" href="favicon.ico" sizes="16x16" />
 </head>
 <body>
     <header>
         <div class="container">
             <div class="logo-wrapper">
-                <img src="images/logo.png" alt="Comicable Logo"/>
+                <a href="#/released-issues"><img src="images/logo.png" alt="Comicable Logo"/></a>
+            </div>
+            <nav>
+              <ul>
+                <li><a href="#released-issues">Released Issues</a></li>
+                <li><a href="#my-series">My Series</a></li>
+                <li><a href="#currently-reading">Currently Reading</a></li>
+              </ul>
+            </nav>
+            <div class="filter-container icon-search">
+                <input id="filter" class="search" type="text" name="input" value="" placeholder="Filter by title...">
             </div>
             <div class="login-state">
                 <div class="not-logged-in">
@@ -28,7 +39,6 @@
             </div>
         </div>
     </header>
-    <div class="banner"></div>
     <div id="main">
         <div ng-view></div>
     </div>

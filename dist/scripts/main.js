@@ -1,7 +1,8 @@
 var comicableApp = angular.module( 'comicableApp',
                                     [
                                      'ngRoute',
-                                     'angularModalService'
+                                     'angularModalService',
+                                     'mb-adaptive-backgrounds'
                                     ] )
 
 comicableApp.config( ['$routeProvider',
@@ -27,10 +28,10 @@ function( $routeProvider ) {
         controller  : 'releasedIssuesController'
     })
 
-    // route for the My Favorites page
-    .when( '/my-favorites', {
-        templateUrl : 'components/my-favorites/my-favorites.html',
-        controller  : 'myFavoritesController'
+    // route for the Currently Reading page
+    .when( '/currently-reading', {
+        templateUrl : 'components/currently-reading/currently-reading.html',
+        controller  : 'currentlyReadingController'
     })
 
     // route for the My Favorites page
@@ -43,6 +44,10 @@ function( $routeProvider ) {
         redirectTo: '/'
     });
 }]);
+
+comicableApp.controller( 'currentlyReadingController', function( $scope ) {
+    $scope.message = 'Currently Reading'
+})
 
 comicableApp.controller( 'issueReaderController', function( $scope ) {
     $scope.message = 'Issue Reader'
@@ -95,12 +100,8 @@ comicableApp.controller( 'modalController', function( $scope, ModalService, clos
   }
 });
 
-comicableApp.controller( 'myFavoritesController', function( $scope ) {
-    $scope.message = 'Favorites List'
-})
-
 comicableApp.controller( 'mySeriesController', function( $scope, ModalService ) {
-    $scope.message = 'My Series';
+    $scope.message = 'Your Collection';
 
     $scope.show = function() {
         ModalService.showModal( {
@@ -150,10 +151,14 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService ) 
     $scope.removeFromFavorites = function() {
         $scope.changeHeartClass();
     }
+
+    $scope.showDropdown = function() {
+        //TODO Show/hide dropdown party
+    }
 })
 
 comicableApp.controller( 'releasedIssuesController', function( $scope, ModalService ) {
-    $scope.message = 'Released Issues'
+    $scope.message = 'Week of April 5 - 10'
 
     $scope.showPurchaseDetails = function() {
         ModalService.showModal( {

@@ -1,5 +1,5 @@
 comicableApp.controller( 'mySeriesController', function( $scope, ModalService ) {
-    $scope.message = 'My Series';
+    $scope.message = 'Your Collection';
 
     $scope.show = function() {
         ModalService.showModal( {
@@ -48,5 +48,9 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService ) 
 
     $scope.removeFromFavorites = function() {
         $scope.changeHeartClass();
+    }
+
+    $scope.showDropdown = function() {
+        //TODO Show/hide dropdown party
     }
 })

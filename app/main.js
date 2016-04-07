@@ -1,7 +1,8 @@
 var comicableApp = angular.module( 'comicableApp',
                                     [
                                      'ngRoute',
-                                     'angularModalService'
+                                     'angularModalService',
+                                     'mb-adaptive-backgrounds'
                                     ] )
 
 comicableApp.config( ['$routeProvider',
@@ -27,10 +28,10 @@ function( $routeProvider ) {
         controller  : 'releasedIssuesController'
     })
 
-    // route for the My Favorites page
-    .when( '/my-favorites', {
-        templateUrl : 'components/my-favorites/my-favorites.html',
-        controller  : 'myFavoritesController'
+    // route for the Currently Reading page
+    .when( '/currently-reading', {
+        templateUrl : 'components/currently-reading/currently-reading.html',
+        controller  : 'currentlyReadingController'
     })
 
     // route for the My Favorites page
