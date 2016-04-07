@@ -132,6 +132,7 @@ background: none;
 
 .label {
   font-family: AkkuratBold;
+  display: block;
 }
 
 .ab-light-background {
@@ -395,7 +396,6 @@ form {
       padding-top: 5px;
     }
     .label {
-      display: block;
       margin-bottom: 5px;
     }
   }
@@ -403,14 +403,34 @@ form {
 
 /* Login Box
    ========================================================================== */
-
-   .login-box {
-     width: 500px;
-     margin: 0 auto;
-     background: lightgray;
-     padding: 50px 20px;
-     text-align: center;
-   }
+.login-wrapper {
+  background: $light-gray;
+  overflow: auto;
+  .login-box, .register-box {
+    width: 50%;
+    margin: 0 auto;
+    padding: 50px 40px;
+    box-sizing: border-box;
+    display: inline-block;
+    float: left;
+    text-align: center;
+  }
+  .login-box {
+    border-right: 1px solid black;
+  }
+  form {
+    text-align: left;
+    margin: 0 auto;
+    width: 52%;
+    input[type="text"],
+    input[type="password"] {
+      margin: 10px 0;
+      width: 100%;
+      padding: 5px 0;
+      height: 25px;
+    }
+  }
+}
 
 
 /* My Series

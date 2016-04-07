@@ -1,18 +1,31 @@
-<div class="container login">
-  <div class="title ">
-    <h1>{{ message }}</h1>
+<div class="login-page">
+  <div class="container">
+    <h1 class="title">{{ message }}</h1>
   </div>
-  <div class="login-box">
-    <form action="#/my-series">
-      <h2>Welcome Back!</h2>
-      <label for="username">Username: </label>
-      <input type="text" id="username" name="username"/>
-      <br />
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password"/>
-      <br />
-      <input class="btn" type="submit" value="Login"/>
-    </form>
-    <p>If you don't have an account <a href="" class="link-dark">register here</a></p>
+  <div class="login-wrapper">
+    <div class="login-box">
+      <h2>Returning User</h2>
+      <form action="#/my-series">
+        <span class="label">Username</span>
+        <input type="text" id="username" name="username"/>
+        <br />
+        <span class="label">Password</span>
+        <input type="password" id="password" name="password"/>
+        <br />
+        <input class="btn" type="submit" value="Login"/>
+      </form>
+    </div>
+    <div class="register-box">
+      <h2>New User</h2>
+      <form action="#/my-series">
+        <span class="label">Username</span>
+        <input type="text" id="username" name="username"/>
+        <br />
+        <span class="label">Password</span>
+        <input type="password" id="password" name="password"/>
+        <br />
+        <input class="btn" type="submit" value="Login"/>
+      </form>
+    </div>
   </div>
 </div>
