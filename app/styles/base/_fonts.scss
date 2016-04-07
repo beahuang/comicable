@@ -47,7 +47,9 @@
 }
 
 [class^="icon-"]:before,
-[class*=" icon-"]:before {
+[class*=" icon-"]:before,
+.username:after,
+.username:before{
   font-family: "comicable" !important;
   font-style: normal !important;
   font-weight: normal !important;
@@ -79,4 +81,12 @@
 }
 .icon-close:before {
   content: "\67";
+}
+.icon-logout:before,
+.username:after {
+  content: "\68";
+}
+.icon-user:before,
+.username:before {
+  content: "\69";
 }

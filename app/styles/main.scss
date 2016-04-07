@@ -170,12 +170,32 @@ header {
 
 .login-state {
   right: 20px;
-
+  top: 35px;
+  position: absolute;
+  a {
+    letter-spacing: 1px;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
   .logged-in {
-    display: none;
-    * {
+    // display: none;
+    .username {
+      position: relative;
       vertical-align: middle;
       display: inline-block;
+      padding: 0 20px;
+      color: white;
+    }
+    .username:before {
+      position: absolute;
+      left: 0px;
+      top: 3px;
+    }
+    .username:after {
+      position: absolute;
+      right: -3px;
+      top: 4px;
+      cursor: pointer;
     }
   }
 }
@@ -226,7 +246,7 @@ nav {
   margin-right: 20px;
   position: relative;
   input#filter {
-    padding: 7px 26px;
+    padding: 7px 10px 7px 30px;
   }
   &.icon-search:before {
     top: 10px;

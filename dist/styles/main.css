@@ -474,7 +474,9 @@ th {
   -moz-osx-font-smoothing: grayscale; }
 
 [class^="icon-"]:before,
-[class*=" icon-"]:before {
+[class*=" icon-"]:before,
+.username:after,
+.username:before {
   font-family: "comicable" !important;
   font-style: normal !important;
   font-weight: normal !important;
@@ -505,6 +507,14 @@ th {
 
 .icon-close:before {
   content: "\67"; }
+
+.icon-logout:before,
+.username:after {
+  content: "\68"; }
+
+.icon-user:before,
+.username:before {
+  content: "\69"; }
 
 /* Variables
    ========================================================================== */
@@ -632,12 +642,28 @@ header {
     margin-top: 5px; }
 
 .login-state {
-  right: 20px; }
-  .login-state .logged-in {
-    display: none; }
-    .login-state .logged-in * {
-      vertical-align: middle;
-      display: inline-block; }
+  right: 20px;
+  top: 35px;
+  position: absolute; }
+  .login-state a {
+    letter-spacing: 1px;
+    font-size: 14px;
+    text-transform: uppercase; }
+  .login-state .logged-in .username {
+    position: relative;
+    vertical-align: middle;
+    display: inline-block;
+    padding: 0 20px;
+    color: white; }
+  .login-state .logged-in .username:before {
+    position: absolute;
+    left: 0px;
+    top: 3px; }
+  .login-state .logged-in .username:after {
+    position: absolute;
+    right: -3px;
+    top: 4px;
+    cursor: pointer; }
 
 body.logged-in .login-state .logged-in {
   display: inline-block; }
@@ -674,7 +700,7 @@ nav {
   margin-right: 20px;
   position: relative; }
   .filter-container input#filter {
-    padding: 7px 26px; }
+    padding: 7px 10px 7px 30px; }
   .filter-container.icon-search:before {
     top: 10px;
     left: 6px;
