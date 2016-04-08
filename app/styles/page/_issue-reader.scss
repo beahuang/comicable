@@ -10,6 +10,10 @@
 	margin: 0 auto;
 	display: block;
 
+	img {
+		cursor: pointer;
+	}
+
 	.controls--top,
 	.controls--bottom {
 		position: relative;
@@ -24,6 +28,7 @@
 	.icon-arrow-left, .icon-arrow-right {
 		position: absolute;
 		font-size: 1.5em;
+		cursor: pointer;
 	}
 
 	.icon-arrow-left {

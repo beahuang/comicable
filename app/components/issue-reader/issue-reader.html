@@ -2,8 +2,8 @@
   <div class="container">
     <div class="reader">
       <div class="controls--top">
-        <a class="icon-arrow-left"></a>
-        <a class="icon-arrow-right"></a>
+        <a class="icon-arrow-left" ng-click="prevImage()"></a>
+        <a class="icon-arrow-right" ng-click="nextImage()"></a>
         <h2 class="line-divider">Batman - End Game / 1</h2>
         <div class="controls__page">
           <select>
@@ -14,10 +14,10 @@
           </select>
         </div>
       </div>
-      <img src="images/batman-cover.jpg" alt="batman endgame cover"/>
+      <img ng-click="nextImage()" src="{{ imageUrl }}" alt="batman endgame cover"/>
       <div class="controls--bottom">
-        <a class="icon-arrow-left"></a>
-        <a class="icon-arrow-right"></a>
+        <a class="icon-arrow-left" ng-click="prevImage()"></a>
+        <a class="icon-arrow-right" ng-click="nextImage()"></a>
         <div class="controls__page">
           <select>
             <option value="">Issue: #</option>

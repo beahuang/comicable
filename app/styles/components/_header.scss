@@ -126,13 +126,6 @@ nav {
 				white-space: nowrap;
 				font-size: 13px;
 			}
-			a.link:hover {
-				background: $dark-purple;
-				color: $light-gray;
-				&:after {
-					display: none;
-				}
-			}
 		}
 		ul li.active {
 			a {

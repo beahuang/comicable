@@ -829,11 +829,6 @@ nav {
           border-radius: 15px;
           white-space: nowrap;
           font-size: 13px; }
-        nav ul li a.link:hover {
-          background: #414058;
-          color: #D8D8D8; }
-          nav ul li a.link:hover:after {
-            display: none; }
       nav ul li.active a {
         background: #DDE62C;
         color: #272641; }
@@ -1249,6 +1244,8 @@ body.modal-open:after {
   width: 90%;
   margin: 0 auto;
   display: block; }
+  .reader img {
+    cursor: pointer; }
   .reader .controls--top,
   .reader .controls--bottom {
     position: relative;
@@ -1260,7 +1257,8 @@ body.modal-open:after {
       top: 22px; }
   .reader .icon-arrow-left, .reader .icon-arrow-right {
     position: absolute;
-    font-size: 1.5em; }
+    font-size: 1.5em;
+    cursor: pointer; }
   .reader .icon-arrow-left {
     left: 0; }
   .reader .icon-arrow-right {
