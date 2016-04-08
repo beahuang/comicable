@@ -593,6 +593,7 @@ select {
   top: 0;
   height: 40px;
   width: 28px;
+  overflow: hidden;
   -webkit-transition: width 0.1s ease-in-out;
   -moz-transition: width 0.1s ease-in-out;
   -o-transition: width 0.1s ease-in-out;
@@ -601,20 +602,23 @@ select {
     content: "";
     font-size: 12px;
     display: inline-block;
-    visibility: hidden;
-    color: #272641;
     margin-top: 14px;
     margin-right: 4px;
     font-family: AkkuratRegular;
-    width: 53px; }
+    width: 53px;
+    opacity: 0;
+    -webkit-transition: width 0.1s ease-in-out;
+    -moz-transition: width 0.1s ease-in-out;
+    -o-transition: width 0.1s ease-in-out;
+    transition: width 0.1s ease-in-out; }
   .tag:hover, .tag--right:hover, .tag--right--green:hover, .tag--left:hover {
     width: 80px;
     text-align: right; }
-    .tag:hover:after, .tag--right:hover:after, .tag--right--green:hover:after, .tag--left:hover:after {
-      visibility: visible; }
     .tag:hover:before, .tag--right:hover:before, .tag--right--green:hover:before, .tag--left:hover:before {
       top: 21px;
       left: 20px; }
+    .tag:hover:after, .tag--right:hover:after, .tag--right--green:hover:after, .tag--left:hover:after {
+      opacity: 1; }
 
 .tag--right, .tag--right--green {
   right: 5px;
@@ -627,7 +631,9 @@ select {
 .tag--right--green {
   background: #DDE62C; }
   .tag--right--green:after {
-    content: "buy issue"; }
+    content: "buy issue";
+    color: #272641;
+    margin-top: 15px; }
 
 .tag--left {
   left: 5px;
@@ -655,6 +661,10 @@ h1 {
   @media (max-width: 768px) {
     h1 {
       font-size: 20px; } }
+  @media (max-width: 500px) {
+    h1 {
+      font-size: 15px;
+      letter-spacing: 6px; } }
 
 h2 {
   font-family: AkkuratRegular;
@@ -764,7 +774,7 @@ header {
       cursor: pointer; }
   @media (max-width: 768px) {
     .login-state {
-      top: 0px; } }
+      top: 10px; } }
   @media (max-width: 500px) {
     .login-state {
       top: 25px; } }
@@ -815,9 +825,11 @@ nav {
           padding: 5px 8%;
           background: #3CA6B7;
           border-radius: 15px;
-          white-space: nowrap; }
+          white-space: nowrap;
+          font-size: 13px; }
         nav ul li a.link:hover {
-          background: #DDE62C; }
+          background: #DDE62C;
+          color: #272641; }
           nav ul li a.link:hover:after {
             display: none; } }
 

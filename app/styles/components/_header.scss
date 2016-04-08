@@ -56,7 +56,7 @@ header {
 		}
 	}
 	@include break($tablet) {
-		top: 0px;
+		top: 10px;
 	}
 	@include break($mobile) {
 		top: 25px;
@@ -119,9 +119,11 @@ nav {
 				background: #3CA6B7;
 				border-radius: 15px;
 				white-space: nowrap;
+				font-size: 13px;
 			}
 			a.link:hover {
 				background: $lime-green;
+				color: $dark-blue;
 				&:after {
 					display: none;
 				}

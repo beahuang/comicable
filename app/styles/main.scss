@@ -105,27 +105,28 @@ select {
 	top: 0;
 	height: 40px;
 	width: 28px;
+	overflow: hidden;
 	@include transition(width .1s ease-in-out);
 	&:after {
 		content: "";
     font-size: 12px;
     display: inline-block;
-    visibility: hidden;
-    color: #272641;
     margin-top: 14px;
     margin-right: 4px;
     font-family: AkkuratRegular;
-    width: 53px;
+		width: 53px;
+		opacity: 0;
+		@include transition(width .1s ease-in-out);
 	}
 	&:hover {
 		width: 80px;
 		text-align: right;
-		&:after {
-			visibility: visible;
-		}
 		&:before {
 			top: 21px;
 			left: 20px;
+		}
+		&:after {
+			opacity: 1;
 		}
 	}
 }
@@ -146,6 +147,8 @@ select {
 	background: $lime-green;
 	&:after {
 		content: "buy issue";
+		color: #272641;
+		margin-top: 15px;
 	}
 }
 
