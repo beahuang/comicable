@@ -1,0 +1,83 @@
+
+/* Basic Comic
+========================================================================== */
+
+.comic-grid {
+	padding: 0;
+
+	.comic-tile {
+		position: relative;
+		width: 20%;
+		padding: 15px 0;
+		float: left;
+		@include break( $small-desktop ) {
+			width: 25%;
+		}
+		@include break( $tablet ) {
+			width: 33.33%;
+		}
+		@include break( $mobile ) {
+			width: 50%;
+		}
+		&:hover {
+			background: grayscale( #4679BD );
+			cursor: pointer;
+		}
+	}
+
+	.comic-tile--content{
+		text-align: center;
+		img {
+			width: 85%;
+			margin: 20px auto;
+		}
+		p {
+			margin-top: 0;
+			font-size: 14px;
+			font-family: AkkuratRegular;
+		}
+	}
+
+}
+
+.comic {
+	width: 80%;
+	margin: 0 auto;
+	padding: 20px 0;
+	.comic__cover, .comic__details {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.comic__cover {
+		width: 33%;
+		padding-right: 20px;
+	}
+	.comic__details {
+		width: 66%;
+	}
+	.comic__title, .comic__author {
+		display: inline-block;
+		width: 50%;
+		float: left;
+	}
+	.comic__description {
+		clear: both;
+		padding-top: 5px;
+	}
+
+	.comic__title, .comic__author, .comic__issue {
+		margin-bottom: 10px;
+	}
+}
+
+@include break($tablet) {
+	.comic {
+		.comic__cover,
+		.comic__details {
+			width: 100%;
+		}
+		.comic__cover {
+			text-align: center;
+		}
+	}
+}

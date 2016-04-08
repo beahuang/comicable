@@ -1,0 +1,63 @@
+
+/* Currently Reading
+========================================================================== */
+
+#currently-reading .comic {
+	width: 50%;
+	float: left;
+	padding: 40px 20px;
+	.comic__cover {
+		width: 39%;
+	}
+	.comic__details {
+		width: 60%;
+	}
+	.comic__author {
+		padding-left: 50px;
+	}
+	.comic__issue {
+		clear: both;
+    padding-top: 5px;
+	}
+
+	@include break( $small-desktop ) {
+		width: 100%;
+	}
+
+	@include break( $mobile ) {
+		.comic__cover, .comic__details {
+			width: 100%;
+		}
+		.comic__cover {
+			img {
+				max-height: 350px;
+				width: auto;
+			}
+		}
+	}
+
+	@include break-min( $large-desktop ) {
+		width: 33.333%;
+	}
+
+}
+
+.add-to-list-wrapper {
+	max-width: 600px;
+	width: 100%;
+	padding: 5px 20px 50px;
+	.add-to-list {
+		&:before, &:after {
+			content: "";
+			display: block;
+			width: 100%;
+			height: 1px;
+			background-color: $light-gray;
+		}
+		input {
+			padding: 7px 0;
+			height: 35px;
+			width: 100%;
+		}
+	}
+}

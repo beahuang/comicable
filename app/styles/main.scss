@@ -105,23 +105,63 @@ select {
 	top: 0;
 	height: 40px;
 	width: 28px;
+	@include transition(width .1s ease-in-out);
+	&:after {
+		content: "";
+    font-size: 12px;
+    display: inline-block;
+    visibility: hidden;
+    color: #272641;
+    margin-top: 14px;
+    margin-right: 4px;
+    font-family: AkkuratRegular;
+    width: 53px;
+	}
+	&:hover {
+		width: 80px;
+		text-align: right;
+		&:after {
+			visibility: visible;
+		}
+		&:before {
+			top: 21px;
+			left: 20px;
+		}
+	}
 }
 
 .tag--right {
 	@extend .tag;
 	right: 5px;
 	background: $red;
+	&:after {
+		content: "favorite";
+		margin-top: 12px;
+		color: white;
+	}
 }
 
 .tag--right--green {
 	@extend .tag--right;
 	background: $lime-green;
+	&:after {
+		content: "buy issue";
+	}
 }
 
 .tag--left {
 	@extend .tag;
 	left: 5px;
 	background: $light-blue;
+	&:hover {
+		width: 90px;
+		text-align: left;
+	}
+	&:after {
+		content: "bookmark";
+		margin-left: 30px;
+		color: white;
+	}
 }
 
 

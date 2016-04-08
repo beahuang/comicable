@@ -1,0 +1,71 @@
+/* Issue Reader
+========================================================================== */
+
+#issue-reader {
+	padding-top: 45px;
+}
+
+.reader {
+	width: 90%;
+	margin: 0 auto;
+	display: block;
+
+	.controls--top,
+	.controls--bottom {
+		position: relative;
+		padding: 20px 0;
+		.controls__page {
+			position: absolute;
+			right: 40px;
+			top: 22px;
+		}
+	}
+
+	.icon-arrow-left, .icon-arrow-right {
+		position: absolute;
+		font-size: 1.5em;
+	}
+
+	.icon-arrow-left {
+		left: 0
+	}
+	.icon-arrow-right {
+		right: 0px
+	}
+
+	.controls--top {
+		h2.line-divider {
+			padding: 0 40px;
+			margin: 0;
+		}
+		.icon-arrow-left, .icon-arrow-right {
+			top: 22px;
+		}
+	}
+
+	.controls__page .btn {
+		margin: 0 20px;
+		padding: 7px 40px 7px 20px;
+		position: relative;
+		&.icon-check:before {
+			position: absolute;
+			right: 20px;
+			top: 9px;
+		}
+	}
+
+	@include break($mobile) {
+		.controls--top {
+			margin-top: 20px;
+			h2.line-divider {
+				margin: -40px 0 40px;
+				padding: 0;
+			}
+			.icon-arrow-left,
+			.icon-arrow-right,
+			.controls__page {
+				top: 30px;
+			}
+		}
+	}
+}

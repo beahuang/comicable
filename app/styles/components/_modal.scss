@@ -1,0 +1,116 @@
+
+/* Modal
+========================================================================== */
+
+body.modal-open:after {
+	background: $overlay-opacity;
+	content: "";
+	height: 100%;
+	width: 100%;
+	display: block;
+	position: absolute;
+	top: 0;
+	position: fixed;
+}
+
+.modal {
+	background: white;
+	position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+	z-index: 2;
+
+	.icon-close {
+		position: absolute;
+		top: 22px;
+    right: 20px;
+    font-size: 20px;
+		cursor: pointer;
+		&:hover:before {
+			color: $red;
+		}
+	}
+
+	.modal-header, .modal-footer {
+		width: 80%;
+		margin: 20px auto;
+	}
+	.modal-body {
+		overflow: auto;
+		width: 80%;
+		margin: 0 auto 15px;
+	}
+	.modal-footer {
+		clear: both;
+		margin: 0px auto 20px;
+	}
+}
+
+.series--details .comic__issues-list {
+	overflow: auto;
+	padding: 20px 0;
+	li {
+		padding: 5px 0;
+	}
+	span.icon-check {
+		margin-left: 45px;
+		position: relative;
+		&:before {
+			position: absolute;
+			left: -20px;
+			top: 1px;
+		}
+	}
+}
+
+.modal {
+	p {
+		font-size: 14px;
+	}
+	.label, ul p {
+		font-size: 16px;
+	}
+	input[type="text"] {
+		border-bottom: 1px solid $light-gray;
+		margin: 0px 0 10px;
+	}
+	.two-col > div {
+		width: 45%;
+		float: left;
+		margin-right: 5%;
+	}
+}
+
+.modal .comic {
+	width: 100%;
+	padding: 0;
+	.comic__cover {
+		width: 49%;
+	}
+	.comic__details {
+		width: 50%;
+		.comic__title,
+		.comic__author {
+			display: block;
+			float: none;
+			width: 100%;
+		}
+	}
+}
+
+.modal {
+	@include break($small-desktop) {
+		width: 100%;
+	}
+	@include break($mobile) {
+		left: 0;
+		top: 0;
+		transform: none;
+		max-height: 100%;
+		overflow-y: scroll;
+		.comic .comic__cover, .comic .comic__details {
+		    width: 100%;
+		}
+	}
+}

@@ -592,18 +592,53 @@ select {
   position: absolute;
   top: 0;
   height: 40px;
-  width: 28px; }
+  width: 28px;
+  -webkit-transition: width 0.1s ease-in-out;
+  -moz-transition: width 0.1s ease-in-out;
+  -o-transition: width 0.1s ease-in-out;
+  transition: width 0.1s ease-in-out; }
+  .tag:after, .tag--right:after, .tag--right--green:after, .tag--left:after {
+    content: "";
+    font-size: 12px;
+    display: inline-block;
+    visibility: hidden;
+    color: #272641;
+    margin-top: 14px;
+    margin-right: 4px;
+    font-family: AkkuratRegular;
+    width: 53px; }
+  .tag:hover, .tag--right:hover, .tag--right--green:hover, .tag--left:hover {
+    width: 80px;
+    text-align: right; }
+    .tag:hover:after, .tag--right:hover:after, .tag--right--green:hover:after, .tag--left:hover:after {
+      visibility: visible; }
+    .tag:hover:before, .tag--right:hover:before, .tag--right--green:hover:before, .tag--left:hover:before {
+      top: 21px;
+      left: 20px; }
 
 .tag--right, .tag--right--green {
   right: 5px;
   background: #DD3A3A; }
+  .tag--right:after, .tag--right--green:after {
+    content: "favorite";
+    margin-top: 12px;
+    color: white; }
 
 .tag--right--green {
   background: #DDE62C; }
+  .tag--right--green:after {
+    content: "buy issue"; }
 
 .tag--left {
   left: 5px;
   background: #3CA6B7; }
+  .tag--left:hover {
+    width: 90px;
+    text-align: left; }
+  .tag--left:after {
+    content: "bookmark";
+    margin-left: 30px;
+    color: white; }
 
 /* Typography
 ========================================================================== */
@@ -845,7 +880,6 @@ form .btn {
     position: relative;
     width: 20%;
     padding: 15px 0;
-    overflow: hidden;
     float: left; }
     @media (max-width: 960px) {
       .comic-grid .comic-tile {
@@ -963,7 +997,7 @@ form .btn {
 .sort-wrapper {
   display: inline-block;
   width: 65%;
-  padding: 20px 0; }
+  padding: 20px 0 50px; }
   .sort-wrapper .sort-by {
     cursor: pointer; }
     .sort-wrapper .sort-by .icon-arrow-right:before {
@@ -981,6 +1015,10 @@ form .btn {
   @media (max-width: 960px) {
     .sort-wrapper {
       width: 100%; } }
+  @media (max-width: 500px) {
+    .sort-wrapper .sort-by .select {
+      width: 100%;
+      margin-bottom: 10px; } }
 
 .upload-wrapper {
   display: inline-block;
@@ -1134,13 +1172,9 @@ body.modal-open:after {
 .modal .label, .modal ul p {
   font-size: 16px; }
 
-.modal input,
-.modal textarea {
-  width: 100%; }
-
 .modal input[type="text"] {
   border-bottom: 1px solid #D8D8D8;
-  margin: 3px 0 5px; }
+  margin: 0px 0 10px; }
 
 .modal .two-col > div {
   width: 45%;

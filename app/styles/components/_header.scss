@@ -1,0 +1,168 @@
+/* Header
+========================================================================== */
+
+header {
+	background-color: $dark-blue;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	border-bottom: 3px solid $light-blue;
+	a {
+		color: white;
+	}
+	div {
+		display: inline-block;
+		vertical-align: middle;
+	}
+}
+
+.logo-wrapper {
+	margin-left: -35px;
+	img {
+		height: 100px;
+		width: 150px;
+		display: block;
+	}
+}
+
+.login-state {
+	right: 20px;
+	top: 38px;
+	position: absolute;
+	a, p {
+		letter-spacing: 1px;
+		font-size: 14px;
+		color: white;
+	}
+	.logged-in {
+		display: none;
+		.username {
+			position: relative;
+			vertical-align: middle;
+			display: inline-block;
+			padding: 0 20px;
+			color: white;
+		}
+		.username:before {
+			position: absolute;
+			left: 0px;
+			top: 3px;
+		}
+		.username:after {
+			position: absolute;
+			right: -3px;
+			top: 4px;
+			cursor: pointer;
+		}
+	}
+	@include break($tablet) {
+		top: 0px;
+	}
+	@include break($mobile) {
+		top: 25px;
+	}
+}
+
+body.logged-in {
+	.login-state .logged-in {
+		display: inline-block;
+	}
+	.login-state .not-logged-in {
+		display: none;
+	}
+}
+
+/* Navigation
+========================================================================== */
+
+nav {
+	display: inline-block;
+	margin-right: 10px;
+	ul {
+		padding: 0;
+		li {
+			display: inline-block;
+			padding: 5px 35px 5px 0;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			font-size: 14px;
+			&:last-of-type {
+				padding-right: 10px;
+			}
+			&.selected:after {
+				content: "";
+				display: block;
+				padding-top: 3px;
+				border-bottom: 2px solid white;
+			}
+			a.link {
+				color: white;
+			}
+		}
+	}
+	@include break($tablet) {
+		text-align: right;
+		display: block;
+		margin-right: 0;
+		ul li {
+			padding-right: 4%;
+		}
+	}
+	@include break($mobile) {
+		text-align: center;
+		margin-top: 55px;
+		ul li {
+			padding: 0;
+			margin: 0px 0 15px 15px;
+			a {
+				padding: 5px 8%;
+				background: #3CA6B7;
+				border-radius: 15px;
+				white-space: nowrap;
+			}
+			a.link:hover {
+				background: $lime-green;
+				&:after {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+/* Filtering
+========================================================================== */
+
+.filter-container {
+	margin-right: 20px;
+	position: relative;
+	input#filter {
+		padding: 4px 10px 4px 30px;
+		border-radius: 20px;
+		background: $dark-purple;
+		&:focus {
+			background: white;
+		}
+	}
+	&.icon-search:before {
+		position: absolute;
+		top: 8px;
+    left: 11px;
+    font-size: 13px;
+		color: gray;
+	}
+	@include break($small-desktop) {
+		display: block;
+		margin: -20px 0 20px;
+		margin-left: 120px;
+		input {
+			width: 100%;
+		}
+	}
+	@include break($tablet) {
+		margin: -84px 0 65px 120px;
+	}
+	@include break($mobile) {
+		margin: -120px 0 90px 0;
+	}
+}

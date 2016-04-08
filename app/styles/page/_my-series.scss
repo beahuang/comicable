@@ -1,0 +1,102 @@
+
+/* My Series
+========================================================================== */
+
+#my-series {
+	overflow: auto;
+}
+
+.sort-wrapper {
+	display: inline-block;
+	width: 65%;
+	padding: 20px 0 50px;
+	.sort-by {
+		cursor: pointer;
+		.icon-arrow-right:before {
+			font-size: 12px;
+			margin-right: 5px;
+		}
+		.select, .filter--favorites {
+			display: inline-block;
+			width: 32%;
+			vertical-align: top;
+		}
+		.dropdown {
+			width: 70%;
+			margin-left: 10%;
+		}
+		p {
+			white-space: nowrap;
+		}
+	}
+
+	@include break( $small-desktop ) {
+		width: 100%;
+	}
+
+	@include break( $mobile ) {
+		.sort-by .select {
+			width: 100%;
+			margin-bottom: 10px;
+		}
+	}
+}
+
+.upload-wrapper {
+	display: inline-block;
+	width: 33%;
+	padding-top: 50px;
+	text-align: center;
+	vertical-align: top;
+	float: right;
+	@include break($small-desktop) {
+		width: 100%;
+		float: none;
+		padding: 30px;
+		.btn {
+			padding: 10px 60px;
+			width: 100%;
+		}
+	}
+}
+
+.icon-heart-filled:before,
+.icon-heart-outline:before {
+	font-size: 20px;
+	cursor: pointer;
+	position: absolute;
+	top: 10px;
+	left: 4px;
+}
+
+.icon-book-filled:before,
+.icon-book-outline:before {
+	font-size: 25px;
+	cursor: pointer;
+	position: absolute;
+	top: 10px;
+	left: 2px;
+}
+
+.icon-heart-filled,
+.icon-book-filled {
+	display: none;
+}
+
+.favorited {
+	.icon-heart-filled {
+		display: block;
+	}
+	.icon-heart-outline {
+		display: none;
+	}
+}
+
+.currently-reading {
+	.icon-book-filled {
+		display: block;
+	}
+	.icon-book-outline {
+		display: none;
+	}
+}
