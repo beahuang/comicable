@@ -744,7 +744,7 @@ header {
   margin-left: -35px; }
   .logo-wrapper img {
     height: 100px;
-    width: 150px;
+    width: 145px;
     display: block; }
 
 .login-state {
@@ -789,7 +789,8 @@ body.logged-in .login-state .not-logged-in {
 ========================================================================== */
 nav {
   display: inline-block;
-  margin-right: 10px; }
+  margin-right: 10px;
+  min-width: 450px; }
   nav ul {
     padding: 0; }
     nav ul li {
@@ -800,24 +801,25 @@ nav {
       font-size: 14px; }
       nav ul li:last-of-type {
         padding-right: 10px; }
-      nav ul li.selected:after {
-        content: "";
-        display: block;
-        padding-top: 3px;
-        border-bottom: 2px solid white; }
+      nav ul li.active a:after {
+        width: 100%; }
       nav ul li a.link {
         color: white; }
+      nav ul li .user-access {
+        display: none; }
   @media (max-width: 768px) {
     nav {
       text-align: right;
       display: block;
-      margin-right: 0; }
+      margin-right: 0;
+      min-width: 0; }
       nav ul li {
         padding-right: 4%; } }
   @media (max-width: 500px) {
     nav {
       text-align: center;
-      margin-top: 55px; }
+      margin-top: 55px;
+      min-width: 0; }
       nav ul li {
         padding: 0;
         margin: 0px 0 15px 15px; }
@@ -828,10 +830,18 @@ nav {
           white-space: nowrap;
           font-size: 13px; }
         nav ul li a.link:hover {
-          background: #DDE62C;
-          color: #272641; }
+          background: #414058;
+          color: #D8D8D8; }
           nav ul li a.link:hover:after {
-            display: none; } }
+            display: none; }
+      nav ul li.active a {
+        background: #DDE62C;
+        color: #272641; }
+        nav ul li.active a:after {
+          display: none; } }
+
+body.logged-in nav ul li .user-access {
+  display: inline-block; }
 
 /* Filtering
 ========================================================================== */
@@ -862,7 +872,11 @@ nav {
       margin: -84px 0 65px 120px; } }
   @media (max-width: 500px) {
     .filter-container {
-      margin: -120px 0 90px 0; } }
+      margin: -85px 0 70px 0; } }
+
+@media (max-width: 500px) {
+  body.logged-in .filter-container {
+    margin: -130px 0 110px 0; } }
 
 /* Global Components
 ========================================================================== */
@@ -1177,6 +1191,10 @@ body.modal-open:after {
       position: absolute;
       left: -20px;
       top: 1px; }
+    @media (max-width: 500px) {
+      .series--details .comic__issues-list span.icon-check {
+        position: absolute;
+        right: 30px; } }
 
 .modal p {
   font-size: 14px; }

@@ -10,7 +10,7 @@
 	<script src="scripts/main.js"></script>
 	<link rel="icon" type="image/png" href="favicon.ico" sizes="16x16" />
 </head>
-<body>
+<body ng-controller="mainController">
 	<header>
 		<div class="container">
 			<div class="logo-wrapper">
@@ -18,9 +18,9 @@
 			</div>
 			<nav>
 				<ul>
-					<li><a class="link" href="#released-issues">Released Issues</a></li>
-					<li><a class="link" href="#my-series">My Series</a></li>
-					<li><a class="link" href="#currently-reading">Currently Reading</a></li>
+					<li ng-class="{active: $route.current.activetab == 'released-issues'}"><a class="link" href="#released-issues">Released Issues</a></li>
+					<li ng-class="{active: $route.current.activetab == 'my-series'}"><a class="link user-access" href="#my-series">My Series</a></li>
+					<li ng-class="{active: $route.current.activetab == 'currently-reading'}"><a class="link user-access" href="#currently-reading">Currently Reading</a></li>
 				</ul>
 			</nav>
 			<div class="filter-container icon-search">

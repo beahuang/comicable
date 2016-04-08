@@ -11,7 +11,7 @@ function( $routeProvider ) {
     $routeProvider
 
     // route for the landing page
-    .when( '/', {
+    .when( '/login', {
         templateUrl : 'components/login/login.html',
         controller  : 'loginController'
     })
@@ -19,19 +19,22 @@ function( $routeProvider ) {
     // route for the My Series page
     .when( '/my-series', {
         templateUrl : 'components/my-series/my-series.html',
-        controller  : 'mySeriesController'
+        controller  : 'mySeriesController',
+        activetab   : 'my-series'
     })
 
     // route for the Released Issues page
     .when( '/released-issues', {
         templateUrl : 'components/released-issues/released-issues.html',
-        controller  : 'releasedIssuesController'
+        controller  : 'releasedIssuesController',
+        activetab   : 'released-issues'
     })
 
     // route for the Currently Reading page
     .when( '/currently-reading', {
         templateUrl : 'components/currently-reading/currently-reading.html',
-        controller  : 'currentlyReadingController'
+        controller  : 'currentlyReadingController',
+        activetab   : 'currently-reading'
     })
 
     // route for the My Favorites page
@@ -41,6 +44,11 @@ function( $routeProvider ) {
     })
 
     .otherwise({
-        redirectTo: '/'
+        redirectTo: '/released-issues',
+        activetab   : 'released-issues'
     });
 }]);
+
+comicableApp.controller( 'mainController', function ( $scope, $route ) {
+    $scope.activeTab = $scope.$route = $route;
+});

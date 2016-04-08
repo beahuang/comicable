@@ -2,6 +2,7 @@ comicableApp.controller( 'modalController', function( $scope, ModalService, clos
 
   $scope.close = function( result ) {
     close(result, 500);
+    $( 'body' ).removeClass( "modal-open" );
   };
 
   $scope.inputDetails = function() {

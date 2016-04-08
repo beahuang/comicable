@@ -20,7 +20,7 @@ header {
 	margin-left: -35px;
 	img {
 		height: 100px;
-		width: 150px;
+		width: 145px;
 		display: block;
 	}
 }
@@ -78,6 +78,7 @@ body.logged-in {
 nav {
 	display: inline-block;
 	margin-right: 10px;
+	min-width: 450px;
 	ul {
 		padding: 0;
 		li {
@@ -89,14 +90,16 @@ nav {
 			&:last-of-type {
 				padding-right: 10px;
 			}
-			&.selected:after {
-				content: "";
-				display: block;
-				padding-top: 3px;
-				border-bottom: 2px solid white;
+			&.active {
+				a:after {
+					width: 100%;
+				}
 			}
 			a.link {
 				color: white;
+			}
+			.user-access {
+				display: none;
 			}
 		}
 	}
@@ -104,6 +107,7 @@ nav {
 		text-align: right;
 		display: block;
 		margin-right: 0;
+		min-width: 0;
 		ul li {
 			padding-right: 4%;
 		}
@@ -111,17 +115,27 @@ nav {
 	@include break($mobile) {
 		text-align: center;
 		margin-top: 55px;
+		min-width: 0;
 		ul li {
 			padding: 0;
 			margin: 0px 0 15px 15px;
 			a {
 				padding: 5px 8%;
-				background: #3CA6B7;
+				background: $light-blue;
 				border-radius: 15px;
 				white-space: nowrap;
 				font-size: 13px;
 			}
 			a.link:hover {
+				background: $dark-purple;
+				color: $light-gray;
+				&:after {
+					display: none;
+				}
+			}
+		}
+		ul li.active {
+			a {
 				background: $lime-green;
 				color: $dark-blue;
 				&:after {
@@ -130,6 +144,10 @@ nav {
 			}
 		}
 	}
+}
+
+body.logged-in nav ul li .user-access {
+	display: inline-block;
 }
 
 /* Filtering
@@ -153,7 +171,7 @@ nav {
     font-size: 13px;
 		color: gray;
 	}
-	@include break($small-desktop) {
+	@include break( $small-desktop ) {
 		display: block;
 		margin: -20px 0 20px;
 		margin-left: 120px;
@@ -161,10 +179,18 @@ nav {
 			width: 100%;
 		}
 	}
-	@include break($tablet) {
+	@include break( $tablet ) {
 		margin: -84px 0 65px 120px;
 	}
-	@include break($mobile) {
-		margin: -120px 0 90px 0;
+	@include break( $mobile ) {
+		margin: -85px 0 70px 0;
+	}
+}
+
+// Account for logged in nav on mobile
+
+body.logged-in .filter-container {
+	@include break( $mobile ) {
+		margin: -130px 0 110px 0;
 	}
 }
