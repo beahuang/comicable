@@ -15,7 +15,7 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService ) 
 
     $scope.showDetails = function() {
         ModalService.showModal( {
-            templateUrl: "components/modals/show-details.html",
+            templateUrl: "components/modals/series-details.html",
             controller: "modalController"
         } ).then( function( modal ) {
             modal.element.modal();

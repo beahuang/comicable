@@ -1,92 +1,90 @@
 <div id="my-series">
-  <div class="container">
-    <h1 class="title">{{ message }}</h1>
-    <div class="sort-wrapper">
-      <div class="container">
-        <h2>Sort By</h2>
-        <div class="sort-by">
-          <div class="select">
-            <p class="icon-arrow-right" ng-click="showDropdown()">Release Date</p>
-            <div class="dropdown">
-              <p>Newest</p>
-              <p>Oldest</p>
-            </div>
-          </div>
-          <div class="select">
-            <p class="icon-arrow-right" ng-click="showDropdown()">Alphabetical</p>
-            <div class="dropdown">
-              <p>A - Z</p>
-              <p>Z - A</p>
-            </div>
-          </div>
-          <p class="filter--favorites">Favorites</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="upload-wrapper">
-    <div class="container">
-      <a class="btn upload" ng-click="show()">Upload</a>
-    </div>
-  </div>
-  <div class="comic-grid">
-    <div class="comic-box" adaptive-background>
-      <div class="comic-content">
-        <div ng-class="class">
-          <span ng-click="addToFavorites()" class="icon-heart-outline"></span>
-          <span ng-click="removeFromFavorites()" class="icon-heart-filled"></span>
-        </div>
-        <img src="images/batman-cover.jpg" alt="batman endgame cover" ng-click="showDetails()"/>
-        <p>Batman - End Game</p>
-      </div>
-    </div>
-    <div class="comic-box" adaptive-background>
-      <div class="comic-content">
-        <img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-        <p>Batman - End Game</p>
-      </div>
-    </div>
-    <div class="comic-box" adaptive-background>
-      <div class="comic-content">
-        <img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-        <p>Batman - End Game</p>
-      </div>
-    </div>
-    <div class="comic-box" adaptive-background>
-      <div class="comic-content">
-        <img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-        <p>Batman - End Game</p>
-      </div>
-    </div>
-    <div class="comic-box" adaptive-background>
-      <div class="comic-content">
-        <img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-        <p>Batman - End Game</p>
-      </div>
-    </div>
-    <div class="comic-box" adaptive-background>
-      <div class="comic-content">
-        <img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-        <p>Batman - End Game</p>
-      </div>
-    </div>
-    <div class="comic-box" adaptive-background>
-      <div class="comic-content">
-        <img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-        <p>Batman - End Game</p>
-      </div>
-    </div>
-    <div class="comic-box" adaptive-background>
-      <div class="comic-content">
-        <img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-        <p>Batman - End Game</p>
-      </div>
-    </div>
-    <div class="comic-box" adaptive-background>
-      <div class="comic-content">
-        <img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-        <p>Batman - End Game</p>
-      </div>
-    </div>
-  </div>
+	<div class="container">
+		<h1 class="title">{{ message }}</h1>
+		<div class="upload-wrapper">
+			<a class="btn upload" ng-click="show()">Upload</a>
+		</div>
+		<div class="sort-wrapper">
+			<div class="container">
+				<h2 class="line-divider">Sort By</h2>
+				<div class="sort-by">
+					<div class="select">
+						<p class="icon-arrow-right" ng-click="showDropdown()">Release Date</p>
+						<div class="dropdown">
+							<p>Newest</p>
+							<p>Oldest</p>
+						</div>
+					</div>
+					<div class="select">
+						<p class="icon-arrow-right" ng-click="showDropdown()">Alphabetical</p>
+						<div class="dropdown">
+							<p>A - Z</p>
+							<p>Z - A</p>
+						</div>
+					</div>
+					<p class="filter--favorites">Favorites</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="comic-grid">
+		<div class="comic-tile" adaptive-background>
+			<div class="comic-tile--content">
+				<div ng-class="class">
+					<span ng-click="addToFavorites()" class="icon-heart-outline"></span>
+					<span ng-click="removeFromFavorites()" class="icon-heart-filled"></span>
+				</div>
+				<img src="images/batman-cover.jpg" alt="batman endgame cover" ng-click="showDetails()"/>
+				<p>Batman - End Game</p>
+			</div>
+		</div>
+		<div class="comic-tile" adaptive-background>
+			<div class="comic-tile--content">
+				<img src="images/batman-cover.jpg" alt="batman endgame cover"/>
+				<p>Batman - End Game</p>
+			</div>
+		</div>
+		<div class="comic-tile" adaptive-background>
+			<div class="comic-tile--content">
+				<img src="images/batman-cover.jpg" alt="batman endgame cover"/>
+				<p>Batman - End Game</p>
+			</div>
+		</div>
+		<div class="comic-tile" adaptive-background>
+			<div class="comic-tile--content">
+				<img src="images/batman-cover.jpg" alt="batman endgame cover"/>
+				<p>Batman - End Game</p>
+			</div>
+		</div>
+		<div class="comic-tile" adaptive-background>
+			<div class="comic-tile--content">
+				<img src="images/batman-cover.jpg" alt="batman endgame cover"/>
+				<p>Batman - End Game</p>
+			</div>
+		</div>
+		<div class="comic-tile" adaptive-background>
+			<div class="comic-tile--content">
+				<img src="images/batman-cover.jpg" alt="batman endgame cover"/>
+				<p>Batman - End Game</p>
+			</div>
+		</div>
+		<div class="comic-tile" adaptive-background>
+			<div class="comic-tile--content">
+				<img src="images/batman-cover.jpg" alt="batman endgame cover"/>
+				<p>Batman - End Game</p>
+			</div>
+		</div>
+		<div class="comic-tile" adaptive-background>
+			<div class="comic-tile--content">
+				<img src="images/batman-cover.jpg" alt="batman endgame cover"/>
+				<p>Batman - End Game</p>
+			</div>
+		</div>
+		<div class="comic-tile" adaptive-background>
+			<div class="comic-tile--content">
+				<img src="images/batman-cover.jpg" alt="batman endgame cover"/>
+				<p>Batman - End Game</p>
+			</div>
+		</div>
+	</div>
 </div>

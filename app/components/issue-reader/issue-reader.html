@@ -1,18 +1,11 @@
 <div id="issue-reader">
-  <div class="container filtering">
-    <h1>{{ message }}</h1>
-    <form>
-      <p>Batman - End Game / 1</p>
-      <input type="text" id="filter"/>
-      <label for="filter">Filter</label>
-    </form>
-  </div>
-  <div class="container comic-list">
+  <div class="container">
     <div class="reader">
-      <div class="controls">
+      <div class="controls--top">
         <a class="icon-arrow-left"></a>
         <a class="icon-arrow-right"></a>
-        <div>
+        <h2 class="line-divider">Batman - End Game / 1</h2>
+        <div class="controls__page">
           <select>
             <option value="">Issue: #</option>
           </select>
@@ -22,17 +15,17 @@
         </div>
       </div>
       <img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-      <div class="controls">
+      <div class="controls--bottom">
         <a class="icon-arrow-left"></a>
         <a class="icon-arrow-right"></a>
-        <div>
+        <div class="controls__page">
           <select>
             <option value="">Issue: #</option>
           </select>
           <select>
             <option value="">Page: #</option>
           </select>
-          <a class="btn">Mark As Read</a>
+          <a class="btn icon-check">Mark As Read</a>
         </div>
       </div>
     </div>

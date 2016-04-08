@@ -1,31 +1,39 @@
 <div class="login-page">
-  <div class="container">
-    <h1 class="title">{{ message }}</h1>
-  </div>
-  <div class="login-wrapper">
-    <div class="login-box">
-      <h2>Returning User</h2>
-      <form action="#/my-series">
-        <span class="label">Username</span>
-        <input type="text" id="username" name="username"/>
-        <br />
-        <span class="label">Password</span>
-        <input type="password" id="password" name="password"/>
-        <br />
-        <input class="btn" type="submit" value="Login"/>
-      </form>
-    </div>
-    <div class="register-box">
-      <h2>New User</h2>
-      <form action="#/my-series">
-        <span class="label">Username</span>
-        <input type="text" id="username" name="username"/>
-        <br />
-        <span class="label">Password</span>
-        <input type="password" id="password" name="password"/>
-        <br />
-        <input class="btn" type="submit" value="Login"/>
-      </form>
-    </div>
-  </div>
+	<div class="container">
+		<h1 class="title">{{ message }}</h1>
+	</div>
+	<div class="login-wrapper">
+		<div class="container">
+			<div class="login-box">
+				<h2>Returning User</h2>
+				<form action="#/my-series">
+					<span class="label">Username</span>
+					<input type="text" id="username" name="username"/>
+					<br />
+					<span class="label">Password</span>
+					<input type="password" id="password" name="password"/>
+					<br />
+					<input class="btn" type="submit" value="Login"/>
+					<p>Don't have an account yet? Click <a class="link-dark">here</a> to make one</p>
+				</form>
+			</div>
+			<div class="register-box">
+				<h2>Register an Account</h2>
+				<form action="#/my-series">
+					<span class="label">Username</span>
+					<input type="text" id="username" name="username"/>
+					<span class="label">Email</span>
+					<input type="email" id="email" name="email"/>
+					<br />
+					<span class="label">Password</span>
+					<input type="password" id="password" name="password"/>
+					<br />
+					<span class="label">Confirm Password</span>
+					<input type="text" id="confpassword" name="confpassword"/>
+					<input class="btn" type="submit" value="Login"/>
+					<p>Already have an account? Click <a class="link-dark">here</a> to login</p>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>

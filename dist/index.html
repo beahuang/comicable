@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="comicableApp">
 <head>
-    <meta charset="UTF-8">
-    <title>Comicable</title>
-    <link rel="stylesheet" type="text/css" href="styles/main.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="scripts/third-party.js"></script>
-    <script src="scripts/main.js"></script>
-    <link rel="icon" type="image/png" href="favicon.ico" sizes="16x16" />
+	<meta charset="UTF-8">
+	<title>Comicable</title>
+	<link rel="stylesheet" type="text/css" href="styles/main.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="scripts/third-party.js"></script>
+	<script src="scripts/main.js"></script>
+	<link rel="icon" type="image/png" href="favicon.ico" sizes="16x16" />
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo-wrapper">
-                <a href="#/released-issues"><img src="images/logo.png" alt="Comicable Logo"/></a>
-            </div>
-            <nav>
-              <ul>
-                <li><a href="#released-issues">Released Issues</a></li>
-                <li><a href="#my-series">My Series</a></li>
-                <li><a href="#currently-reading">Currently Reading</a></li>
-              </ul>
-            </nav>
-            <div class="filter-container icon-search">
-                <input id="filter" class="search" type="text" name="input" value="" placeholder="Filter by title...">
-            </div>
-            <div class="login-state">
-                <div class="not-logged-in">
-                    <p><a href="#login">Login Here</p></a>
-                </div>
-                <div class="logged-in">
-                    <p class="username">Username</p>
-                </div>
-            </div>
-        </div>
-    </header>
-    <div id="main">
-        <div ng-view></div>
-    </div>
+	<header>
+		<div class="container">
+			<div class="logo-wrapper">
+				<a href="#/released-issues"><img src="images/logo.png" alt="Comicable Logo"/></a>
+			</div>
+			<nav>
+				<ul>
+					<li><a class="link" href="#released-issues">Released Issues</a></li>
+					<li><a class="link" href="#my-series">My Series</a></li>
+					<li><a class="link" href="#currently-reading">Currently Reading</a></li>
+				</ul>
+			</nav>
+			<div class="filter-container icon-search">
+				<input id="filter" class="search" type="text" name="input" value="" placeholder="Filter by title...">
+			</div>
+			<div class="login-state">
+				<div class="not-logged-in">
+					<p><a class="link" href="#login">Login Here</p></a>
+				</div>
+				<div class="logged-in">
+					<p class="username">Username</p>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div id="main">
+		<div ng-view></div>
+	</div>
 </body>
 </html>

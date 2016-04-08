@@ -3,579 +3,192 @@
 @import './base/fonts';
 
 /* Variables
-   ========================================================================== */
+========================================================================== */
 
 // Wrapper
-$container: 1080px;
+$container: 1200px;
 
 // Breakpoints
-$mobile: 760px;
-$tablet: 960px;
+$mobile: 500px;
+$tablet: 768px;
+$small-desktop: 960px;
 $mobile-landscape: 400px;
+$large-desktop: 1500px;
 
 // Colors
-$link-light: rgb(238, 246, 64);
 $light-gray: #D8D8D8;
 $dark-gray: #6C6C6C;
 $light-blue: #3CA6B7;
 $dark-blue: #272641;
 $lime-green: #DDE62C;
+$red: #DD3A3A;
+$dark-purple: #414058;
+$overlay-opacity: rgba(0,0,0,0.5);
+$link-light: #79e7ff;
+
 
 /* Structure
-   ========================================================================== */
+========================================================================== */
+body {
+	* {
+		box-sizing: border-box;
+	}
+}
 
 .container {
-  max-width: $container;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 20px;
-  box-sizing: border-box;
-  display: block;
-  position: relative;
+	max-width: $container;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0 20px;
+	display: block;
+	position: relative;
+}
+
+.two-col {
+	overflow: auto;
+	> * {
+		display: inline-block;
+		width: 50%;
+		float: left;
+	}
 }
 
 #main {
-  margin-bottom: 50px;
+	margin-bottom: 50px;
 }
 
 /* Global
-   ========================================================================== */
+========================================================================== */
 
 ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
 
 img {
-  width: 100%;
-  max-height: 100%;
+	width: 100%;
+	max-height: 100%;
 }
 
 .btn {
-  -webkit-appearance: none;
-  border: none;
-  background: none;
-  background-color: white;
-  padding: 7px 60px;
-  border: 1px solid black;
-  cursor: pointer;
-  display: inline-block;
-  &:hover {
-    background-color: gray;
-    color: white;
-  }
-}
-
-.link, .link-dark {
-  position: relative;
-  color: $link-light;
-  &:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    width: 0;
-    height: 2px;
-    display: block;
-    background: white;
-    @include bouncetransition;
-  }
-  &:hover:after{
-    width: 100%;
-  }
-}
-.link-dark {
-  color:black;
-  &:after {
-    background: black;
-  }
+	-webkit-appearance: none;
+	border: none;
+	background: none;
+	background-color: $dark-blue;
+	padding: 7px 60px;
+	cursor: pointer;
+	display: inline-block;
+	color: white;
+	@include transition(background-color 0.15s linear);
+	&:hover {
+		background-color: $light-blue;
+	}
 }
 
 input {
-  border: none;
-  &:focus {
-    outline: none;
-  }
-}
-
-/* Typography
-   ========================================================================== */
-body {
-  font-family: AkkuratLightRegular;
-}
-
-h1 {
-  font-family: AkkuratRegular;
-  letter-spacing: 8px;
-  text-transform: uppercase;
-  font-size: 25px;
-}
-
-h2 {
-  font-family: AkkuratRegular;
-  font-size: 18px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-
-a {
-  color: black;
-  text-decoration: none;
+	border: none;
+	&:focus {
+		outline: none;
+	}
 }
 
 select {
-  text-transform: none;
--webkit-appearance: none;
-border: none;
-background: none;
+	text-transform: none;
+	-webkit-appearance: none;
+	border: none;
+	background: none;
 }
 
-.label {
-  font-family: AkkuratBold;
-  display: block;
-}
 
-.ab-light-background {
-  color: #333;
-}
-.ab-dark-background {
-  color: #fff;
-}
+/* Typography
+========================================================================== */
+
+@import './base/typography';
+
 
 /* Header
-   ========================================================================== */
+========================================================================== */
 
-header {
-  background-color: $dark-blue;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  a {
-    color: white;
-  }
-  div {
-    display: inline-block;
-    vertical-align: middle;
-  }
-}
+@import './components/header';
 
-.logo-wrapper {
-  margin-left: -35px;
-  img {
-    height: 120px;
-    width: auto;
-    display: block;
-    margin-top: 5px;
-  }
-}
-
-.login-state {
-  right: 20px;
-  top: 35px;
-  position: absolute;
-  a {
-    letter-spacing: 1px;
-    font-size: 14px;
-    text-transform: uppercase;
-  }
-  .logged-in {
-    // display: none;
-    .username {
-      position: relative;
-      vertical-align: middle;
-      display: inline-block;
-      padding: 0 20px;
-      color: white;
-    }
-    .username:before {
-      position: absolute;
-      left: 0px;
-      top: 3px;
-    }
-    .username:after {
-      position: absolute;
-      right: -3px;
-      top: 4px;
-      cursor: pointer;
-    }
-  }
-}
-
-body.logged-in {
-  .login-state .logged-in {
-    display: inline-block;
-  }
-  .login-state .not-logged-in {
-    display: none;
-  }
-}
-
-/* Navigation
-   ========================================================================== */
-
-nav {
-  display: inline-block;
-  margin: 0 20px 0 20px;
-  ul {
-    padding: 0;
-    li {
-      display: inline-block;
-      padding: 5px 35px 5px 0;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 14px;
-      &:last-of-type {
-        padding-right: 10px;
-      }
-      &.selected:after {
-        content: "";
-        display: block;
-        padding-top: 3px;
-        border-bottom: 2px solid white;
-      }
-      a {
-        color: white;
-      }
-    }
-  }
-}
-
-/* Filtering
-   ========================================================================== */
-
-.filter-container {
-  margin-right: 20px;
-  position: relative;
-  input#filter {
-    padding: 7px 10px 7px 30px;
-  }
-  &.icon-search:before {
-    top: 10px;
-    left: 6px;
-    position: absolute;
-    color: gray;
-  }
-}
-
-/* Banner
-   ========================================================================== */
-
-.banner {
-  min-height: 350px;
-}
 
 /* Global Components
-   ========================================================================== */
+========================================================================== */
 
 .title {
-  margin: 0;
-  padding-top: 45px;
-  padding-bottom: 20px;
+	margin: 0;
+	padding-top: 45px;
+	padding-bottom: 20px;
 }
 
 form {
-  input {
-    margin: 10px 0;
-  }
-  label {
-    min-width: 110px;
-    display: inline-block;
-  }
-  .btn {
-    margin-top: 15px;
-  }
+	input {
+		margin: 10px 0;
+	}
+	label {
+		min-width: 110px;
+		display: inline-block;
+	}
+	.btn {
+		margin-top: 15px;
+		width: 100%;
+	}
 }
 
-.comic-grid {
-  padding: 0;
-  .comic-box{
-    position: relative;
-    width: 20%;
-    overflow: hidden;
-    float: left;
-    box-sizing: border-box;
-    @include break($tablet) {
-      width: 25%;
-    }
-    @include break($mobile) {
-      width: 50%;
-    }
-    &:hover {
-      background: grayscale(#4679BD);
-      cursor: pointer;
-    }
-  }
-  .comic-content{
-    text-align: center;
-    img {
-      width: 85%;
-      margin: 20px auto;
-    }
-  }
-}
 
-.comic-details {
-  width: 500px;
-  img {
-    width: 24%;
-    display: inline-block;
-    vertical-align: middle;
-  }
-  .details {
-    display: inline-block;
-    width: 75%;
-    vertical-align: middle;
-    font-size: 0.8em;
-  }
-  ul {
-    li {
-      padding-bottom: 5px;
-    }
-    a {
-      margin-right: 150px;
-      display: inline-block;
-    }
-  }
-  .icon-check {
-    color: green;
-    margin-left: 5px;
-  }
-}
+/* Basic Comic
+========================================================================== */
 
-.modal {
-  background: white;
-  border: 1px solid black;
-  position: absolute;
-  top: 50%;
-  left: 33%;
-  padding: 20px !important;
-  .close {
-    padding: 0;
-    border: none;
-    right: 0;
-    position: absolute;
-    top: 5px;
-    right: 8px;
-    cursor: pointer;
-    &:hover {
-      color: darkred;
-    }
-  }
-  .modal-footer {
-    padding-top: 20px;
-  }
-}
+@import './components/comics.scss';
 
-.featured-comic-wrapper {
-  background: $light-gray;
-  color: black;
-  .featured-comic {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px 0;
-    .featured-comic__cover {
-      display: inline-block;
-      width: 33%;
-      padding: 20px;
-      box-sizing: border-box;
-      vertical-align: middle;
-    }
-    .featured-comic__details {
-      width: 66%;
-      display: inline-block;
-      vertical-align: middle;
-    }
-    .featured-comic__title, .featured-comic__author {
-      display: inline-block;
-      box-sizing: border-box;
-      width: 50%;
-      float: left;
-    }
-    .featured-comic__description {
-      clear: both;
-      padding-top: 5px;
-    }
-    .label {
-      margin-bottom: 5px;
-    }
-  }
-}
 
 /* Login Box
-   ========================================================================== */
-.login-wrapper {
-  background: $light-gray;
-  overflow: auto;
-  .login-box, .register-box {
-    width: 50%;
-    margin: 0 auto;
-    padding: 50px 40px;
-    box-sizing: border-box;
-    display: inline-block;
-    float: left;
-    text-align: center;
-  }
-  .login-box {
-    border-right: 1px solid black;
-  }
-  form {
-    text-align: left;
-    margin: 0 auto;
-    width: 52%;
-    input[type="text"],
-    input[type="password"] {
-      margin: 10px 0;
-      width: 100%;
-      padding: 5px 0;
-      height: 25px;
-    }
-  }
+========================================================================== */
+
+@import './page/login.scss';
+
+
+/* Released Issues
+========================================================================== */
+
+#released-issues {
+	.comic-wrapper {
+		background: $light-gray;
+		color: black;
+	}
+	.comic {
+		max-width: 850px;
+	}
+
+	@include break($tablet) {
+		.comic__cover img {
+			max-height: 350px;
+			width: auto;
+		}
+	}
 }
 
 
 /* My Series
-  ========================================================================== */
+========================================================================== */
 
-  #my-series {
-    overflow: auto;
-  }
-
-  .sort-wrapper {
-    max-width: 600px;
-    width: 100%;
-    padding: 20px 0;
-    h2:after {
-      content: "";
-      display: block;
-      width: 100%;
-      height: 1px;
-      margin-top: 7px;
-      background-color: $light-gray;
-    }
-    .sort-by {
-        cursor: pointer;
-        .icon-arrow-right:before {
-          font-size: 12px;
-          margin-right: 5px;
-        }
-        .select, .filter--favorites {
-          display: inline-block;
-          width: 32%;
-          vertical-align: top;
-        }
-        .dropdown {
-          width: 70%;
-          margin-left: 10%;
-        }
-    }
-  }
-
-  .upload-wrapper {
-    background: $light-gray;
-    padding: 35px 0;
-  }
-
-  .favorited {
-    .icon-heart-filled {
-      display: block;
-    }
-    .icon-heart-outline {
-      display: none;
-    }
-  }
-
-  .icon-heart-filled {
-    display: none;
-    position: absolute;
-    right: 3px;
-    top: -25px;
-    &:before {
-      font-size: 1.3em;
-      cursor: pointer;
-    }
-  }
-
-  .icon-heart-outline {
-    position: absolute;
-    right: 3px;
-    top: -25px;
-    &:before {
-      font-size: 1.3em;
-      cursor: pointer;
-    }
-  }
+@import './page/my-series';
 
 
 /* Currently Reading
 ========================================================================== */
-#currently-reading .comic-list {
-  color: white;
-  overflow: auto;
-  .comic-box {
-    padding: 20px;
-    width: 50%;
-    box-sizing: border-box;
-    float: left;
-    img, .description {
-      display: inline-block;
-      vertical-align: middle;
-    }
-    img {
-      width: 25%;
-    }
-    .description {
-      width: 74%;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-  }
-}
 
-.add-to-list-wrapper {
-  max-width: 600px;
-  width: 100%;
-  padding: 5px 0 50px;
-  .add-to-list {
-    &:before, &:after {
-      content: "";
-      display: block;
-      width: 100%;
-      height: 1px;
-      background-color: $light-gray;
-    }
-    input {
-      padding: 7px 0;
-      height: 35px;
-      width: 100%;
-    }
-  }
-}
+@import './page/currently-reading';
+
+
+/* Modal
+========================================================================== */
+
+@import './components/modal';
 
 
 /* Issue Reader
 ========================================================================== */
-.reader {
-  img {
-    width: 90%;
-    margin: 0 auto;
-    display: block;
-  }
-  .controls {
-    height: 30px;
-    padding: 20px 0;
-    > div {
-      width: 90%;
-      text-align: right;
-    }
-  }
-  .icon-arrow-left, .icon-arrow-right {
-    position: absolute;
-    font-size: 1.5em;
-  }
-  .icon-arrow-left {
-    left: 50px;
-  }
-  .icon-arrow-right {
-    right: 50px;
-  }
-}
+
+@import './page/issue-reader';

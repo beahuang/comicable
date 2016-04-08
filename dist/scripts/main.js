@@ -117,7 +117,7 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService ) 
 
     $scope.showDetails = function() {
         ModalService.showModal( {
-            templateUrl: "components/modals/show-details.html",
+            templateUrl: "components/modals/series-details.html",
             controller: "modalController"
         } ).then( function( modal ) {
             modal.element.modal();
@@ -162,7 +162,7 @@ comicableApp.controller( 'releasedIssuesController', function( $scope, ModalServ
 
     $scope.showPurchaseDetails = function() {
         ModalService.showModal( {
-            templateUrl: "components/modals/show-purchase-details.html",
+            templateUrl: "components/modals/purchase-details.html",
             controller: "modalController"
         } ).then( function( modal ) {
             modal.element.modal();
