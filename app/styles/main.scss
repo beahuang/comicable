@@ -100,6 +100,31 @@ select {
 	background: none;
 }
 
+.tag {
+	position: absolute;
+	top: 0;
+	height: 40px;
+	width: 28px;
+}
+
+.tag--right {
+	@extend .tag;
+	right: 5px;
+	background: $red;
+}
+
+.tag--right--green {
+	@extend .tag--right;
+	background: $lime-green;
+}
+
+.tag--left {
+	@extend .tag;
+	left: 5px;
+	background: $light-blue;
+}
+
+
 
 /* Typography
 ========================================================================== */
@@ -157,8 +182,17 @@ form {
 		background: $light-gray;
 		color: black;
 	}
+
 	.comic {
 		max-width: 850px;
+	}
+
+	.comic-tile .icon-cash:before {
+		color: $dark-blue !important;
+		position: absolute;
+		top: 12px;
+		font-size: 20px;
+		left: 4px;
 	}
 
 	@include break($tablet) {

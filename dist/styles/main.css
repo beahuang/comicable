@@ -516,14 +516,14 @@ th {
 .username:before {
   content: "\69"; }
 
-.icon-star-outline:before {
-  content: "\6a"; }
-
-.icon-star-filled:before {
-  content: "\6b"; }
-
 .icon-cash:before {
   content: "\6d"; }
+
+.icon-book-outline:before {
+  content: "\6c"; }
+
+.icon-book-filled:before {
+  content: "\6e"; }
 
 /* Variables
 ========================================================================== */
@@ -587,6 +587,23 @@ select {
   -webkit-appearance: none;
   border: none;
   background: none; }
+
+.tag, .tag--right, .tag--right--green, .tag--left {
+  position: absolute;
+  top: 0;
+  height: 40px;
+  width: 28px; }
+
+.tag--right, .tag--right--green {
+  right: 5px;
+  background: #DD3A3A; }
+
+.tag--right--green {
+  background: #DDE62C; }
+
+.tag--left {
+  left: 5px;
+  background: #3CA6B7; }
 
 /* Typography
 ========================================================================== */
@@ -924,6 +941,13 @@ form .btn {
 #released-issues .comic {
   max-width: 850px; }
 
+#released-issues .comic-tile .icon-cash:before {
+  color: #272641 !important;
+  position: absolute;
+  top: 12px;
+  font-size: 20px;
+  left: 4px; }
+
 @media (max-width: 768px) {
   #released-issues .comic__cover img {
     max-height: 350px;
@@ -974,23 +998,36 @@ form .btn {
         padding: 10px 60px;
         width: 100%; } }
 
+.icon-heart-filled:before,
+.icon-heart-outline:before {
+  font-size: 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 4px; }
+
+.icon-book-filled:before,
+.icon-book-outline:before {
+  font-size: 25px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 2px; }
+
+.icon-heart-filled,
+.icon-book-filled {
+  display: none; }
+
 .favorited .icon-heart-filled {
   display: block; }
 
 .favorited .icon-heart-outline {
   display: none; }
 
-.icon-heart-filled,
-.icon-heart-outline {
-  position: absolute;
-  right: 5px;
-  top: 10px; }
-  .icon-heart-filled:before,
-  .icon-heart-outline:before {
-    font-size: 1.3em;
-    cursor: pointer; }
+.currently-reading .icon-book-filled {
+  display: block; }
 
-.icon-heart-filled {
+.currently-reading .icon-book-outline {
   display: none; }
 
 /* Currently Reading
