@@ -127,12 +127,16 @@ nav {
 				font-size: 13px;
 			}
 		}
-		ul li.active {
-			a {
-				background: $lime-green;
-				color: $dark-blue;
-				&:after {
+		ul {
+			li {
+				a:after {
 					display: none;
+				}
+				&.active {
+					a {
+						background: $lime-green;
+						color: $dark-blue;
+					}
 				}
 			}
 		}
@@ -147,8 +151,10 @@ body.logged-in nav ul li .user-access {
 ========================================================================== */
 
 .filter-container {
-	margin-right: 20px;
-	position: relative;
+	position: absolute;
+	right: 150px;
+	top: 38px;
+
 	input#filter {
 		padding: 4px 10px 4px 30px;
 		border-radius: 20px;
@@ -165,8 +171,11 @@ body.logged-in nav ul li .user-access {
 		color: gray;
 	}
 	@include break( $small-desktop ) {
+		position: relative;
 		display: block;
 		margin: -20px 0 20px;
+		right:auto;
+		top: auto;
 		margin-left: 120px;
 		input {
 			width: 100%;

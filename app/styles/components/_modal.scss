@@ -2,7 +2,7 @@
 /* Modal
 ========================================================================== */
 
-body.modal-open:after {
+.modal-backdrop.in {
 	background: $overlay-opacity;
 	content: "";
 	height: 100%;
@@ -39,7 +39,7 @@ body.modal-open:after {
 	.modal-body {
 		overflow: auto;
 		width: 80%;
-		margin: 0 auto 15px;
+    margin: 0 auto 25px;
 	}
 	.modal-footer {
 		clear: both;

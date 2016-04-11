@@ -27,67 +27,22 @@
 			</div>
 		</div>
 	</div>
-	<div class="comic-grid">
-		<div class="comic-tile" adaptive-background>
-			<div class="comic-tile--content">
-				<div ng-class="class" class="tag--right">
-					<span ng-click="addToFavorites()" class="icon-heart-outline"></span>
-					<span ng-click="removeFromFavorites()" class="icon-heart-filled"></span>
+	<div class="comic-grid-wrapper">
+		<div class="comic-grid">
+			<!-- Comic Tile -->
+			<div class="comic-tile" adaptiveBackground ng-repeat="series in mySeries">
+				<div class="comic-tile--content" >
+					<div ng-class="class" class="tag--right">
+						<span ng-click="addToFavorites()" class="icon-heart-outline"></span>
+						<span ng-click="removeFromFavorites()" class="icon-heart-filled"></span>
+					</div>
+					<div ng-class="class" class="tag--left">
+						<span ng-click="addToCurrentlyReading()" class="icon-book-outline"></span>
+						<span ng-click="addToCurrentlyReading()" class="icon-book-filled"></span>
+					</div>
+					<img ng-src="{{ series.coverImage }}" alt="{{ series.seriesTitle }} cover" ng-click="showDetails()"/>
+					<p>{{ series.seriesTitle }}</p>
 				</div>
-				<div ng-class="class" class="tag--left">
-					<span ng-click="addToCurrentlyReading()" class="icon-book-outline"></span>
-					<span ng-click="addToCurrentlyReading()" class="icon-book-filled"></span>
-				</div>
-				<img src="images/batman-cover.jpg" alt="batman endgame cover" ng-click="showDetails()"/>
-				<p>Batman - End Game</p>
-			</div>
-		</div>
-		<div class="comic-tile" adaptive-background>
-			<div class="comic-tile--content">
-				<img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-				<p>Batman - End Game</p>
-			</div>
-		</div>
-		<div class="comic-tile" adaptive-background>
-			<div class="comic-tile--content">
-				<img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-				<p>Batman - End Game</p>
-			</div>
-		</div>
-		<div class="comic-tile" adaptive-background>
-			<div class="comic-tile--content">
-				<img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-				<p>Batman - End Game</p>
-			</div>
-		</div>
-		<div class="comic-tile" adaptive-background>
-			<div class="comic-tile--content">
-				<img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-				<p>Batman - End Game</p>
-			</div>
-		</div>
-		<div class="comic-tile" adaptive-background>
-			<div class="comic-tile--content">
-				<img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-				<p>Batman - End Game</p>
-			</div>
-		</div>
-		<div class="comic-tile" adaptive-background>
-			<div class="comic-tile--content">
-				<img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-				<p>Batman - End Game</p>
-			</div>
-		</div>
-		<div class="comic-tile" adaptive-background>
-			<div class="comic-tile--content">
-				<img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-				<p>Batman - End Game</p>
-			</div>
-		</div>
-		<div class="comic-tile" adaptive-background>
-			<div class="comic-tile--content">
-				<img src="images/batman-cover.jpg" alt="batman endgame cover"/>
-				<p>Batman - End Game</p>
 			</div>
 		</div>
 	</div>

@@ -16,8 +16,9 @@ $mobile-landscape: 400px;
 $large-desktop: 1500px;
 
 // Colors
-$light-gray: #D8D8D8;
+$light-gray: #E8E8E8;
 $dark-gray: #6C6C6C;
+$darkest-gray: #383B40;
 $light-blue: #3CA6B7;
 $dark-blue: #272641;
 $lime-green: #DDE62C;
@@ -106,6 +107,7 @@ select {
 	height: 40px;
 	width: 28px;
 	overflow: hidden;
+	z-index: 2;
 	@include transition(width .1s ease-in-out);
 	&:after {
 		content: "";

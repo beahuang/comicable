@@ -53,8 +53,15 @@ comicableApp.controller( 'mainController', function ( $scope, $route ) {
     $scope.activeTab = $scope.$route = $route;
 });
 
-comicableApp.controller( 'currentlyReadingController', function( $scope ) {
+comicableApp.controller( 'currentlyReadingController', function( $scope, $http ) {
     $scope.message = 'Currently Reading'
+
+    $http({
+        method: 'GET',
+        url: 'http://104.236.52.101/currentlyReading'
+    }).then(function successCallback(response) {
+        $scope.currentlyReading = response.data;
+    });
 })
 
 comicableApp.controller( 'issueReaderController', function( $scope ) {
@@ -108,6 +115,7 @@ comicableApp.controller( 'modalController', function( $scope, ModalService, clos
   $scope.close = function( result ) {
     close(result, 500);
     $( 'body' ).removeClass( "modal-open" );
+    $( '.modal-backdrop.in' ).remove();
   };
 
   $scope.inputDetails = function() {
@@ -145,8 +153,15 @@ comicableApp.controller( 'modalController', function( $scope, ModalService, clos
   }
 });
 
-comicableApp.controller( 'mySeriesController', function( $scope, ModalService ) {
+comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $http ) {
     $scope.message = 'Your Collection';
+
+    $http({
+        method: 'GET',
+        url: 'http://104.236.52.101/uploaded'
+    }).then(function successCallback(response) {
+        $scope.mySeries = response.data;
+    });
 
     $scope.show = function() {
         ModalService.showModal( {
@@ -200,14 +215,56 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService ) 
     $scope.showDropdown = function() {
         //TODO Show/hide dropdown party
     }
+
+    $scope.uploadIssue = function() {
+        var comicData = {
+        };
+        $http({
+            url: '',
+            method: 'POST',
+            data: comicData,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+        }).success(function (data, status) {
+            // Reset $scope.comic_series
+            $http({
+                method: 'GET',
+                url: '/someUrl'
+            }).then(function successCallback(response) {
+                for (var i = 0;  i < response.issue.length; i++) {
+                    //unpack data
+                }
+                $scope.mySeries = response.mySeries;
+            });
+        });
+    };
 })
 
-comicableApp.controller( 'releasedIssuesController', function( $scope, ModalService ) {
-    $scope.message = 'Week of April 5 - 10'
+comicableApp.controller( 'releasedIssuesController', function( $scope, ModalService, $http ) {
+    $scope.message = 'New Releases: April 5 - 10'
+
+    $http({
+        method: 'GET',
+        url: 'http://104.236.52.101/recentlyreleased'
+    }).then(function successCallback(response) {
+        $scope.recentlyReleased = response.data;
+        $scope.featuredIssue = $scope.recentlyReleased[ 0 ];
+        $scope.recentlyReleased.shift();
+    });
 
     $scope.showPurchaseDetails = function() {
         ModalService.showModal( {
             templateUrl: "components/modals/purchase-details.html",
+            controller: "modalController"
+        } ).then( function( modal ) {
+            modal.element.modal();
+            modal.close.then( function( result ) {
+                console.log( result );
+            });
+        });
+    }
+    $scope.inputCreditCard = function() {
+        ModalService.showModal( {
+            templateUrl: "components/modals/card-details.html",
             controller: "modalController"
         } ).then( function( modal ) {
             modal.element.modal();

@@ -3,6 +3,7 @@ comicableApp.controller( 'modalController', function( $scope, ModalService, clos
   $scope.close = function( result ) {
     close(result, 500);
     $( 'body' ).removeClass( "modal-open" );
+    $( '.modal-backdrop.in' ).remove();
   };
 
   $scope.inputDetails = function() {

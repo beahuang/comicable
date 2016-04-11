@@ -1,15 +1,22 @@
 
 /* Basic Comic
 ========================================================================== */
+.comic-grid-wrapper {
+	background-color: $darkest-gray;
+	overflow: auto;
+}
 
 .comic-grid {
 	padding: 0;
+	overflow: auto;
+	display: flex;
+	flex-flow: row wrap;
 
 	.comic-tile {
 		position: relative;
 		width: 20%;
 		padding: 15px 0;
-		float: left;
+
 		@include break( $small-desktop ) {
 			width: 25%;
 		}
@@ -30,6 +37,29 @@
 		img {
 			width: 85%;
 			margin: 20px auto;
+		}
+		&:hover {
+			img {
+				-webkit-filter: grayscale(100%);
+		    opacity: 0.5;
+		    filter: alpha(opacity=40);
+		    filter: grayscale(100%);
+			}
+			&:after {
+				display: block;
+		    content: "Get Details";
+		    position: absolute;
+		    width: 85%;
+		    text-transform: uppercase;
+		    font-family: AkkuratBold;
+		    font-size: 20px;
+		    color: white;
+				left: 20px;
+		    top: 35px;
+		    padding: 60% 0;
+		    letter-spacing: 2px;
+		    pointer-events: none;
+			}
 		}
 		p {
 			margin-top: 0;
@@ -64,7 +94,12 @@
 		clear: both;
 		padding-top: 5px;
 	}
-
+	.comic__price {
+		margin-top: 10px;
+		.btn {
+			margin-top: 20px;
+		}
+	}
 	.comic__title, .comic__author, .comic__issue {
 		margin-bottom: 10px;
 	}

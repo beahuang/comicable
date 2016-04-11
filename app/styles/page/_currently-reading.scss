@@ -20,6 +20,10 @@
     padding-top: 5px;
 	}
 
+	@include break-min( $large-desktop ) {
+		width: 33.33%;
+	}
+
 	@include break( $small-desktop ) {
 		width: 100%;
 	}
@@ -35,11 +39,6 @@
 			}
 		}
 	}
-
-	@include break-min( $large-desktop ) {
-		width: 33.333%;
-	}
-
 }
 
 .add-to-list-wrapper {
