@@ -49,6 +49,11 @@
 	text-align: center;
 	vertical-align: top;
 	float: right;
+	p {
+		font-size: 13px;
+    width: 80%;
+    margin: 10px auto;
+	}
 	@include break($small-desktop) {
 		width: 100%;
 		float: none;

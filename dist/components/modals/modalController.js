@@ -1,4 +1,5 @@
-comicableApp.controller( 'modalController', function( $scope, ModalService, close ) {
+comicableApp.controller( 'modalController', function( $scope, issue, ModalService, close ) {
+  $scope.issue = issue;
 
   $scope.close = function( result ) {
     close(result, 500);

@@ -33,13 +33,13 @@
 		<!-- Comic Grid -->
 		<div class="comic-grid">
 			<!-- Comic Tile -->
-			<div class="comic-tile" ng-repeat="issue in recentlyReleased" ng-click="showPurchaseDetails()" adaptive-background>
+			<div class="comic-tile" ng-repeat="issue in recentlyReleased" ng-click="showPurchaseDetails( $event )" adaptive-background>
 				<div class="tag--right--green">
 					<span ng-click="showPurchaseDetails()" class="icon-cash"></span>
 				</div>
 				<div class="comic-tile--content">
-					<img ng-src="{{ issue.cover }}" alt="{{ issue.seriesTitle }} cover"/>
-					<p>{{ issue.seriesTitle }}<br /> Issue # {{ issue.issueNumber }}</p>
+					<img class="data__cover" ng-src="{{ issue.cover }}" alt="{{ issue.seriesTitle }} cover"/>
+					<p class="data__title">{{ issue.seriesTitle }}<br /> Issue # {{ issue.issueNumber }}</p>
 				</div>
 			</div>
 		</div>

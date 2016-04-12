@@ -612,6 +612,8 @@ select {
     -moz-transition: width 0.1s ease-in-out;
     -o-transition: width 0.1s ease-in-out;
     transition: width 0.1s ease-in-out; }
+  .tag span:before, .tag--right span:before, .tag--right--green span:before, .tag--left span:before {
+    color: white !important; }
   .tag:hover, .tag--right:hover, .tag--right--green:hover, .tag--left:hover {
     width: 80px;
     text-align: right; }
@@ -627,14 +629,16 @@ select {
   .tag--right:after, .tag--right--green:after {
     content: "favorite";
     margin-top: 12px;
-    color: white; }
+    color: white !important; }
 
 .tag--right--green {
   background: #DDE62C; }
   .tag--right--green:after {
     content: "buy issue";
-    color: #272641;
+    color: #272641 !important;
     margin-top: 15px; }
+  .tag--right--green span:before {
+    color: #272641 !important; }
 
 .tag--left {
   left: 5px;
@@ -644,8 +648,7 @@ select {
     text-align: left; }
   .tag--left:after {
     content: "bookmark";
-    margin-left: 30px;
-    color: white; }
+    margin-left: 30px; }
 
 /* Typography
 ========================================================================== */
@@ -831,7 +834,7 @@ nav {
           white-space: nowrap;
           font-size: 13px; }
       nav ul li a:after {
-        display: none; }
+        display: none !important; }
       nav ul li.active a {
         background: #DDE62C;
         color: #272641; } }
@@ -1082,6 +1085,10 @@ form .btn {
   text-align: center;
   vertical-align: top;
   float: right; }
+  .upload-wrapper p {
+    font-size: 13px;
+    width: 80%;
+    margin: 10px auto; }
   @media (max-width: 960px) {
     .upload-wrapper {
       width: 100%;

@@ -130,7 +130,7 @@ nav {
 		ul {
 			li {
 				a:after {
-					display: none;
+					display: none !important;
 				}
 				&.active {
 					a {
