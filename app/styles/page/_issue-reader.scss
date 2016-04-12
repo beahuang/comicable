@@ -59,7 +59,7 @@
 		}
 	}
 
-	@include break($mobile) {
+	@include break( $mobile ) {
 		.controls--top {
 			margin-top: 20px;
 			h2.line-divider {
@@ -72,5 +72,24 @@
 				top: 30px;
 			}
 		}
+		.controls--bottom {
+			text-align: right;
+			.btn {
+				margin: 10px 0;
+				display: block;
+			}
+		}
 	}
 }
+
+// body.fixed .controls--top {
+// 	position: fixed;
+// 	width: 87%;
+// 	background: white;
+// 	top: 128px;
+//
+// 	@include break( $mobile ) {
+// 		position: relative;
+// 		width: 100%;
+// 	}
+// }

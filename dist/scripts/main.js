@@ -51,33 +51,9 @@ function( $routeProvider ) {
 
 comicableApp.controller( 'mainController', function ( $scope, $route ) {
     $scope.activeTab = $scope.$route = $route;
+    $scope.searchTitle = '';
+    $scope.ordering = '';
 });
-
-comicableApp.controller( 'issueReaderController', function( $scope ) {
-    $scope.message = 'Issue Reader'
-
-    $scope.imageUrl = 'images/batman-cover.jpg';
-    $scope.counter = 0;
-    $scope.maxPages = 30;
-    $scope.nextImage = function() {
-        if ($scope.counter >= $scope.maxPages) {
-            $scope.imageUrl = 'images/batman-cover.jpg';
-            $scope.counter = 0;
-        } else {
-            $scope.counter += 1;
-            $scope.imageUrl = 'images/batman-' + $scope.counter + '.jpg';
-        }
-    };
-
-    $scope.prevImage = function() {
-        if ($scope.counter <= 1) {
-            $scope.imageUrl = 'images/batman-cover.jpg';
-        } else {
-            $scope.counter -= 1;
-            $scope.imageUrl = 'images/batman-' + $scope.counter + '.jpg';
-        }
-    };
-})
 
 comicableApp.controller( 'currentlyReadingController', function( $scope, $http ) {
     $scope.message = 'Currently Reading'
@@ -88,7 +64,144 @@ comicableApp.controller( 'currentlyReadingController', function( $scope, $http )
     }).then(function successCallback(response) {
         $scope.currentlyReading = response.data;
     });
+
+    $scope.addToList = function() {
+        var comicData = {};
+
+        $http({
+            url: 'http://104.236.52.101/setCurrentlyReading',
+            method: 'POST',
+            data: comicData,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+        }).success(function (data, status) {
+            $http({
+                method: 'GET',
+                url: 'http://104.236.52.101/currentlyReading'
+            }).then(function successCallback(response) {
+                $scope.currentlyReading = response.data;
+            });
+        });
+    };
 })
+
+
+comicableApp.controller( 'issueReaderController', function( $scope ) {
+	$scope.message = 'Issue Reader'
+
+	$scope.imageUrl = 'images/batman-cover.jpg';
+	$scope.counter = 0;
+	$scope.maxPages = 30;
+	
+	$scope.nextImage = function() {
+		if ($scope.counter >= $scope.maxPages) {
+			$scope.imageUrl = 'images/batman-cover.jpg';
+			$scope.counter = 0;
+		} else {
+			$scope.counter += 1;
+			$scope.imageUrl = 'images/batman-' + $scope.counter + '.jpg';
+		}
+	};
+
+	$scope.prevImage = function() {
+		if ($scope.counter <= 1) {
+			$scope.imageUrl = 'images/batman-cover.jpg';
+		} else {
+			$scope.counter -= 1;
+			$scope.imageUrl = 'images/batman-' + $scope.counter + '.jpg';
+		}
+	};
+})
+
+comicableApp.directive( "scroll", function ( $window ) {
+	return function( scope, element, attrs ) {
+		angular.element( $window ).bind( "scroll", function() {
+			if ( this.pageYOffset >= 100 ) {
+				scope.boolChangeClass = true;
+			} else {
+				scope.boolChangeClass = false;
+			}
+			scope.$apply();
+		});
+	};
+});
+
+comicableApp.controller( 'modalController', function( $scope, $http, issue, ModalService, close ) {
+	$scope.issue = issue;
+
+	$scope.close = function( result ) {
+		close();
+		$( 'body' ).removeClass( "modal-open" );
+		$( '.modal-backdrop.in' ).remove();
+	};
+
+	$scope.inputDetails = function() {
+		ModalService.showModal( {
+			templateUrl: "components/modals/upload-details.html",
+			controller: "modalController",
+			inputs: {
+				issue: null
+			}
+		} ).then( function( modal ) {
+			modal.element.modal();
+			modal.close.then( function( result ) {
+				console.log( result.title );
+			});
+		});
+	}
+	
+	$scope.inputCreditCard = function() {
+		ModalService.showModal( {
+			templateUrl: "components/modals/card-details.html",
+			controller: "modalController",
+			inputs: {
+				issue: null
+			}
+		} ).then( function( modal ) {
+			modal.element.modal();
+			modal.close.then( function( result ) {
+				console.log( result );
+			});
+		});
+	}
+
+	$scope.confirmPurchase = function() {
+		ModalService.showModal( {
+			templateUrl: "components/modals/confirm-purchase.html",
+			controller: "modalController",
+			inputs: {
+				issue: null
+			}
+		} ).then( function( modal ) {
+			modal.element.modal();
+			modal.close.then( function( result ) {
+				console.log( result );
+			});
+		});
+	}
+
+	$scope.uploadIssue = function() {
+		var comicData = {
+			seriesTitle: $scope.seriesTitle,
+			issueNumber: $scope.issueNumber,
+			author: $scope.author,
+			description: $scope.desc,
+			coverImage: "images/batman-cover.jpg"
+		};
+		$http({
+			url: 'http://104.236.52.101/uploadComics',
+			method: 'POST',
+			data: comicData,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+		}).success(function (data, status) {
+			$http({
+				method: 'GET',
+				url: 'http://104.236.52.101/uploaded'
+			}).then(function successCallback(response) {
+				$scope.mySeries = response.data;
+			});
+		});
+	};
+});
 
 var comicableApp = angular.module( 'comicableApp' );
 
@@ -108,50 +221,6 @@ comicableApp.controller( 'loginController', function( $scope, $location ) {
         $( 'body' ).addClass( 'logged-in' );
         $location.path('/my-series');
     }
-});
-
-comicableApp.controller( 'modalController', function( $scope, issue, ModalService, close ) {
-  $scope.issue = issue;
-
-  $scope.close = function( result ) {
-    close(result, 500);
-    $( 'body' ).removeClass( "modal-open" );
-    $( '.modal-backdrop.in' ).remove();
-  };
-
-  $scope.inputDetails = function() {
-      ModalService.showModal( {
-          templateUrl: "components/modals/upload-details.html",
-          controller: "modalController"
-      } ).then( function( modal ) {
-          modal.element.modal();
-          modal.close.then( function( result ) {
-              console.log( result );
-          });
-      });
-  }
-  $scope.inputCreditCard = function() {
-      ModalService.showModal( {
-          templateUrl: "components/modals/card-details.html",
-          controller: "modalController"
-      } ).then( function( modal ) {
-          modal.element.modal();
-          modal.close.then( function( result ) {
-              console.log( result );
-          });
-      });
-  }
-  $scope.confirmPurchase = function() {
-      ModalService.showModal( {
-          templateUrl: "components/modals/confirm-purchase.html",
-          controller: "modalController"
-      } ).then( function( modal ) {
-          modal.element.modal();
-          modal.close.then( function( result ) {
-              console.log( result );
-          });
-      });
-  }
 });
 
 comicableApp.controller( 'releasedIssuesController', function( $scope, ModalService, $http ) {
@@ -185,7 +254,10 @@ comicableApp.controller( 'releasedIssuesController', function( $scope, ModalServ
 	$scope.inputCreditCard = function() {
 		ModalService.showModal( {
 			templateUrl: "components/modals/card-details.html",
-			controller: "modalController"
+			controller: "modalController",
+			inputs: {
+					issue: null
+			}
 		} ).then( function( modal ) {
 			modal.element.modal();
 			modal.close.then( function( result ) {
@@ -195,101 +267,150 @@ comicableApp.controller( 'releasedIssuesController', function( $scope, ModalServ
 	}
 
 	$scope.parseComicElement = function( comicElement ) {
-		var comic_cover = comicElement.getElementsByClassName("data__cover")[0].src
-		var comic_title = comicElement.getElementsByClassName("data__title")[0].innerHTML
+		var comic_cover = comicElement.getElementsByClassName( "data__cover" )[ 0 ].src
+		var comic_title = comicElement.getElementsByClassName( "data__title" )[ 0 ].innerHTML;
+		var comic_issueNumber = comicElement.getElementsByClassName( "data__issue-number" )[ 0 ].innerHTML;
+		var comic_author = comicElement.getElementsByClassName( "data__author" )[ 0 ].innerHTML;
+		var comic_desc = comicElement.getElementsByClassName( "data__desc" )[ 0 ].innerHTML
+		var comic_price = comicElement.getElementsByClassName( "data__price" )[ 0 ].innerHTML
 		issue = {
 			cover: comic_cover,
 			title: comic_title,
-			author: null,
-			desc: null,
-			price: null
+			issueNumber: comic_issueNumber,
+			author: comic_author,
+			desc: comic_desc,
+			price: comic_price
 		}
 		return issue;
 	}
 })
 
 comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $http ) {
-    $scope.message = 'Your Collection';
+	$scope.message = 'Your Collection';
+	$scope.ordering = '';
+	$scope.filterFavorites = false;
 
-    $http({
-        method: 'GET',
-        url: 'http://104.236.52.101/uploaded'
-    }).then(function successCallback(response) {
-        $scope.mySeries = response.data;
-    });
+	$http({
+		method: 'GET',
+		url: 'http://104.236.52.101/uploaded'
+	}).then(function successCallback(response) {
+		$scope.mySeries = response.data;
+	});
 
-    $scope.show = function() {
-        ModalService.showModal( {
-            templateUrl: "components/modals/upload.html",
-            controller: "modalController"
-        } ).then( function( modal ) {
-            modal.element.modal();
-            modal.close.then( function( result ) {
-                console.log( result );
-            });
-        });
-    }
+	$scope.show = function() {
+		ModalService.showModal( {
+			templateUrl: "components/modals/upload.html",
+			controller: "modalController",
+			inputs: {
+				issue: null
+			}
+		} ).then( function( modal ) {
+			modal.element.modal();
+			modal.close.then( function( result ) {
+				console.log( result );
+			});
+		});
+	}
 
-    $scope.showDetails = function() {
-        ModalService.showModal( {
-            templateUrl: "components/modals/series-details.html",
-            controller: "modalController"
-        } ).then( function( modal ) {
-            modal.element.modal();
-            modal.close.then( function( result ) {
-                console.log( result );
-            });
-        });
-    }
+	$scope.showDetails = function( $event ) {
+		var issueData = $scope.parseComicElement( $event.currentTarget );
+		ModalService.showModal( {
+			templateUrl: "components/modals/series-details.html",
+			controller: "modalController",
+			inputs: {
+				issue: issueData
+			}
+		}
+	) }
 
-    $scope.addToFavorites = function() {
-        ModalService.showModal( {
-            templateUrl: "components/modals/confirm.html",
-            controller: "modalController"
-        } ).then( function( modal ) {
-            modal.element.modal();
-            modal.close.then( function( result ) {
-                $scope.changeHeartClass();
-            });
-        });
-    }
+	$scope.addToFavorites = function() {
+		ModalService.showModal( {
+			templateUrl: "components/modals/confirm.html",
+			controller: "modalController",
+			inputs: {
+				issue: null
+			}
+		} ).then( function( modal ) {
+			modal.element.modal();
+			modal.close.then( function( result ) {
+				$scope.changeHeartClass();
+			});
+		});
+	}
 
-    $scope.class = "";
-    $scope.changeHeartClass = function() {
-        if ($scope.class === "") {
-            $scope.class = "favorited";
-        } else {
-            $scope.class = "";
-        }
-    }
+	$scope.heartFilled = false;
+	$scope.changeHeartClass = function() {
+		$scope.heartFilled = !$scope.heartFilled;
+	}
 
-    $scope.removeFromFavorites = function() {
-        $scope.changeHeartClass();
-    }
+	$scope.bookFilled = false;
+	$scope.changeBookClass = function() {
+		$scope.bookFilled = !$scope.bookFilled;
+	}
 
-    $scope.showDropdown = function() {
-        //TODO Show/hide dropdown party
-    }
+	$scope.setFavorite = function() {
+		var comicData = {
+			favorite: null,
+			comicId: null
+		};
+		$http({
+			url: 'http://104.236.52.101/favorites',
+			method: 'POST',
+			data: comicData,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+		}).success(function (data, status) {
+			$http({
+				method: 'GET',
+				url: 'http://104.236.52.101/uploaded'
+			}).then(function successCallback(response) {
+				$scope.mySeries = response.data;
+			});
+			$scope.changeHeartClass()
+		});
+	};
 
-    $scope.uploadIssue = function() {
-        var comicData = {
-        };
-        $http({
-            url: '',
-            method: 'POST',
-            data: comicData,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
-        }).success(function (data, status) {
-            // Reset $scope.comic_series
-            $http({
-                method: 'GET',
-                url: '/someUrl'
-            }).then(function successCallback(response) {
-                for (var i = 0;  i < response.issue.length; i++) {
-                    //unpack data
-                }
-                $scope.mySeries = response.mySeries;
-            });
-        });
-    };
+	$scope.removeFromFavorites = function() {
+		var comicData = {
+			favorite: null,
+			comicId: null
+		};
+		$http({
+			url: 'http://104.236.52.101/favorites',
+			method: 'POST',
+			data: comicData,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+		}).success(function (data, status) {
+			$http({
+				method: 'GET',
+				url: 'http://104.236.52.101/uploaded'
+			}).then(function successCallback(response) {
+				$scope.mySeries = response.data;
+			});
+			$scope.changeHeartClass()
+		});
+	};
+
+	$scope.releaseDropOpen = false;
+	$scope.showReleaseDrop = function() {
+		$scope.releaseDropOpen = !$scope.releaseDropOpen;
+	}
+
+	$scope.alphaDropOpen = false;
+	$scope.showAlphaDrop = function() {
+		$scope.alphaDropOpen = !$scope.alphaDropOpen;
+	}
+
+	$scope.parseComicElement = function( comicElement ) {
+		var comic_cover = comicElement.getElementsByClassName( "data__cover" )[ 0 ].src
+		var comic_title = comicElement.getElementsByClassName( "data__title" )[ 0 ].innerHTML;
+		var comic_author = comicElement.getElementsByClassName( "data__author" )[ 0 ].innerHTML;
+		var comic_desc = comicElement.getElementsByClassName( "data__desc" )[ 0 ].innerHTML;
+		issue = {
+			cover: comic_cover,
+			title: comic_title,
+			author: comic_author,
+			desc: comic_desc
+		}
+		return issue;
+	}
 })

@@ -648,7 +648,8 @@ select {
     text-align: left; }
   .tag--left:after {
     content: "bookmark";
-    margin-left: 30px; }
+    margin-left: 30px;
+    color: white; }
 
 /* Typography
 ========================================================================== */
@@ -712,6 +713,8 @@ a {
 
 .ab-light-background {
   color: #333; }
+  .ab-light-background h2.line-divider:after {
+    background-color: #272641; }
 
 .ab-dark-background {
   color: #fff; }
@@ -737,12 +740,24 @@ header {
   display: flex;
   align-items: center;
   width: 100%;
-  border-bottom: 3px solid #3CA6B7; }
+  border-bottom: 3px solid #3CA6B7;
+  position: fixed;
+  top: 0;
+  z-index: 3; }
   header a {
     color: white; }
   header div {
     display: inline-block;
     vertical-align: middle; }
+
+#main {
+  margin-top: 100px; }
+  @media (max-width: 768px) {
+    #main {
+      margin-top: 137px; } }
+  @media (max-width: 500px) {
+    #main {
+      margin-top: 250px; } }
 
 .logo-wrapper {
   margin-left: -35px; }
@@ -956,6 +971,8 @@ form .btn {
       margin-top: 0;
       font-size: 14px;
       font-family: AkkuratRegular; }
+    .comic-grid .comic-tile--content .hidden-data {
+      display: none; }
 
 .comic {
   width: 80%;
@@ -1118,16 +1135,16 @@ form .btn {
 .icon-book-filled {
   display: none; }
 
-.favorited .icon-heart-filled {
+.filled .icon-heart-filled {
   display: block; }
 
-.favorited .icon-heart-outline {
+.filled .icon-heart-outline {
   display: none; }
 
-.currently-reading .icon-book-filled {
+.filled .icon-book-filled {
   display: block; }
 
-.currently-reading .icon-book-outline {
+.filled .icon-book-outline {
   display: none; }
 
 /* Currently Reading
@@ -1195,7 +1212,7 @@ form .btn {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2; }
+  z-index: 4; }
   .modal .icon-close {
     position: absolute;
     top: 22px;
@@ -1326,4 +1343,9 @@ form .btn {
       .reader .controls--top .icon-arrow-left,
       .reader .controls--top .icon-arrow-right,
       .reader .controls--top .controls__page {
-        top: 30px; } }
+        top: 30px; }
+    .reader .controls--bottom {
+      text-align: right; }
+      .reader .controls--bottom .btn {
+        margin: 10px 0;
+        display: block; } }

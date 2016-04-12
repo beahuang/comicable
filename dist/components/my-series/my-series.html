@@ -3,27 +3,28 @@
 		<h1 class="title">{{ message }}</h1>
 		<div class="upload-wrapper">
 			<a class="btn upload" ng-click="show()">Upload</a>
-			<p>Have any digital comic issues? Upload them here and read your collection online!</p>
+			<p>Have any digital comic issues?<br/>
+				Upload them here and read your collection online!</p>
 		</div>
 		<div class="sort-wrapper">
 			<div class="container">
 				<h2 class="line-divider">Sort By</h2>
 				<div class="sort-by">
 					<div class="select">
-						<p class="icon-arrow-right" ng-click="showDropdown()">Release Date</p>
+						<p class="icon-arrow-right" ng-click="showReleaseDrop()" ng-class="{active: releaseDropOpen}">Release Date</p>
 						<div class="dropdown">
-							<p>Newest</p>
-							<p>Oldest</p>
+							<p ng-click="ordering = 'dateReleased'">Newest</p>
+							<p ng-click="ordering = '-dateReleased'">Oldest</p>
 						</div>
 					</div>
 					<div class="select">
-						<p class="icon-arrow-right" ng-click="showDropdown()">Alphabetical</p>
+						<p class="icon-arrow-right" ng-click="alphaDropOpen()" ng-class="{active: alphaDropOpen}">Alphabetical</p>
 						<div class="dropdown">
-							<p>A - Z</p>
-							<p>Z - A</p>
+							<p ng-click="ordering = 'seriesTitle'">A - Z</p>
+							<p ng-click="ordering = '-seriesTitle'">Z - A</p>
 						</div>
 					</div>
-					<p class="filter--favorites">Favorites</p>
+					<p class="filter--favorites" ng-click="filterFavorites = !filterFavorites">Favorites</p>
 				</div>
 			</div>
 		</div>
@@ -31,18 +32,22 @@
 	<div class="comic-grid-wrapper">
 		<div class="comic-grid">
 			<!-- Comic Tile -->
-			<div class="comic-tile" adaptive-background ng-repeat="series in mySeries">
-				<div class="comic-tile--content" >
-					<div ng-class="class" class="tag--right">
-						<span ng-click="addToFavorites()" class="icon-heart-outline"></span>
-						<span ng-click="removeFromFavorites()" class="icon-heart-filled"></span>
+			<div class="comic-tile" adaptive-background ng-repeat="series in mySeries | orderBy: ordering | filter:searchTitle">
+				<div ng-class="{filled: heartFilled}" class="tag--right">
+					<span ng-click="setFavorite()" class="icon-heart-outline"></span>
+					<span ng-click="removeFromFavorites()" class="icon-heart-filled"></span>
+				</div>
+				<div ng-class="{filled: bookFilled}" class="tag--left">
+					<span ng-click="addToCurrentlyReading()" class="icon-book-outline"></span>
+					<span ng-click="removeFromFavorites()" class="icon-book-filled"></span>
+				</div>
+				<div class="comic-tile--content" ng-click="showDetails( $event )">
+					<img class="data__cover" ng-src="{{ series.coverImage }}" alt="{{ series.seriesTitle }} cover"/>
+					<p class="data__title">{{ series.seriesTitle }}</p>
+					<div class="hidden-data">
+						<p class="data__author">{{ series.author }}</p>
+						<p class="data__desc">{{ series.desc }}</p>
 					</div>
-					<div ng-class="class" class="tag--left">
-						<span ng-click="addToCurrentlyReading()" class="icon-book-outline"></span>
-						<span ng-click="addToCurrentlyReading()" class="icon-book-filled"></span>
-					</div>
-					<img ng-src="{{ series.coverImage }}" alt="{{ series.seriesTitle }} cover" ng-click="showDetails()"/>
-					<p>{{ series.seriesTitle }}</p>
 				</div>
 			</div>
 		</div>

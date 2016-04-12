@@ -11,7 +11,7 @@
 	<div class="comic-grid-wrapper">
 		<div class="comic-list">
 			<!-- Comic -->
-			<div class="comic" adaptive-background ng-repeat="series in currentlyReading">
+			<div class="comic" adaptive-background ng-repeat="series in currentlyReading | filter:searchTitle">
 				<div class="comic__cover">
 					<img ng-src="{{ series.coverImage }}" alt="{{ series.seriesTitle }} cover"/>
 				</div>

@@ -51,4 +51,6 @@ function( $routeProvider ) {
 
 comicableApp.controller( 'mainController', function ( $scope, $route ) {
     $scope.activeTab = $scope.$route = $route;
+    $scope.searchTitle = '';
+    $scope.ordering = '';
 });

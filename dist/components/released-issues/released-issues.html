@@ -1,5 +1,4 @@
 <div id="released-issues">
-
 	<div class="container">
 		<h1 class="title">{{ message }}</h1>
 	</div>
@@ -33,13 +32,19 @@
 		<!-- Comic Grid -->
 		<div class="comic-grid">
 			<!-- Comic Tile -->
-			<div class="comic-tile" ng-repeat="issue in recentlyReleased" ng-click="showPurchaseDetails( $event )" adaptive-background>
+			<div class="comic-tile" ng-repeat="issue in recentlyReleased | filter:searchTitle" ng-click="showPurchaseDetails( $event )" adaptive-background>
 				<div class="tag--right--green">
 					<span ng-click="showPurchaseDetails()" class="icon-cash"></span>
 				</div>
 				<div class="comic-tile--content">
 					<img class="data__cover" ng-src="{{ issue.cover }}" alt="{{ issue.seriesTitle }} cover"/>
-					<p class="data__title">{{ issue.seriesTitle }}<br /> Issue # {{ issue.issueNumber }}</p>
+					<p class="data__title">{{ issue.seriesTitle }}</p>
+					<p class="data__issue-number">Issue # {{ issue.issueNumber }}</p>
+					<div class="hidden-data">
+						<p class="data__author">{{ issue.author }}</p>
+						<p class="data__desc">{{ issue.desc }}</p>
+						<p class="data__price">{{ issue.price }}</p>
+					</div>
 				</div>
 			</div>
 		</div>

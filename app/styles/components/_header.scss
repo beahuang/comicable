@@ -1,18 +1,30 @@
 /* Header
 ========================================================================== */
-
 header {
 	background-color: $dark-blue;
 	display: flex;
 	align-items: center;
 	width: 100%;
 	border-bottom: 3px solid $light-blue;
+	position: fixed;
+	top: 0;
+	z-index: 3;
 	a {
 		color: white;
 	}
 	div {
 		display: inline-block;
 		vertical-align: middle;
+	}
+}
+
+#main {
+	margin-top: 100px;
+	@include break ( $tablet ) {
+		margin-top: 137px;
+	}
+	@include break( $mobile ) {
+		margin-top: 250px;
 	}
 }
 

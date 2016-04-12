@@ -70,6 +70,9 @@ a {
 	a.link {
 		@extend .link-dark;
 	}
+	h2.line-divider:after {
+		background-color: $dark-blue;
+	}
 }
 
 .ab-dark-background {

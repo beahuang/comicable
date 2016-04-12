@@ -27,6 +27,8 @@ $dark-purple: #414058;
 $overlay-opacity: rgba(0,0,0,0.5);
 $link-light: #79e7ff;
 
+// TODO: Make the z-index thing
+
 
 /* Structure
 ========================================================================== */
@@ -171,6 +173,7 @@ select {
 	&:after {
 		content: "bookmark";
 		margin-left: 30px;
+		color: white;
 	}
 }
 

@@ -29,7 +29,10 @@ comicableApp.controller( 'releasedIssuesController', function( $scope, ModalServ
 	$scope.inputCreditCard = function() {
 		ModalService.showModal( {
 			templateUrl: "components/modals/card-details.html",
-			controller: "modalController"
+			controller: "modalController",
+			inputs: {
+					issue: null
+			}
 		} ).then( function( modal ) {
 			modal.element.modal();
 			modal.close.then( function( result ) {
@@ -39,14 +42,19 @@ comicableApp.controller( 'releasedIssuesController', function( $scope, ModalServ
 	}
 
 	$scope.parseComicElement = function( comicElement ) {
-		var comic_cover = comicElement.getElementsByClassName("data__cover")[0].src
-		var comic_title = comicElement.getElementsByClassName("data__title")[0].innerHTML
+		var comic_cover = comicElement.getElementsByClassName( "data__cover" )[ 0 ].src
+		var comic_title = comicElement.getElementsByClassName( "data__title" )[ 0 ].innerHTML;
+		var comic_issueNumber = comicElement.getElementsByClassName( "data__issue-number" )[ 0 ].innerHTML;
+		var comic_author = comicElement.getElementsByClassName( "data__author" )[ 0 ].innerHTML;
+		var comic_desc = comicElement.getElementsByClassName( "data__desc" )[ 0 ].innerHTML
+		var comic_price = comicElement.getElementsByClassName( "data__price" )[ 0 ].innerHTML
 		issue = {
 			cover: comic_cover,
 			title: comic_title,
-			author: null,
-			desc: null,
-			price: null
+			issueNumber: comic_issueNumber,
+			author: comic_author,
+			desc: comic_desc,
+			price: comic_price
 		}
 		return issue;
 	}
