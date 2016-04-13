@@ -923,6 +923,10 @@ form .btn {
   overflow: auto;
   width: 100%; }
 
+.comic-list {
+  display: flex;
+  flex-flow: row wrap; }
+
 .comic-grid {
   padding: 0;
   overflow: auto;
@@ -1122,7 +1126,7 @@ form .btn {
 .upload-wrapper {
   display: inline-block;
   width: 33%;
-  padding-top: 50px;
+  padding-top: 35px;
   text-align: center;
   vertical-align: top;
   float: right; }

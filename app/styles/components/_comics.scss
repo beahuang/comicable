@@ -6,7 +6,10 @@
 	overflow: auto;
 	width: 100%;
 }
-
+.comic-list {
+	display: flex;
+	flex-flow: row wrap;
+}
 .comic-grid {
 	padding: 0;
 	overflow: auto;
