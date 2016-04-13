@@ -22,11 +22,38 @@
 			vertical-align: top;
 		}
 		.dropdown {
-			width: 70%;
+			height: 0;
 			margin-left: 10%;
+			width: 70%;
+			overflow: hidden;
+			@include transition(height 0.2s ease-in-out);
+			&.active {
+				height: 70px;
+			}
+			p {
+				margin-top: 10px;
+				&:after {
+					content: "";
+					height: 1px;
+					background: transparent;
+					display: block;
+					margin-top: 3px;
+				}
+				&.active {
+					width: inherit;
+					color: $light-blue;
+					&:after {
+				    background: $lime-green;
+					}
+				}
+			}
 		}
+
 		p {
 			white-space: nowrap;
+			&.icon-arrow-right:before {
+				transform: rotate(90deg);
+			}
 		}
 	}
 

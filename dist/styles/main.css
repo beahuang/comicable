@@ -920,7 +920,8 @@ form .btn {
 ========================================================================== */
 .comic-grid-wrapper {
   background-color: #383B40;
-  overflow: auto; }
+  overflow: auto;
+  width: 100%; }
 
 .comic-grid {
   padding: 0;
@@ -1083,10 +1084,33 @@ form .btn {
       width: 32%;
       vertical-align: top; }
     .sort-wrapper .sort-by .dropdown {
+      height: 0;
+      margin-left: 10%;
       width: 70%;
-      margin-left: 10%; }
+      overflow: hidden;
+      -webkit-transition: height 0.2s ease-in-out;
+      -moz-transition: height 0.2s ease-in-out;
+      -o-transition: height 0.2s ease-in-out;
+      transition: height 0.2s ease-in-out; }
+      .sort-wrapper .sort-by .dropdown.active {
+        height: 70px; }
+      .sort-wrapper .sort-by .dropdown p {
+        margin-top: 10px; }
+        .sort-wrapper .sort-by .dropdown p:after {
+          content: "";
+          height: 1px;
+          background: transparent;
+          display: block;
+          margin-top: 3px; }
+        .sort-wrapper .sort-by .dropdown p.active {
+          width: inherit;
+          color: #3CA6B7; }
+          .sort-wrapper .sort-by .dropdown p.active:after {
+            background: #DDE62C; }
     .sort-wrapper .sort-by p {
       white-space: nowrap; }
+      .sort-wrapper .sort-by p.icon-arrow-right:before {
+        transform: rotate(90deg); }
   @media (max-width: 960px) {
     .sort-wrapper {
       width: 100%; } }

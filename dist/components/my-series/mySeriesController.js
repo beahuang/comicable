@@ -1,7 +1,9 @@
 comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $http ) {
 	$scope.message = 'Your Collection';
 	$scope.ordering = '';
-	$scope.filterFavorites = false;
+	$scope.filterFavorites = 0;
+	$scope.az = false;
+	$scope.za = false;
 
 	$http({
 		method: 'GET',
@@ -36,36 +38,19 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 		}
 	) }
 
-	$scope.addToFavorites = function() {
-		ModalService.showModal( {
-			templateUrl: "components/modals/confirm.html",
-			controller: "modalController",
-			inputs: {
-				issue: null
-			}
-		} ).then( function( modal ) {
-			modal.element.modal();
-			modal.close.then( function( result ) {
-				$scope.changeHeartClass();
-			});
-		});
-	}
-
 	$scope.heartFilled = false;
 	$scope.changeHeartClass = function() {
 		$scope.heartFilled = !$scope.heartFilled;
 	}
 
-	$scope.bookFilled = false;
-	$scope.changeBookClass = function() {
-		$scope.bookFilled = !$scope.bookFilled;
-	}
+	$scope.setFavorite = function( $event ) {
+		var id = $event.currentTarget.parentNode.parentNode.getElementsByClassName( "data__comicId" )[ 0 ].innerHTML;
 
-	$scope.setFavorite = function() {
 		var comicData = {
-			favorite: null,
-			comicId: null
+			favorite: 1,
+			comicId: parseInt(id)
 		};
+
 		$http({
 			url: 'http://104.236.52.101/favorites',
 			method: 'POST',
@@ -82,13 +67,70 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 		});
 	};
 
-	$scope.removeFromFavorites = function() {
+	$scope.removeFromFavorites = function( $event ) {
+		var id = $event.currentTarget.parentNode.parentNode.getElementsByClassName( "data__comicId" )[ 0 ].innerHTML;
+
 		var comicData = {
-			favorite: null,
-			comicId: null
+			favorite: 0,
+			comicId: parseInt(id),
 		};
+
 		$http({
 			url: 'http://104.236.52.101/favorites',
+			method: 'POST',
+			data: comicData,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+		}).success(function (data, status) {
+			$http({
+				method: 'GET',
+				url: 'http://104.236.52.101/uploaded'
+			}).then(function successCallback(response) {
+				$scope.mySeries = response.data;
+			});
+			$scope.changeBookClass()
+		});
+	};
+
+	$scope.bookFilled = false;
+	$scope.changeBookClass = function() {
+		$scope.bookFilled = !$scope.bookFilled;
+	}
+
+	$scope.setCurrentlyReading = function( $event ) {
+		var id = $event.currentTarget.parentNode.parentNode.getElementsByClassName( "data__comicId" )[ 0 ].innerHTML;
+
+		var comicData = {
+			currentlyReading: 1,
+			comicId: parseInt(id)
+		};
+		console.log( comicData );
+
+		$http({
+			url: 'http://104.236.52.101/setCurrentlyReading',
+			method: 'POST',
+			data: comicData,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+		}).success(function (data, status) {
+			$http({
+				method: 'GET',
+				url: 'http://104.236.52.101/uploaded'
+			}).then(function successCallback(response) {
+				$scope.mySeries = response.data;
+			});
+			$scope.changeBookClass()
+		});
+	};
+
+	$scope.removeCurrentlyReading = function( $event ) {
+		var id = $event.currentTarget.parentNode.parentNode.getElementsByClassName( "data__comicId" )[ 0 ].innerHTML;
+
+		var comicData = {
+			currentlyReading: 0,
+			comicId: parseInt(id),
+		};
+
+		$http({
+			url: 'http://104.236.52.101/setCurrentlyReading',
 			method: 'POST',
 			data: comicData,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}

@@ -12,19 +12,19 @@
 				<div class="sort-by">
 					<div class="select">
 						<p class="icon-arrow-right" ng-click="showReleaseDrop()" ng-class="{active: releaseDropOpen}">Release Date</p>
-						<div class="dropdown">
-							<p ng-click="ordering = 'dateReleased'">Newest</p>
-							<p ng-click="ordering = '-dateReleased'">Oldest</p>
+						<div class="dropdown" ng-class="{active: releaseDropOpen}">
+							<p ng-class="{active: ordering == 'dateReleased'}" ng-click="ordering = 'dateReleased'">Newest</p>
+							<p ng-class="{active: ordering == '-dateReleased'}" ng-click="ordering = '-dateReleased'">Oldest</p>
 						</div>
 					</div>
 					<div class="select">
-						<p class="icon-arrow-right" ng-click="alphaDropOpen()" ng-class="{active: alphaDropOpen}">Alphabetical</p>
-						<div class="dropdown">
-							<p ng-click="ordering = 'seriesTitle'">A - Z</p>
-							<p ng-click="ordering = '-seriesTitle'">Z - A</p>
+						<p class="icon-arrow-right" ng-click="showAlphaDrop()" ng-class="{active: releaseDropOpen}">Alphabetical</p>
+						<div class="dropdown" ng-class="{active: alphaDropOpen}">
+							<p ng-class="{active: ordering == 'seriesTitle'}" ng-click="ordering = 'seriesTitle'">A - Z</p>
+							<p ng-class="{active: ordering == '-seriesTitle'}" ng-click="ordering = '-seriesTitle'">Z - A</p>
 						</div>
 					</div>
-					<p class="filter--favorites" ng-click="filterFavorites = !filterFavorites">Favorites</p>
+					<p class="filter--favorites" ng-class="{active: filterFavorites == 1}" ng-click="filterFavorites = filterFavorites ? 1 : 0">Favorites</p>
 				</div>
 			</div>
 		</div>
@@ -32,14 +32,14 @@
 	<div class="comic-grid-wrapper">
 		<div class="comic-grid">
 			<!-- Comic Tile -->
-			<div class="comic-tile" adaptive-background ng-repeat="series in mySeries | orderBy: ordering | filter:searchTitle">
+			<div class="comic-tile" adaptive-background ng-repeat="series in mySeries | orderBy: ordering | filter:searchTitle | filter: {favorite: filterFavorites}">
 				<div ng-class="{filled: heartFilled}" class="tag--right">
-					<span ng-click="setFavorite()" class="icon-heart-outline"></span>
-					<span ng-click="removeFromFavorites()" class="icon-heart-filled"></span>
+					<span ng-click="setFavorite( $event )" class="icon-heart-outline"></span>
+					<span ng-click="removeFromFavorites( $event )" class="icon-heart-filled"></span>
 				</div>
 				<div ng-class="{filled: bookFilled}" class="tag--left">
-					<span ng-click="addToCurrentlyReading()" class="icon-book-outline"></span>
-					<span ng-click="removeFromFavorites()" class="icon-book-filled"></span>
+					<span ng-click="setCurrentlyReading( $event )" class="icon-book-outline"></span>
+					<span ng-click="removeCurrentlyReading()" class="icon-book-filled"></span>
 				</div>
 				<div class="comic-tile--content" ng-click="showDetails( $event )">
 					<img class="data__cover" ng-src="{{ series.coverImage }}" alt="{{ series.seriesTitle }} cover"/>
@@ -47,6 +47,9 @@
 					<div class="hidden-data">
 						<p class="data__author">{{ series.author }}</p>
 						<p class="data__desc">{{ series.desc }}</p>
+						<p>{{ series.favorite }}</p>
+						<p>{{ series.currentlyReading }}</p>
+						<p class="data__comicId">{{ series.comicId }}</p>
 					</div>
 				</div>
 			</div>

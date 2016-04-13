@@ -21,7 +21,7 @@ comicableApp.controller( 'modalController', function( $scope, $http, issue, Moda
 			});
 		});
 	}
-	
+
 	$scope.inputCreditCard = function() {
 		ModalService.showModal( {
 			templateUrl: "components/modals/card-details.html",
@@ -55,11 +55,13 @@ comicableApp.controller( 'modalController', function( $scope, $http, issue, Moda
 	$scope.uploadIssue = function() {
 		var comicData = {
 			seriesTitle: $scope.seriesTitle,
-			issueNumber: $scope.issueNumber,
+			issueNumber: parseInt($scope.issueNumber),
 			author: $scope.author,
 			description: $scope.desc,
-			coverImage: "images/batman-cover.jpg"
+			coverImage: "images/batman-cover.jpg",
+			pages: null
 		};
+		console.log(comicData);
 		$http({
 			url: 'http://104.236.52.101/uploadComics',
 			method: 'POST',

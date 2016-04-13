@@ -9,7 +9,20 @@ comicableApp.controller( 'currentlyReadingController', function( $scope, $http )
     });
 
     $scope.addToList = function() {
-        var comicData = {};
+        $http({
+            method: 'GET',
+            url: 'http://104.236.52.101/uploaded'
+        }).then(function successCallback(response) {
+            $scope.uploaded = response.data;
+        });
+        console.log( $scope.uploaded );
+
+        var id = null;
+
+		var comicData = {
+			currentlyReading: 1,
+			comicId: id
+		};
 
         $http({
             url: 'http://104.236.52.101/setCurrentlyReading',
