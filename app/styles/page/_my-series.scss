@@ -32,19 +32,21 @@
 			}
 			p {
 				margin-top: 10px;
+			}
+		}
+		p:not( .icon-arrow-right ) {
+			&:after {
+				content: "";
+				height: 1px;
+				background: transparent;
+				display: block;
+				margin-top: 3px;
+			}
+			&.active {
+				width: inherit;
+				color: $light-blue;
 				&:after {
-					content: "";
-					height: 1px;
-					background: transparent;
-					display: block;
-					margin-top: 3px;
-				}
-				&.active {
-					width: inherit;
-					color: $light-blue;
-					&:after {
-				    background: $lime-green;
-					}
+					background: $lime-green;
 				}
 			}
 		}

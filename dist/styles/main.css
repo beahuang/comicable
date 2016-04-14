@@ -1100,17 +1100,17 @@ form .btn {
         height: 70px; }
       .sort-wrapper .sort-by .dropdown p {
         margin-top: 10px; }
-        .sort-wrapper .sort-by .dropdown p:after {
-          content: "";
-          height: 1px;
-          background: transparent;
-          display: block;
-          margin-top: 3px; }
-        .sort-wrapper .sort-by .dropdown p.active {
-          width: inherit;
-          color: #3CA6B7; }
-          .sort-wrapper .sort-by .dropdown p.active:after {
-            background: #DDE62C; }
+    .sort-wrapper .sort-by p:not(.icon-arrow-right):after {
+      content: "";
+      height: 1px;
+      background: transparent;
+      display: block;
+      margin-top: 3px; }
+    .sort-wrapper .sort-by p:not(.icon-arrow-right).active {
+      width: inherit;
+      color: #3CA6B7; }
+      .sort-wrapper .sort-by p:not(.icon-arrow-right).active:after {
+        background: #DDE62C; }
     .sort-wrapper .sort-by p {
       white-space: nowrap; }
       .sort-wrapper .sort-by p.icon-arrow-right:before {
