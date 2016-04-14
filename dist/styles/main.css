@@ -1319,6 +1319,9 @@ form .btn {
     .modal .comic .comic__cover, .modal .comic .comic__details {
       width: 100%; } }
 
+.modal--upload input {
+  width: 100%; }
+
 /* Issue Reader
 ========================================================================== */
 /* Issue Reader
