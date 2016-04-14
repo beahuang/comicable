@@ -66,7 +66,7 @@ comicableApp.controller( 'modalController', function( $scope, $http, issue, Moda
 			url: 'http://104.236.52.101/uploadComics',
 			method: 'POST',
 			data: comicData,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+			headers: {'Content-Type': 'application/json'}
 		}).success(function (data, status) {
 			$http({
 				method: 'GET',

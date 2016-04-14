@@ -85,7 +85,7 @@ comicableApp.controller( 'currentlyReadingController', function( $scope, $http )
             url: 'http://104.236.52.101/setCurrentlyReading',
             method: 'POST',
             data: comicData,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+            headers: {'Content-Type': 'application/json'}
         }).success(function (data, status) {
             $http({
                 method: 'GET',
@@ -96,6 +96,7 @@ comicableApp.controller( 'currentlyReadingController', function( $scope, $http )
         });
     };
 })
+
 
 comicableApp.controller( 'issueReaderController', function( $scope ) {
 	$scope.message = 'Issue Reader'
@@ -135,6 +136,26 @@ comicableApp.directive( "scroll", function ( $window ) {
 			scope.$apply();
 		});
 	};
+});
+
+var comicableApp = angular.module( 'comicableApp' );
+
+comicableApp.controller( 'loginController', function( $scope, $location ) {
+    $scope.message = 'Login / Register';
+
+    $scope.loginClass = "";
+    $scope.toggleRegister = function() {
+        if ($scope.loginClass === "") {
+            $scope.loginClass = "show-register";
+        } else {
+            $scope.loginClass = "";
+        }
+    }
+
+    $scope.showUser = function() {
+        $( 'body' ).addClass( 'logged-in' );
+        $location.path('/my-series');
+    }
 });
 
 comicableApp.controller( 'modalController', function( $scope, $http, issue, ModalService, close ) {
@@ -205,7 +226,7 @@ comicableApp.controller( 'modalController', function( $scope, $http, issue, Moda
 			url: 'http://104.236.52.101/uploadComics',
 			method: 'POST',
 			data: comicData,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+			headers: {'Content-Type': 'application/json'}
 		}).success(function (data, status) {
 			$http({
 				method: 'GET',
@@ -216,7 +237,6 @@ comicableApp.controller( 'modalController', function( $scope, $http, issue, Moda
 		});
 	};
 });
-
 
 comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $http ) {
 	$scope.message = 'Your Collection';
@@ -270,12 +290,13 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 			favorite: 1,
 			comicId: parseInt(id)
 		};
+		console.log( comicData );
 
 		$http({
 			url: 'http://104.236.52.101/favorites',
 			method: 'POST',
 			data: comicData,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+			headers: {'Content-Type': 'application/json'}
 		}).success(function (data, status) {
 			$http({
 				method: 'GET',
@@ -299,7 +320,7 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 			url: 'http://104.236.52.101/favorites',
 			method: 'POST',
 			data: comicData,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+			headers: {'Content-Type': 'application/json'}
 		}).success(function (data, status) {
 			$http({
 				method: 'GET',
@@ -329,7 +350,7 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 			url: 'http://104.236.52.101/setCurrentlyReading',
 			method: 'POST',
 			data: comicData,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+			headers: {'Content-Type': 'application/json'}
 		}).success(function (data, status) {
 			$http({
 				method: 'GET',
@@ -353,7 +374,7 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 			url: 'http://104.236.52.101/setCurrentlyReading',
 			method: 'POST',
 			data: comicData,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+			headers: {'Content-Type': 'application/json'}
 		}).success(function (data, status) {
 			$http({
 				method: 'GET',
@@ -451,23 +472,3 @@ comicableApp.controller( 'releasedIssuesController', function( $scope, ModalServ
 		return issue;
 	}
 })
-
-var comicableApp = angular.module( 'comicableApp' );
-
-comicableApp.controller( 'loginController', function( $scope, $location ) {
-    $scope.message = 'Login / Register';
-
-    $scope.loginClass = "";
-    $scope.toggleRegister = function() {
-        if ($scope.loginClass === "") {
-            $scope.loginClass = "show-register";
-        } else {
-            $scope.loginClass = "";
-        }
-    }
-
-    $scope.showUser = function() {
-        $( 'body' ).addClass( 'logged-in' );
-        $location.path('/my-series');
-    }
-});

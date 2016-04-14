@@ -50,12 +50,13 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 			favorite: 1,
 			comicId: parseInt(id)
 		};
+		console.log( comicData );
 
 		$http({
 			url: 'http://104.236.52.101/favorites',
 			method: 'POST',
 			data: comicData,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+			headers: {'Content-Type': 'application/json'}
 		}).success(function (data, status) {
 			$http({
 				method: 'GET',
@@ -79,7 +80,7 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 			url: 'http://104.236.52.101/favorites',
 			method: 'POST',
 			data: comicData,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+			headers: {'Content-Type': 'application/json'}
 		}).success(function (data, status) {
 			$http({
 				method: 'GET',
@@ -109,7 +110,7 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 			url: 'http://104.236.52.101/setCurrentlyReading',
 			method: 'POST',
 			data: comicData,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+			headers: {'Content-Type': 'application/json'}
 		}).success(function (data, status) {
 			$http({
 				method: 'GET',
@@ -133,7 +134,7 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 			url: 'http://104.236.52.101/setCurrentlyReading',
 			method: 'POST',
 			data: comicData,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'}
+			headers: {'Content-Type': 'application/json'}
 		}).success(function (data, status) {
 			$http({
 				method: 'GET',
