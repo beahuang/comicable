@@ -151,10 +151,8 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 	$scope.filterByFavorites = function() {
 		if ( $scope.filterFavorites == 0 ) {
 			$scope.filterFavorites = 1;
-			console.log('hey');
-		} if ( $scope.filterFavorites == 1 ) {
-			$scope.filterFavorites == 0;
-			console.log('why');
+		} else if ( $scope.filterFavorites == 1 ) {
+			$scope.filterFavorites = 0;
 		}
 	}
 

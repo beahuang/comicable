@@ -13,7 +13,7 @@
 			<!-- Comic -->
 			<div class="comic" adaptive-background ng-repeat="series in currentlyReading | filter:searchTitle">
 				<div class="comic__cover">
-					<img ng-src="{{ series.coverImage }}" alt="{{ series.seriesTitle }} cover"/>
+					<img ng-src="{{ series.cover }}" alt="{{ series.seriesTitle }} cover"/>
 				</div>
 				<div class="comic__details">
 					<div class="comic__title">

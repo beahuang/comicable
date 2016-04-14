@@ -33,7 +33,7 @@
 	<div class="comic-grid-wrapper">
 		<div class="comic-grid">
 			<!-- Comic Tile -->
-			<div class="comic-tile" adaptive-background ng-repeat="series in mySeries | orderBy: ordering | filter:searchTitle">
+			<div class="comic-tile" adaptive-background ng-repeat="series in mySeries | orderBy: ordering | filter:searchTitle | filter: {favorite : filterFavorites}">
 				<div ng-class="{filled: {{ series.favorite }} == 1}" class="tag--right">
 					<span ng-click="setFavorite( $event )" class="icon-heart-outline"></span>
 					<span ng-click="removeFromFavorites( $event )" class="icon-heart-filled"></span>
