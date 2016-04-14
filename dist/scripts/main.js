@@ -97,7 +97,6 @@ comicableApp.controller( 'currentlyReadingController', function( $scope, $http )
     };
 })
 
-
 comicableApp.controller( 'issueReaderController', function( $scope ) {
 	$scope.message = 'Issue Reader'
 
@@ -137,6 +136,7 @@ comicableApp.directive( "scroll", function ( $window ) {
 		});
 	};
 });
+
 
 var comicableApp = angular.module( 'comicableApp' );
 
@@ -243,7 +243,7 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 	$scope.ordering = '';
 	$scope.az = false;
 	$scope.za = false;
-	$scope.filterFavorites = 0;
+	$scope.filterFavorites = "";
 
 	$http({
 		method: 'GET',
@@ -392,7 +392,7 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 		if ( $scope.filterFavorites == 0 ) {
 			$scope.filterFavorites = 1;
 		} else if ( $scope.filterFavorites == 1 ) {
-			$scope.filterFavorites = 0;
+			$scope.filterFavorites = "";
 		}
 	}
 
