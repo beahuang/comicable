@@ -1002,7 +1002,7 @@ form .btn {
     margin-top: 10px; }
     .comic .comic__price .btn {
       margin-top: 20px; }
-  .comic .comic__title, .comic .comic__author, .comic .comic__issue {
+  .comic .comic__title, .comic .comic__author, .comic .comic__issue, .comic .comic__series-title {
     margin-bottom: 10px; }
 
 @media (max-width: 768px) {

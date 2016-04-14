@@ -38,9 +38,10 @@
 				</div>
 				<div class="comic-tile--content">
 					<img class="data__cover" ng-src="{{ issue.cover }}" alt="{{ issue.seriesTitle }} cover"/>
-					<p class="data__title">{{ issue.seriesTitle }}</p>
+					<p class="data__title">{{ issue.title }}</p>
 					<p class="data__issue-number">Issue # {{ issue.issueNumber }}</p>
 					<div class="hidden-data">
+						<p class="data__series-title">{{ issue.seriesTitle }}</p>
 						<p class="data__author">{{ issue.author }}</p>
 						<p class="data__desc">{{ issue.desc }}</p>
 						<p class="data__price">{{ issue.price }}</p>

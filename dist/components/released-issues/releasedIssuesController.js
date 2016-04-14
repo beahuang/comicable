@@ -44,6 +44,7 @@ comicableApp.controller( 'releasedIssuesController', function( $scope, ModalServ
 	$scope.parseComicElement = function( comicElement ) {
 		var comic_cover = comicElement.getElementsByClassName( "data__cover" )[ 0 ].src
 		var comic_title = comicElement.getElementsByClassName( "data__title" )[ 0 ].innerHTML;
+		var comic_seriesTitle = comicElement.getElementsByClassName( "data__series-title" )[ 0 ].innerHTML;
 		var comic_issueNumber = comicElement.getElementsByClassName( "data__issue-number" )[ 0 ].innerHTML;
 		var comic_author = comicElement.getElementsByClassName( "data__author" )[ 0 ].innerHTML;
 		var comic_desc = comicElement.getElementsByClassName( "data__desc" )[ 0 ].innerHTML
@@ -51,6 +52,7 @@ comicableApp.controller( 'releasedIssuesController', function( $scope, ModalServ
 		issue = {
 			cover: comic_cover,
 			title: comic_title,
+			seriesTitle: comic_seriesTitle,
 			issueNumber: comic_issueNumber,
 			author: comic_author,
 			desc: comic_desc,

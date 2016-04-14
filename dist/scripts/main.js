@@ -97,6 +97,7 @@ comicableApp.controller( 'currentlyReadingController', function( $scope, $http )
     };
 })
 
+
 comicableApp.controller( 'issueReaderController', function( $scope ) {
 	$scope.message = 'Issue Reader'
 
@@ -137,7 +138,6 @@ comicableApp.directive( "scroll", function ( $window ) {
 	};
 });
 
-
 var comicableApp = angular.module( 'comicableApp' );
 
 comicableApp.controller( 'loginController', function( $scope, $location ) {
@@ -156,86 +156,6 @@ comicableApp.controller( 'loginController', function( $scope, $location ) {
         $( 'body' ).addClass( 'logged-in' );
         $location.path('/my-series');
     }
-});
-
-comicableApp.controller( 'modalController', function( $scope, $http, issue, ModalService, close ) {
-	$scope.issue = issue;
-
-	$scope.close = function( result ) {
-		close();
-		$( 'body' ).removeClass( "modal-open" );
-		$( '.modal-backdrop.in' ).remove();
-	};
-
-	$scope.inputDetails = function() {
-		ModalService.showModal( {
-			templateUrl: "components/modals/upload-details.html",
-			controller: "modalController",
-			inputs: {
-				issue: null
-			}
-		} ).then( function( modal ) {
-			modal.element.modal();
-			modal.close.then( function( result ) {
-				console.log( result.title );
-			});
-		});
-	}
-
-	$scope.inputCreditCard = function() {
-		ModalService.showModal( {
-			templateUrl: "components/modals/card-details.html",
-			controller: "modalController",
-			inputs: {
-				issue: null
-			}
-		} ).then( function( modal ) {
-			modal.element.modal();
-			modal.close.then( function( result ) {
-				console.log( result );
-			});
-		});
-	}
-
-	$scope.confirmPurchase = function() {
-		ModalService.showModal( {
-			templateUrl: "components/modals/confirm-purchase.html",
-			controller: "modalController",
-			inputs: {
-				issue: null
-			}
-		} ).then( function( modal ) {
-			modal.element.modal();
-			modal.close.then( function( result ) {
-				console.log( result );
-			});
-		});
-	}
-
-	$scope.uploadIssue = function() {
-		var comicData = {
-			seriesTitle: $scope.seriesTitle,
-			issueNumber: parseInt($scope.issueNumber),
-			author: $scope.author,
-			description: $scope.desc,
-			cover: "images/batman-cover.jpg",
-			pages: null
-		};
-		console.log(comicData);
-		$http({
-			url: 'http://104.236.52.101/uploadComics',
-			method: 'POST',
-			data: comicData,
-			headers: {'Content-Type': 'application/json'}
-		}).success(function (data, status) {
-			$http({
-				method: 'GET',
-				url: 'http://104.236.52.101/uploaded'
-			}).then(function successCallback(response) {
-				$scope.mySeries = response.data;
-			});
-		});
-	};
 });
 
 comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $http ) {
@@ -411,6 +331,86 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 	}
 })
 
+comicableApp.controller( 'modalController', function( $scope, $http, issue, ModalService, close ) {
+	$scope.issue = issue;
+
+	$scope.close = function( result ) {
+		close();
+		$( 'body' ).removeClass( "modal-open" );
+		$( '.modal-backdrop.in' ).remove();
+	};
+
+	$scope.inputDetails = function() {
+		ModalService.showModal( {
+			templateUrl: "components/modals/upload-details.html",
+			controller: "modalController",
+			inputs: {
+				issue: null
+			}
+		} ).then( function( modal ) {
+			modal.element.modal();
+			modal.close.then( function( result ) {
+				console.log( result.title );
+			});
+		});
+	}
+
+	$scope.inputCreditCard = function() {
+		ModalService.showModal( {
+			templateUrl: "components/modals/card-details.html",
+			controller: "modalController",
+			inputs: {
+				issue: null
+			}
+		} ).then( function( modal ) {
+			modal.element.modal();
+			modal.close.then( function( result ) {
+				console.log( result );
+			});
+		});
+	}
+
+	$scope.confirmPurchase = function() {
+		ModalService.showModal( {
+			templateUrl: "components/modals/confirm-purchase.html",
+			controller: "modalController",
+			inputs: {
+				issue: null
+			}
+		} ).then( function( modal ) {
+			modal.element.modal();
+			modal.close.then( function( result ) {
+				console.log( result );
+			});
+		});
+	}
+
+	$scope.uploadIssue = function() {
+		var comicData = {
+			seriesTitle: $scope.seriesTitle,
+			issueNumber: parseInt($scope.issueNumber),
+			author: $scope.author,
+			description: $scope.desc,
+			cover: "images/batman-cover.jpg",
+			pages: null
+		};
+		console.log(comicData);
+		$http({
+			url: 'http://104.236.52.101/uploadComics',
+			method: 'POST',
+			data: comicData,
+			headers: {'Content-Type': 'application/json'}
+		}).success(function (data, status) {
+			$http({
+				method: 'GET',
+				url: 'http://104.236.52.101/uploaded'
+			}).then(function successCallback(response) {
+				$scope.mySeries = response.data;
+			});
+		});
+	};
+});
+
 comicableApp.controller( 'releasedIssuesController', function( $scope, ModalService, $http ) {
 	$scope.message = 'New Releases: April 5 - 10'
 
@@ -457,6 +457,7 @@ comicableApp.controller( 'releasedIssuesController', function( $scope, ModalServ
 	$scope.parseComicElement = function( comicElement ) {
 		var comic_cover = comicElement.getElementsByClassName( "data__cover" )[ 0 ].src
 		var comic_title = comicElement.getElementsByClassName( "data__title" )[ 0 ].innerHTML;
+		var comic_seriesTitle = comicElement.getElementsByClassName( "data__series-title" )[ 0 ].innerHTML;
 		var comic_issueNumber = comicElement.getElementsByClassName( "data__issue-number" )[ 0 ].innerHTML;
 		var comic_author = comicElement.getElementsByClassName( "data__author" )[ 0 ].innerHTML;
 		var comic_desc = comicElement.getElementsByClassName( "data__desc" )[ 0 ].innerHTML
@@ -464,6 +465,7 @@ comicableApp.controller( 'releasedIssuesController', function( $scope, ModalServ
 		issue = {
 			cover: comic_cover,
 			title: comic_title,
+			seriesTitle: comic_seriesTitle,
 			issueNumber: comic_issueNumber,
 			author: comic_author,
 			desc: comic_desc,
