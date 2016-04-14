@@ -1,9 +1,9 @@
 comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $http ) {
 	$scope.message = 'Your Collection';
 	$scope.ordering = '';
-	$scope.filterFavorites = 0;
 	$scope.az = false;
 	$scope.za = false;
+	$scope.filterFavorites = 0;
 
 	$http({
 		method: 'GET',
@@ -22,7 +22,12 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 		} ).then( function( modal ) {
 			modal.element.modal();
 			modal.close.then( function( result ) {
-				console.log( result );
+				$http({
+					method: 'GET',
+					url: 'http://104.236.52.101/uploaded'
+				}).then(function successCallback(response) {
+					$scope.mySeries = response.data;
+				});
 			});
 		});
 	}
@@ -37,11 +42,6 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 			}
 		}
 	) }
-
-	$scope.heartFilled = false;
-	$scope.changeHeartClass = function() {
-		$scope.heartFilled = !$scope.heartFilled;
-	}
 
 	$scope.setFavorite = function( $event ) {
 		var id = $event.currentTarget.parentNode.parentNode.getElementsByClassName( "data__comicId" )[ 0 ].innerHTML;
@@ -64,7 +64,6 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 			}).then(function successCallback(response) {
 				$scope.mySeries = response.data;
 			});
-			$scope.changeHeartClass()
 		});
 	};
 
@@ -88,14 +87,9 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 			}).then(function successCallback(response) {
 				$scope.mySeries = response.data;
 			});
-			$scope.changeBookClass()
 		});
 	};
 
-	$scope.bookFilled = false;
-	$scope.changeBookClass = function() {
-		$scope.bookFilled = !$scope.bookFilled;
-	}
 
 	$scope.setCurrentlyReading = function( $event ) {
 		var id = $event.currentTarget.parentNode.parentNode.getElementsByClassName( "data__comicId" )[ 0 ].innerHTML;
@@ -118,7 +112,6 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 			}).then(function successCallback(response) {
 				$scope.mySeries = response.data;
 			});
-			$scope.changeBookClass()
 		});
 	};
 
@@ -142,7 +135,6 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 			}).then(function successCallback(response) {
 				$scope.mySeries = response.data;
 			});
-			$scope.changeHeartClass()
 		});
 	};
 
@@ -154,6 +146,16 @@ comicableApp.controller( 'mySeriesController', function( $scope, ModalService, $
 	$scope.alphaDropOpen = false;
 	$scope.showAlphaDrop = function() {
 		$scope.alphaDropOpen = !$scope.alphaDropOpen;
+	}
+
+	$scope.filterByFavorites = function() {
+		if ( $scope.filterFavorites == 0 ) {
+			$scope.filterFavorites = 1;
+			console.log('hey');
+		} if ( $scope.filterFavorites == 1 ) {
+			$scope.filterFavorites == 0;
+			console.log('why');
+		}
 	}
 
 	$scope.parseComicElement = function( comicElement ) {

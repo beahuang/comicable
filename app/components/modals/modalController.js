@@ -58,7 +58,7 @@ comicableApp.controller( 'modalController', function( $scope, $http, issue, Moda
 			issueNumber: parseInt($scope.issueNumber),
 			author: $scope.author,
 			description: $scope.desc,
-			coverImage: "images/batman-cover.jpg",
+			cover: "images/batman-cover.jpg",
 			pages: null
 		};
 		console.log(comicData);
