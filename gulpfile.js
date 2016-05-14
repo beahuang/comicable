@@ -11,11 +11,11 @@ var uglify = require('gulp-uglify');
 
 
 var srcPaths = {
-	jsPath: [ 'app/**/*.js', '!app/third-party.js' ],
-	thirdPartyJsPath: 'app/third-party.js',
-	compsPath: 'app/components/**/*',
-	imagesPath: 'app/images/**',
-	stylesPath: 'app/styles/**/*.scss'
+	jsPath: [ 'public/**/*.js', '!public/third-party.js' ],
+	thirdPartyJsPath: 'public/third-party.js',
+	compsPath: 'public/components/**/*',
+	imagesPath: 'public/images/**',
+	stylesPath: 'public/styles/**/*.scss'
 };
 
 var distPaths = {
