@@ -32,6 +32,7 @@
     "angular-adaptive-backgrounds": "0.2.3",
     "angular-modal-service": "0.6.10",
     "angular-route": "1.5.1",
+    "cheerio": "0.20.0",
     "hapi": "13.4.0",
     "jquery": "2.2.2"
   }
