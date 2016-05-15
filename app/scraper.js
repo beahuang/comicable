@@ -32,16 +32,13 @@ let scrape = ( publisher ) => {
   .then( allBodies => {
     allBodies.map( ( body, index ) => {
       let cheerioBody = cheerio.load( body );
-      let whatedf = getIssues( cheerioBody );
-      console.log( whatedf.length );
-      // issuesArray.concat(  );
+      issuesArray = issuesArray.concat( getIssues( cheerioBody ) );
     });
 
-    // console.log( issuesArray );
     return issuesArray;
   })
   .catch( err => {
-    // console.log( err );
+    console.log( err );
   });
 }
 
@@ -90,7 +87,6 @@ let grabPublisherURLs = ( publisher, date ) => {
   return rp( opts )
   .then( $ => {
     let firstPage = getIssues( $ );
-    // Save to DB
     return generateURLs( $, publisher, date );
   })
   .catch( err => {
