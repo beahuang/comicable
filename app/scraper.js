@@ -3,20 +3,45 @@
 const rp = require('request-promise');
 const cheerio = require('cheerio');
 
-let scrape = () => {
-  let opts = {
-    uri: 'https://pulllist.comixology.com/thisweek/',
-    transform: body => {
-      return cheerio.load( body );
-    }
-  };
+/**
+ * Takes in a publisher and gets
+ * @param  {[type]} publisher [description]
+ * @return {[type]}           [description]
+ */
+let scrape = ( publisher ) => {
+  let today = new Date( Date.now() );
+  let dateObj = {
+    year: today.getFullYear(),
+    month: today.getMonth() + 1,
+    day: today.getDate()
+  }
 
-  rp( opts )
-  .then( $ => {
-    getIssues( $ );
+  let dateString = `${ dateObj.year }/${ dateObj.month }/${ dateObj.day }`;
+
+  let urlsArrayPromise = grabPublisherURLs( publisher , '2016/05/11' );
+  let issuesArray = [];
+
+  urlsArrayPromise
+  .then( allURLs => {
+    let requestPromiseArray = allURLs.map( ( url, index ) => {
+      return rp( url );
+    });
+
+    return Promise.all( requestPromiseArray );
+  })
+  .then( allBodies => {
+    allBodies.map( ( body, index ) => {
+      let cheerioBody = cheerio.load( body );
+      let whatedf = getIssues( cheerioBody );
+      console.log( whatedf.length );
+      // issuesArray.concat(  );
+    });
+
+    // console.log( issuesArray );
+    return issuesArray;
   })
   .catch( err => {
-    console.log(`Request-Promise choked on the URL, gg ${ err }`);
+    // console.log( err );
   });
 }
 
@@ -48,46 +73,66 @@ let getIssues = ( $ ) => {
   return issuesArray;
 }
 
-scrape();
-
 /**
  * Change the URL that is being loaded into cheerio
- * @param { string } Publisher (dc_comics or marvel)
- * @param { string } Date (ex: 2016/05/11)
- * @return { string } URL
+ * @param { String } Publisher  (dc_comics or marvel)
+ * @param { String } Date       (ex: 2016/05/11)
+ * @return { String } URL       A fuckton of URLs
  */
-let changeURL = ( publisher, date ) => {
-  let startIssue = 0;
-  let baseURL = 'https://pulllist.comixology.com'
-  let url = `${ baseURL }/${ publisher }/${ date }/?start=${ startIssue }`;
-
+let grabPublisherURLs = ( publisher, date ) => {
   let opts = {
-    uri: url,
+    uri: makeURL( 0, publisher, date ),
     transform: body => {
       return cheerio.load( body );
     }
-  }
-  rp( opts )
+  };
+
+  return rp( opts )
   .then( $ => {
-    let numPages = 0;
-    const paginationSelector = '#items';
-    numPages = $( paginationSelector ).length - 1 ;
-
-    // TODO: Loop through numPages and increment end of startIssue by 20
-    while ( numPages > 0 ) {
-
-      // get comics for the url
-
-      // change the url
-
-      // get comics again
-    }
+    // Call getIssues( $ ) here and save the first page
+    return generateURLs( $, publisher, date );
   })
   .catch( err => {
     console.log(`Request-Promise didn't work when counting pages ${ err }`);
   });
-
-  return url;
 }
 
-changeURL('dc_comics', '2016/05/11');
+/**
+ * After taking a number to start with, a publisher and a date, creates
+ * 1 URL to hit comixology.
+ * @param { Number } startIssue The first issue to get
+ * @param { String } Publisher  (dc_comics or marvel)
+ * @param { String } Date       (ex: 2016/05/11)
+ * @return { String }           URL to hit
+ */
+let makeURL = ( startIssue, publisher, date ) => {
+  // TODO: Change to config const
+  let baseURL = 'https://pulllist.comixology.com'
+
+  return `${ baseURL }/${ publisher }/${ date }/?start=${ startIssue * 20 }`;
+}
+
+/**
+ * After having hit a page structured like
+ * https://pulllist.comixology.com/marvel/2016/05/11
+ * this function figures out the URLs for all the pages with comics for this day
+ *
+ * @param  { CheerioBody } $   This is the HTML of the page after
+ *                             being loaded into cheerio
+ * @return { Array }           Array of URLs for all the pages of this date/pub
+ */
+let generateURLs = ( $, publisher, date ) => {
+  const numToTakeOff = 2; // First request, and "next" link
+  const paginationSelector = '#items';
+  let numPages = $( $( paginationSelector )[ 0 ] ).children().length - numToTakeOff;
+  let urlsArray = [];
+
+  while ( numPages > 0 ) {
+    urlsArray.push( makeURL( numPages, publisher, date ) );
+    numPages--;
+  }
+
+  return urlsArray;
+}
+
+scrape( 'marvel' );
