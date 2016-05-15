@@ -89,7 +89,8 @@ let grabPublisherURLs = ( publisher, date ) => {
 
   return rp( opts )
   .then( $ => {
-    // Call getIssues( $ ) here and save the first page
+    let firstPage = getIssues( $ );
+    // Save to DB
     return generateURLs( $, publisher, date );
   })
   .catch( err => {
