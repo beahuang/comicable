@@ -1,9 +1,13 @@
 ## Comicbook Web Application
 
 # Installation
-1. First you need node installed on your computer
-2. Then cd into the project directory and run `npm install` to download all the dependencies
-3. Run `gulp` and navigate to `localhost:8080`
+1. Install (HomeBrew)[http://brew.sh/]
+2. Install `nvm` via `brew install nvm` and follow the prompts
+3. Install `node` via `nvm install v6.1.0` -> `nvm use v6.1.0`
+4. Install `mongodb` via `brew install mongodb`
+5. Install `gulp` via `npm install -g gulp`
+6. Install `mocha` via `npm install g mocha`
+7. Then cd into the project directory and run `npm install` to download all the dependencies
 
 # To Run Server
 1. `node app/server.js` and you'll have a webserver at `localhost:8081`
