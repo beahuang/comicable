@@ -7,6 +7,7 @@ var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+let mocha = require('gulp-mocha');
 
 
 
@@ -85,3 +86,8 @@ gulp.task('imageMin', function(){
 	})
 
 	gulp.task( 'default', [ 'serve', 'watch' ] );
+
+gulp.task( 'test', () => {
+	return gulp.src('test/**/*.js')
+	.pipe( mocha() );
+});

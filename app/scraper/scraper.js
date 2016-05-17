@@ -132,4 +132,11 @@ let generateURLs = ( $, publisher, date ) => {
   return urlsArray;
 }
 
-scrape( 'marvel' );
+module.exports = {
+  scrape,
+  getIssues,
+  grabPublisherURLs,
+  makeURL,
+  generateURLs
+}
+
