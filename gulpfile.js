@@ -89,5 +89,5 @@ gulp.task('imageMin', function(){
 
 gulp.task( 'test', () => {
 	return gulp.src('test/**/*.js')
-						.pipe( mocha() );
+	.pipe( mocha() );
 });
