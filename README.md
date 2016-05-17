@@ -19,6 +19,9 @@
 1. Start Mongo: `mongod`
 2. Connect to the database: `node app/server.js`
 
+# Run Tests
+1. `npm test`
+
 # Directory Information
 ```
 comicable
