@@ -11,6 +11,10 @@
 # To Run the scrapy scraper script
 1. `node app/scraper.js`
 
+# Database Setup
+1. Start Mongo: `mongod`
+2. Connect to the database: `node app/server.js`
+
 # Directory Information
 ```
 comicable
