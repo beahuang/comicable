@@ -6,7 +6,7 @@
 3. Install `node` via `nvm install v6.1.0` -> `nvm use v6.1.0`
 4. Install `mongodb` via `brew install mongodb`
 5. Install `gulp` via `npm install -g gulp`
-6. Install `mocha` via `npm install g mocha`
+6. Install `mocha` via `npm install -g mocha`
 7. Then cd into the project directory and run `npm install` to download all the dependencies
 
 # To Run Server
