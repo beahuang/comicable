@@ -37,7 +37,7 @@
     "hapi": "13.4.0",
     "jquery": "3.0.0",
     "mongodb": "2.1.18",
-    "mongoose": "^4.4.17",
+    "mongoose": "4.4.17",
     "request": "2.72.0",
     "request-promise": "3.0.0"
   }
