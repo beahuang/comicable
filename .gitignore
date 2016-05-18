@@ -2,3 +2,4 @@ env
 config.py
 node_modules
 .DS_Store
+coverage/
