@@ -1,7 +1,7 @@
 ## Comicbook Web Application
 
 # Installation
-1. Install (HomeBrew)[http://brew.sh/]
+1. Install [HomeBrew](http://brew.sh/)
 2. Install `nvm` via `brew install nvm` and follow the prompts
 3. Install `node` via `nvm install v6.1.0` -> `nvm use v6.1.0`
 4. Install `mongodb` via `brew install mongodb`
