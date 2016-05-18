@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const modulePath = '../../app/scraper/scraper.js';
 const assert = require('chai').assert;
@@ -9,6 +9,31 @@ describe( 'Scraper', () => {
 
   describe( '#getIssues', () => {
 
+    it('Parses an array of Issues correctly out of HTML', () => {
+      let scraper = require('rewire')( modulePath );
+      const $issues = require('rewire')('cheerio').load( mockHTML.issuesHTML );
+
+      assert.sameDeepMembers( scraper.getIssues( $issues ),
+        [{
+          issueTitle: 'Agents of S.H.I.E.L.D. (2016-) #5 Aso',
+          imgURL: 'https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/PrintItem/501600/MAR160802._SX200_QL80_TTD_.jpg',
+          seriesTitle: 'Agents of S.H.I.E.L.D. (2016-)',
+          issueNumber: 5
+        }, {
+          issueTitle: 'Constantine: The Hellblazer (2015-) #12',
+          imgURL: 'https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/PrintItem/500366/MAR160189._SX200_QL80_TTD_.jpg',
+          seriesTitle: 'Constantine: The Hellblazer (2015-)',
+          issueNumber: 12
+        }]);
+
+    });
+
+    it ('Gets an empty array given garbage html', () => {
+      let scraper = require('rewire')( modulePath );
+      const $fake = require('rewire')('cheerio').load('<div>Death</div>');
+
+      assert.sameMembers( scraper.getIssues( $fake ), [] );
+    });
   });
 
   describe( '#grabPublisherURLs', () => {
@@ -43,10 +68,6 @@ describe( 'Scraper', () => {
           assert.ok( err );
           done();
         });
-    });
-
-    it( 'Calls #getIssues once', () => {
-
     });
   });
 
@@ -86,6 +107,5 @@ describe( 'Scraper', () => {
       assert.equal( scraper.makeURL( 0, 'marvel', '1994/07/06' ),
         'https://pulllist.comixology.com/marvel/1994/07/06/?start=0' );
     });
-
   });
 });

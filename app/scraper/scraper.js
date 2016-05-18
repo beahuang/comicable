@@ -18,7 +18,7 @@ let scrape = ( publisher ) => {
 
   let dateString = `${ dateObj.year }/${ dateObj.month }/${ dateObj.day }`;
 
-  let urlsArrayPromise = grabPublisherURLs( publisher , '2016/05/11' );
+  let urlsArrayPromise = grabPublisherURLs( publisher , dateString );
   let issuesArray = [];
 
   urlsArrayPromise
@@ -44,19 +44,19 @@ let scrape = ( publisher ) => {
 
 /**
  * Returns relevant issue information from loaded html as an Issue Object
- * @param { CheerioObject } DOM Element wrapped in Cheerio
- * @return { [Issue] } Array of Issue Objects
+ * @param   { Function }  DOM Element wrapped in Cheerio, it's a function
+ * @return  { Array }     Array of Issue Objects
  */
 let getIssues = ( $ ) => {
-  const blockSelector = '#list-items > div #listings > tr';
+  const blockSelector = '#list-items > div #listings tr';
 
   let issuesArray =  [];
 
   $( blockSelector ).map( ( index, block )=> {
     let imgURL = $( block ).find('#image a img' ).attr('src');
-    let issueTitle = $( block ).find('#synopsis #title a').text();
-    let seriesTitle = issueTitle.split(' #')[ 0 ];
-    let issueNumber = issueTitle.split(/(?:#([0-9]*))/g)[ 1 ];
+    let issueTitle = $( block ).find('#synopsis #title a').text().trim();
+    let seriesTitle = issueTitle.split(' #')[ 0 ].trim();
+    let issueNumber = parseInt( issueTitle.split(/(?:#([0-9]*))/g)[ 1 ] );
 
     issuesArray.push({
       issueTitle,
