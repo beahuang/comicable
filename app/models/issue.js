@@ -3,16 +3,16 @@
 const mongoose = require('mongoose');
 
 let issueSchema = {
-	title: 'String',
-	author: 'String',
-	imgURL: 'String',
-	seriesTitle: 'String',
-	issueNumber: 'Number',
-	publisher: 'String',
-	currentlyReading: 'Boolean',
-	favorite: 'Boolean',
-	uploaded: 'Boolean',
-	dateReleased: 'Date'
+  title: 'String',
+  author: 'String',
+  imgURL: 'String',
+  seriesTitle: 'String',
+  issueNumber: 'Number',
+  publisher: 'String',
+  currentlyReading: 'Boolean',
+  favorite: 'Boolean',
+  uploaded: 'Boolean',
+  dateReleased: 'Date'
 }
 
 let Issue = new mongoose.model( 'Issue', new mongoose.Schema( issueSchema ) );
@@ -22,18 +22,18 @@ let Issue = new mongoose.model( 'Issue', new mongoose.Schema( issueSchema ) );
 * @param issueObject { Issue } Issue to be Created
 */
 let createIssue = issueObject => {
-	Issue.create( issueObject, ( err, issue ) => {
-		if ( err ) return handleError( err );
-	});
+  Issue.create( issueObject, ( err, issue ) => {
+    if ( err ) return handleError( err );
+  });
 }
 
 /**
 * Get all the Issues
 */
 let readIssue = issueObject => {
-	Issue.find( {}, ( err, issues ) => {
-		if ( err ) return handleError( err );
-	});
+  Issue.find( {}, ( err, issues ) => {
+    if ( err ) return handleError( err );
+  });
 }
 
 /**
@@ -41,9 +41,9 @@ let readIssue = issueObject => {
 * @param issueObject { Issue } Issue to be updated
 */
 let updateIssue = ( issueObject, updatedIssueObject )=> {
-	Issue.update( issueObject, { $set: updatedIssueObject }, ( err, issue ) => {
-		if ( err ) return handleError( err );
-	});
+  Issue.update( issueObject, { $set: updatedIssueObject }, ( err, issue ) => {
+    if ( err ) return handleError( err );
+  });
 }
 
 /**
@@ -51,7 +51,7 @@ let updateIssue = ( issueObject, updatedIssueObject )=> {
 * @param issueObject { Issue } Issue to be Deleted
 */
 let deleteIssue = issueObject => {
-	Tank.remove( issueObject , ( err ) => {
-		if ( err ) return handleError( err );
-	});
+  Issue.remove( issueObject , ( err ) => {
+    if ( err ) return handleError( err );
+  });
 }
