@@ -1,7 +1,7 @@
 'use strict'
 
 let rp = require('request-promise');
-const cheerio = require('cheerio');
+let cheerio = require('cheerio');
 
 /**
  * Takes in a publisher and gets
@@ -21,7 +21,7 @@ let scrape = ( publisher ) => {
   let urlsArrayPromise = grabPublisherURLs( publisher , dateString );
   let issuesArray = [];
 
-  urlsArrayPromise
+  return urlsArrayPromise
   .then( allURLs => {
     let requestPromiseArray = allURLs.map( ( url, index ) => {
       return rp( url );
@@ -38,7 +38,7 @@ let scrape = ( publisher ) => {
     return issuesArray;
   })
   .catch( err => {
-    console.log( err );
+    throw new Error( err );
   });
 }
 
@@ -87,7 +87,8 @@ let grabPublisherURLs = ( publisher, date ) => {
 
   return rp( opts )
   .then( $ => {
-    let firstPage = getIssues( $ );
+    // Uncomment this when we have a db, so then a real test can be written
+    // let firstPage = getIssues( $ );
     return generateURLs( $, publisher, date );
   })
   .catch( err => {
