@@ -1,18 +1,17 @@
-var gulp = require( 'gulp' );
-var sass = require( 'gulp-sass' );
-var browserSync = require( 'browser-sync' );
-var browserify = require( 'browserify' );
-var source = require( 'vinyl-source-stream' );
-var imagemin = require('gulp-imagemin');
-var cache = require('gulp-cache');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-let mocha = require('gulp-mocha');
-let istanbul = require('gulp-istanbul');
+'use strict';
 
+const gulp = require( 'gulp' );
+const sass = require( 'gulp-sass' );
+const browserSync = require( 'browser-sync' );
+const browserify = require( 'browserify' );
+const source = require( 'vinyl-source-stream' );
+const imagemin = require('gulp-imagemin');
+const cache = require('gulp-cache');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const mocha = require('gulp-mocha');
 
-
-var srcPaths = {
+const srcPaths = {
 	jsPath: [ 'public/**/*.js', '!public/third-party.js' ],
 	thirdPartyJsPath: 'public/third-party.js',
 	compsPath: 'public/components/**/*',
@@ -20,7 +19,7 @@ var srcPaths = {
 	stylesPath: 'public/styles/**/*.scss'
 };
 
-var distPaths = {
+const distPaths = {
 	root: 'dist/',
 	scriptsPath: 'dist/scripts',
 	compsPath: 'dist/components',
@@ -29,7 +28,7 @@ var distPaths = {
 	htmlPath: 'dist/index.html'
 }
 
-gulp.task( 'serve', function() {
+gulp.task( 'serve', () => {
 
 	browserSync.init({
 		server: {
@@ -41,27 +40,27 @@ gulp.task( 'serve', function() {
 
 });
 
-gulp.task( 'concatScripts', function() {
+gulp.task( 'concatScripts', () => {
 	return gulp.src( srcPaths.jsPath )
 	.pipe( concat( 'main.js' ) )
 	.pipe( gulp.dest( distPaths.scriptsPath ) )
-})
+});
 
-gulp.task( 'compileThirdParty', function() {
+gulp.task( 'compileThirdParty', () => {
 	return browserify( srcPaths.thirdPartyJsPath )
 	.bundle()
 	.pipe( source( 'third-party.js' ) )
 	.pipe( gulp.dest( distPaths.scriptsPath ) );
-})
+});
 
-gulp.task( 'sassCompile', function() {
+gulp.task( 'sassCompile', () => {
 	return gulp.src( srcPaths.stylesPath )
 	.pipe(sass().on('error', sass.logError))
 	.pipe( gulp.dest( distPaths.stylesPath ) )
 	.pipe( browserSync.stream() );
 });
 
-gulp.task('imageMin', function(){
+gulp.task('imageMin', () => {
 	gulp.src( srcPaths.imagesPath )
 	.pipe( cache(
 		imagemin ( {
@@ -69,24 +68,24 @@ gulp.task('imageMin', function(){
 			progressive: true,
 			interlaced: true
 		} ) ) )
-		.pipe( gulp.dest( distPaths.imagesPath ) );
-	});
+	.pipe( gulp.dest( distPaths.imagesPath ) );
+});
 
-	gulp.task( 'copyComponents', function() {
-		return gulp.src( srcPaths.compsPath )
-		.pipe( gulp.dest( distPaths.compsPath ) );
-	})
+gulp.task( 'copyComponents', () => {
+	return gulp.src( srcPaths.compsPath )
+	.pipe( gulp.dest( distPaths.compsPath ) );
+});
 
-	gulp.task( 'watch', function() {
-		gulp.watch( srcPaths.jsPath, [ 'concatScripts', browserSync.reload ] );
-		gulp.watch( srcPaths.thirdPartyJsPath, [ 'compileThirdParty', browserSync.reload ] );
-		gulp.watch( srcPaths.imagesPath, [ 'imageMin' ] );
-		gulp.watch( srcPaths.stylesPath, [ 'sassCompile' ] );
-		gulp.watch( distPaths.htmlPath, [ browserSync.reload] );
-		gulp.watch( srcPaths.compsPath, ['copyComponents', browserSync.reload ] );
-	})
+gulp.task( 'watch', () => {
+	gulp.watch( srcPaths.jsPath, [ 'concatScripts', browserSync.reload ] );
+	gulp.watch( srcPaths.thirdPartyJsPath, [ 'compileThirdParty', browserSync.reload ] );
+	gulp.watch( srcPaths.imagesPath, [ 'imageMin' ] );
+	gulp.watch( srcPaths.stylesPath, [ 'sassCompile' ] );
+	gulp.watch( distPaths.htmlPath, [ browserSync.reload] );
+	gulp.watch( srcPaths.compsPath, ['copyComponents', browserSync.reload ] );
+});
 
-	gulp.task( 'default', [ 'serve', 'watch' ] );
+gulp.task( 'default', [ 'serve', 'watch' ] );
 
 gulp.task( 'pre-test', () => {
 	return gulp.src( [ 'app/**/*.js', '!app/server.js', '!app/routes/*.js' ] )
