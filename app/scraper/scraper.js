@@ -1,7 +1,7 @@
 'use strict'
 
-const rp = require('request-promise');
-const cheerio = require('cheerio');
+let rp = require('request-promise');
+let cheerio = require('cheerio');
 
 /**
  * Takes in a publisher and gets
@@ -18,10 +18,10 @@ let scrape = ( publisher ) => {
 
   let dateString = `${ dateObj.year }/${ dateObj.month }/${ dateObj.day }`;
 
-  let urlsArrayPromise = grabPublisherURLs( publisher , '2016/05/11' );
+  let urlsArrayPromise = grabPublisherURLs( publisher , dateString );
   let issuesArray = [];
 
-  urlsArrayPromise
+  return urlsArrayPromise
   .then( allURLs => {
     let requestPromiseArray = allURLs.map( ( url, index ) => {
       return rp( url );
@@ -38,25 +38,25 @@ let scrape = ( publisher ) => {
     return issuesArray;
   })
   .catch( err => {
-    console.log( err );
+    throw new Error( err );
   });
 }
 
 /**
  * Returns relevant issue information from loaded html as an Issue Object
- * @param { CheerioObject } DOM Element wrapped in Cheerio
- * @return { [Issue] } Array of Issue Objects
+ * @param   { Function }  DOM Element wrapped in Cheerio, it's a function
+ * @return  { Array }     Array of Issue Objects
  */
 let getIssues = ( $ ) => {
-  const blockSelector = '#list-items > div #listings > tr';
+  const blockSelector = '#list-items > div #listings tr';
 
   let issuesArray =  [];
 
   $( blockSelector ).map( ( index, block )=> {
     let imgURL = $( block ).find('#image a img' ).attr('src');
-    let issueTitle = $( block ).find('#synopsis #title a').text();
-    let seriesTitle = issueTitle.split(' #')[ 0 ];
-    let issueNumber = issueTitle.split(/(?:#([0-9]*))/g)[ 1 ];
+    let issueTitle = $( block ).find('#synopsis #title a').text().trim();
+    let seriesTitle = issueTitle.split(' #')[ 0 ].trim();
+    let issueNumber = parseInt( issueTitle.split(/(?:#([0-9]*))/g)[ 1 ] );
 
     issuesArray.push({
       issueTitle,
@@ -74,7 +74,8 @@ let getIssues = ( $ ) => {
  * Change the URL that is being loaded into cheerio
  * @param { String } Publisher  (dc_comics or marvel)
  * @param { String } Date       (ex: 2016/05/11)
- * @return { String } URL       A fuckton of URLs
+ * @return { Array }            Array of URLs
+ * @throws { Error }            If Request-Promise 404's or fails
  */
 let grabPublisherURLs = ( publisher, date ) => {
   let opts = {
@@ -86,11 +87,12 @@ let grabPublisherURLs = ( publisher, date ) => {
 
   return rp( opts )
   .then( $ => {
-    let firstPage = getIssues( $ );
+    // Uncomment this when we have a db, so then a real test can be written
+    // let firstPage = getIssues( $ );
     return generateURLs( $, publisher, date );
   })
   .catch( err => {
-    console.log(`Request-Promise didn't work when counting pages ${ err }`);
+    throw new Error('Something failed in grabPublisherURLs\n', err );
   });
 }
 
@@ -114,14 +116,20 @@ let makeURL = ( startIssue, publisher, date ) => {
  * https://pulllist.comixology.com/marvel/2016/05/11
  * this function figures out the URLs for all the pages with comics for this day
  *
- * @param  { CheerioBody } $   This is the HTML of the page after
- *                             being loaded into cheerio
- * @return { Array }           Array of URLs for all the pages of this date/pub
+ * @param  { Function } $   This is the HTML of the page after
+ *                          being loaded into cheerio,
+ *                          It's an invokable function
+ * @return { Array }        Array of URLs for all the pages of this date/pub
  */
 let generateURLs = ( $, publisher, date ) => {
   const numToTakeOff = 2; // First request, and "next" link
-  const paginationSelector = '#items';
-  let numPages = $( $( paginationSelector )[ 0 ] ).children().length - numToTakeOff;
+  const pageSelector = '#items';
+  let numPages = 0;
+
+  if ( $( pageSelector ) && $( pageSelector ).length ) {
+    numPages = $( $( pageSelector )[ 0 ] ).children().length - numToTakeOff;
+  }
+
   let urlsArray = [];
 
   while ( numPages > 0 ) {

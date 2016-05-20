@@ -8,6 +8,7 @@ var cache = require('gulp-cache');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 let mocha = require('gulp-mocha');
+let istanbul = require('gulp-istanbul');
 
 
 
@@ -87,7 +88,15 @@ gulp.task('imageMin', function(){
 
 	gulp.task( 'default', [ 'serve', 'watch' ] );
 
-gulp.task( 'test', () => {
+gulp.task( 'pre-test', () => {
+	return gulp.src( [ 'app/**/*.js', '!app/server.js', '!app/routes/*.js' ] )
+	.pipe( istanbul( { includeUntested: true } ) )
+	.pipe( istanbul.hookRequire() );
+
+});
+
+gulp.task( 'test', [ 'pre-test' ], () => {
 	return gulp.src('test/**/*.js')
-	.pipe( mocha() );
+	.pipe( mocha() )
+	.pipe( istanbul.writeReports() );
 });
