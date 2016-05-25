@@ -1,6 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 
 let issueSchema = {
   title: 'String',
@@ -15,24 +16,28 @@ let issueSchema = {
   dateReleased: 'Date'
 }
 
-let Issue = new mongoose.model( 'Issue', new mongoose.Schema( issueSchema ) );
+let Issue = mongoose.model( 'Issue', new mongoose.Schema( issueSchema ) );
 
 /**
 * Creates an Issue given an Issue Object
 * @param issueObject { Issue } Issue to be Created
 */
 let createIssue = issueObject => {
-  Issue.create( issueObject, ( err, issue ) => {
-    if ( err ) return handleError( err );
+  return Issue.create( issueObject, ( err, issue ) => {
+    if ( err ) {
+      throw new Error( err );
+    }
   });
 }
 
 /**
 * Get all the Issues
 */
-let readIssue = issueObject => {
-  Issue.find( {}, ( err, issues ) => {
-    if ( err ) return handleError( err );
+let readIssues = issueObject => {
+  return Issue.find( {}, ( err, issues ) => {
+    if ( err ) {
+      throw new Error( err );
+    }
   });
 }
 
@@ -40,9 +45,11 @@ let readIssue = issueObject => {
 * Update an issue
 * @param issueObject { Issue } Issue to be updated
 */
-let updateIssue = ( issueObject, updatedIssueObject )=> {
+let updateIssue = ( issueObject, updatedIssueObject ) => {
   Issue.update( issueObject, { $set: updatedIssueObject }, ( err, issue ) => {
-    if ( err ) return handleError( err );
+    if ( err ) {
+      throw new Error( err );
+    }
   });
 }
 
@@ -51,7 +58,16 @@ let updateIssue = ( issueObject, updatedIssueObject )=> {
 * @param issueObject { Issue } Issue to be Deleted
 */
 let deleteIssue = issueObject => {
-  Issue.remove( issueObject , ( err ) => {
-    if ( err ) return handleError( err );
+  Issue.remove( issueObject , ( err, issue ) => {
+    if ( err ) {
+      throw new Error( err );
+    }
   });
+}
+
+module.exports = {
+  createIssue,
+  readIssues,
+  updateIssue,
+  deleteIssue
 }
