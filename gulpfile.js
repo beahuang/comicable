@@ -10,6 +10,7 @@ const cache = require('gulp-cache');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const mocha = require('gulp-mocha');
+const istanbul = require('gulp-istanbul');
 
 const srcPaths = {
 	jsPath: [ 'public/**/*.js', '!public/third-party.js' ],
