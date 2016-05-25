@@ -48,4 +48,3 @@ Promise.all( plugins ).then( () => {
   });
 })
 .catch( console.error );
-

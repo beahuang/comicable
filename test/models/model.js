@@ -1,45 +1,32 @@
 'use strict';
 
-const modulePath = '../../app/models/issue.js';
+const modulePath = '../../app/resources/issue.js';
 const assert = require('chai').assert;
-const Promise = require('bluebird');
-const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017/test';
+let issue = require( modulePath );
 
 describe ( 'Issue', () =>  {
 
-
   describe( '#createIssue', () => {
 
-    // beforeEach( () => {
-    //   MongoClient.connect( url, ( err, db ) => {
-    //     db.dropDatabase();
-    //     db.close();
-    //   });
-    // });
-
     it ( 'Throws an error if the Issue creation fails', ( done ) => {
-      let issue = require('rewire')( modulePath );
+
       let mockIssue = {
         title: 2
       }
 
-      issue.createIssue( mockIssue ).then( i => {
-        console.log(i)
+      issue.createIssue( mockIssue )
+      .then( issue => {
+        assert.isDefined( issue._id );
+        Object.keys( mockIssue ).forEach( key => {
+          assert.equal( mockIssue[ key ], issue[ key ] );
+        });
+        // assert.includeDeepMembers( issue, mockIssue );
+        done();
+      })
+      .catch( err => {
+        assert.ok( false );
         done();
       });
-
-      // issue.createIssue( mockIssue )
-      // .then( issue => {
-      //   console.log(issue)
-      //   assert.ok( false );
-      //   done();
-      // })
-      // .catch( err => {
-      //   console.log(err)
-      //   assert.ok( false );
-      //   done();
-      // });
 
     });
 
