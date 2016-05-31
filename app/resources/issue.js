@@ -1,18 +1,20 @@
 'use strict';
 
 let Issue = require('../models/issue.js');
+let Promise = require('bluebird');
 
 /**
 * Creates an Issue given an Issue Object
 * @param issueObject { Issue } Issue to be Created
 */
 let createIssue = issueObject => {
-  return Issue.create( issueObject, ( err, issue ) => {
-    if ( err ) {
-      throw new Error( err );
-    }
-
-    return issue;
+  return new Promise( ( resolve, reject ) => {
+    Issue.create( issueObject, ( err, issue ) => {
+      if ( err ) {
+        reject( err );
+      }
+      resolve( issue );
+    });
   });
 }
 
@@ -20,12 +22,14 @@ let createIssue = issueObject => {
 * Get all the Issues
 */
 let readIssues = issueObject => {
-  return Issue.find( {}, ( err, issues ) => {
-    if ( err ) {
-      throw new Error( err );
-    }
+  return new Promise( ( resolve, reject ) => {
+    Issue.find( {} , ( err, issues ) => {
+      if ( err ) {
+        reject( err );
+      }
 
-    return issues;
+      resolve( issues );
+    });
   });
 }
 
@@ -56,13 +60,6 @@ let deleteIssue = issueObject => {
     return issue;
   });
 }
-
-createIssue({
-          issueTitle: 'Agents of S.H.I.E.L.D. (2016-) #5 Aso',
-          imgURL: 'https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/PrintItem/501600/MAR160802._SX200_QL80_TTD_.jpg',
-          seriesTitle: 'Agents of S.H.I.E.L.D. (2016-)',
-          issueNumber: 5
-        });
 
 
 module.exports = {

@@ -4,11 +4,13 @@ const modulePath = '../../app/resources/issue.js';
 const assert = require('chai').assert;
 let issue = require( modulePath );
 
+
 describe ( 'Issue', () =>  {
 
   describe( '#createIssue', () => {
 
-    it ( 'Throws an error if the Issue creation fails', ( done ) => {
+    it ( 'Resolves to an Issue if Issue is successfully created in db', ( done ) => {
+      let db = require('../../app/db/db.js');
 
       let mockIssue = {
         title: 2
@@ -20,17 +22,16 @@ describe ( 'Issue', () =>  {
         Object.keys( mockIssue ).forEach( key => {
           assert.equal( mockIssue[ key ], issue[ key ] );
         });
-        // assert.includeDeepMembers( issue, mockIssue );
-        done();
+        db.disconnect( () => done() );
       })
       .catch( err => {
         assert.ok( false );
-        done();
+        db.disconnect( () => done() );
       });
 
     });
 
-    xit ( 'Resolves to an Issue if Issue is successfully created in db', () => {
+    xit ( 'Error case', () => {
       let mockIssue = {
         title: 'DC Universe Rebirth #1',
         author: 'Geoff Johns',
