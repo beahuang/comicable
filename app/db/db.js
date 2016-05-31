@@ -1,7 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const dbURL = 'mongodb://localhost:27017/comicable';
+const dbURL = require('../config.js')('mongoURL');
 
 let db = mongoose.connection;
 
