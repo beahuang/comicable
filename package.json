@@ -4,7 +4,7 @@
   "description": "Comic web app",
   "main": "main.js",
   "scripts": {
-    "test": "gulp test",
+    "test": "NODE_ENV=test gulp test",
     "start": "nodemon app/server.js"
   },
   "repository": {
