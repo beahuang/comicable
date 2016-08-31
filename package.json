@@ -39,6 +39,7 @@
     "cheerio": "0.20.0",
     "hapi": "13.4.0",
     "jquery": "3.0.0",
+    "inert": "4.0.2",
     "mongodb": "2.1.18",
     "mongoose": "4.4.17",
     "request": "2.72.0",
