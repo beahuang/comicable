@@ -11,7 +11,7 @@ let issueSchema = new mongoose.Schema({
   currentlyReading: 'Boolean',
   favorite: 'Boolean',
   uploaded: 'Boolean',
-  dateReleased: 'Date'
+  dateReleased: 'String'
 });
 
 let Issue = db.model( 'Issue', issueSchema );

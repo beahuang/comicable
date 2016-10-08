@@ -36,14 +36,22 @@ let readIssues = issueObject => {
 /**
 * Update an issue
 * @param issueObject { Issue } Issue to be updated
+* @param updatedIssueFields { Object } Updated fields
 */
-let updateIssue = ( issueObject, updatedIssueObject ) => {
-  return Issue.update( issueObject, { $set: updatedIssueObject }, ( err, issue ) => {
-    if ( err ) {
-      throw new Error( err );
+let updateIssue = ( issueObject, updatedIssueFields ) => {
+  return new Promise( ( resolve, reject ) => {
+    const options = {
+      'new': true,
+      'upsert': false,
+      'runValidators': true
     }
 
-    return issue;
+    Issue.findOneAndUpdate( issueObject, updatedIssueFields, options, ( err, issue ) => {
+      if ( err ) {
+        reject( err );
+      }
+      resolve( issue );
+    });
   });
 }
 
@@ -52,12 +60,13 @@ let updateIssue = ( issueObject, updatedIssueObject ) => {
 * @param issueObject { Issue } Issue to be Deleted
 */
 let deleteIssue = issueObject => {
-  return Issue.remove( issueObject , ( err, issue ) => {
-    if ( err ) {
-      throw new Error( err );
-    }
-
-    return issue;
+  return new Promise( ( resolve, reject ) => {
+    Issue.findOneAndRemove( issueObject, ( err, issue ) => {
+      if ( err ) {
+        reject( err );
+      }
+      resolve( issue );
+    });
   });
 }
 

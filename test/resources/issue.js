@@ -1,13 +1,22 @@
 'use strict';
 
+const mongoose = require('mongoose');
 const modulePath = '../../app/resources/issue.js';
 const assert = require('chai').assert;
-let issue = require( modulePath );
-
+let Issue = require( modulePath );
+let db = require('../../app/db/db.js');
 
 describe ( 'Issue', () =>  {
 
   describe( '#createIssue', () => {
+
+    beforeEach( () => {
+      mongoose.connection.collections['issues'].drop( ( err ) => {
+        if ( err ) {
+          console.log( err );
+        }
+      });
+    });
 
     it ( 'Resolves to an Issue if Issue is successfully created in db', ( done ) => {
       let db = require('../../app/db/db.js');
@@ -16,24 +25,24 @@ describe ( 'Issue', () =>  {
         title: 2
       }
 
-      issue.createIssue( mockIssue )
+      Issue.createIssue( mockIssue )
       .then( issue => {
         assert.isDefined( issue._id );
         Object.keys( mockIssue ).forEach( key => {
           assert.equal( mockIssue[ key ], issue[ key ] );
         });
-        db.disconnect( () => done() );
+        done();
       })
       .catch( err => {
         assert.ok( false );
-        db.disconnect( () => done() );
+        done();
       });
 
     });
 
-    xit ( 'Error case', () => {
+    it ( 'Error case', () => {
       let mockIssue = {
-        title: 'DC Universe Rebirth #1',
+        title: 2,
         author: 'Geoff Johns',
         imgURL: 'https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/PrintItem/510822/APR160273._SX200_QL80_TTD_.jpg',
         seriesTitle: 'DC Universe Rebirth',
@@ -45,25 +54,29 @@ describe ( 'Issue', () =>  {
         dateReleased: '05/11/16'
       }
 
-      issue.createIssue( mockIssue )
-      .then( issue => {
+      Issue.createIssue( mockIssue )
+      .then( () => {
         assert.sameDeepMembers( issue, mockIssue );
         done();
+      } )
+      .catch( err => {
+        assert.ok( true );
       });
 
     });
   });
 
-  xdescribe( '#readIssues', () => {
+  describe( '#readIssues', () => {
 
     beforeEach( () => {
-      MongoClient.connect( url, ( err, db ) => {
-        db.dropDatabase();
-        db.close();
+      mongoose.connection.collections['issues'].drop( ( err ) => {
+        if ( err ) {
+          console.log( err );
+        }
       });
     });
 
-    it ( 'Reads all the Issues in the database', () => {
+    it ( 'Reads all the Issues in the database', ( done ) => {
       let mockIssues = [{
         title: 'DC Universe Rebirth #1',
         author: 'Geoff Johns',
@@ -88,29 +101,44 @@ describe ( 'Issue', () =>  {
         dateReleased: '05/11/16'
       }];
 
-      issue.createIssue( mockIssues[0] );
-      issue.createIssue( mockIssues[1] );
-
-      issue.readIssues()
+      Issue.createIssue( mockIssues[ 0 ] )
+      .then( () => {
+        Issue.createIssue( mockIssues[ 1 ] );
+      })
+      .then( () => {
+        return Issue.readIssues()
+      })
       .then( issues => {
         assert.isArray( issues );
-        assert.sameDeepMembers( issues, mockIssues );
+
+        mockIssues.forEach( ( mockIssue, index ) => {
+          const actual_issue = issues[ index ];
+          Object.keys( mockIssue ).forEach( key => {
+            assert.equal( mockIssue[ key ], actual_issue[ key ] );
+          });
+        });
+
+        done();
+      })
+      .catch( err => {
+        assert.ok( false );
         done();
       });
+
     });
 
   });
 
-  xdescribe( '#updateIssue', () => {
-
+  describe( '#updateIssue', () => {
     beforeEach( () => {
-      MongoClient.connect( url, ( err, db ) => {
-        db.dropDatabase();
-        db.close();
+      mongoose.connection.collections['issues'].drop( ( err ) => {
+        if ( err ) {
+          console.log( err );
+        }
       });
     });
 
-    it ( 'Throws an error if it is being updated with invalid properties', () => {
+    it ( 'Throws an error if it is being updated with invalid properties', ( done ) => {
       let mockIssue = {
         title: 'DC Universe Rebirth #1',
         author: 'Geoff Johns',
@@ -128,8 +156,11 @@ describe ( 'Issue', () =>  {
         author: 1,
       }
 
-      issue.updateIssue( mockIssue, mockUpdatedIssue )
+      Issue.createIssue( mockIssue )
       .then( () => {
+        return Issue.updateIssue( mockIssue, mockUpdatedIssue )
+      })
+      .then( issue => {
         assert.ok( false );
         done();
       })
@@ -137,9 +168,10 @@ describe ( 'Issue', () =>  {
         assert.ok( true );
         done();
       });
+
     });
 
-    it ( 'Updates the Issue in the database', () => {
+    it ( 'Updates the Issue in the database', ( done ) => {
       let mockIssue = {
         title: 'DC Universe Rebirth #1',
         author: 'Geoff Johns',
@@ -158,27 +190,113 @@ describe ( 'Issue', () =>  {
         issueNumber: 4
       }
 
-      issue.updateIssue( mockIssue, mockUpdatedIssue )
-      .then( issue  => {
-        assert.sameDeepMembers( issue, mockUpdatedIssue );
+      Issue.createIssue( mockIssue )
+      .then( () => {
+        return Issue.updateIssue( mockIssue, mockUpdatedIssue );
       })
-    });
+      .then( updatedIssue => {
+        Object.keys( mockUpdatedIssue ).forEach( key => {
+          assert.equal( updatedIssue[ key ], mockUpdatedIssue[ key ] );
+        });
+        done();
+      })
+      .catch( err => {
+        assert.ok( false );
+        done();
+      });
 
+    });
   });
 
-  xdescribe( '#deleteIssue', () => {
-
+  describe( '#deleteIssue', () => {
     beforeEach( () => {
-      MongoClient.connect( url, ( err, db ) => {
-        db.dropDatabase();
-        db.close();
+      mongoose.connection.collections['issues'].drop( ( err ) => {
+        if ( err ) {
+          console.log( err );
+        }
       });
     });
 
-    it ( 'Throws an error if Issue to be deleted is not there', () => {
+    it ( 'Throws an error if Issue to be deleted is not there', ( done ) => {
+      let mockIssues = [{
+        title: 'DC Universe Rebirth #1',
+        author: 'Geoff Johns',
+        imgURL: 'https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/PrintItem/510822/APR160273._SX200_QL80_TTD_.jpg',
+        seriesTitle: 'DC Universe Rebirth',
+        issueNumber: 1,
+        publisher: 'DC',
+        currentlyReading: true,
+        favorite: false,
+        uploaded: false,
+        dateReleased: '05/11/16'
+      }, {
+        title: 'Black Panther (2016-) #2',
+        author: 'Coates, Ta-Nehisi',
+        imgURL: 'https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/PrintItem/502435/MAR160829._SX360_QL80_TTD_.jpg',
+        seriesTitle: 'Black Panther (2016-)',
+        issueNumber: '2',
+        publisher: 'Marvel',
+        currentlyReading: false,
+        favorite: false,
+        uploaded: false,
+        dateReleased: '05/11/16'
+      }];
+
+      Issue.createIssue( mockIssues[0] )
+      .then( () => {
+        return Issue.deleteIssue( mockIssues[1] );
+      })
+      .then( () => {
+        assert.ok( false );
+        done();
+      })
+      .catch( err => {
+        assert.ok( true );
+        done();
+      });
+
     });
 
-    it ( 'Deletes the Issue from the database', () => {
+    it ( 'Deletes the Issue from the database', ( done ) => {
+      let mockIssue = {
+        title: 'DC Universe Rebirth #1',
+        author: 'Geoff Johns',
+        imgURL: 'https://images-na.ssl-images-amazon.com/images/S/cmx-images-prod/PrintItem/510822/APR160273._SX200_QL80_TTD_.jpg',
+        seriesTitle: 'DC Universe Rebirth',
+        issueNumber: 1,
+        publisher: 'DC',
+        currentlyReading: true,
+        favorite: false,
+        uploaded: false,
+        dateReleased: '05/11/16'
+      }
+
+      Issue.createIssue( mockIssue )
+      .then( () => {
+        Issue.readIssues()
+        .then( issues => {
+          assert.lengthOf( issues, 1, 'There should be 1 issue in collection');
+        })
+        .then( () => {
+          return Issue.deleteIssue( mockIssue )
+        })
+        .then( deletedIssue => {
+          Object.keys( mockIssue ).forEach( key => {
+            assert.equal( deletedIssue[ key ], mockIssue[ key ] );
+          });
+
+          Issue.readIssues()
+          .then( issues => {
+            assert.lengthOf( issues, 0, 'There should be 0 issue in collection');
+            done();
+          });
+        })
+        .catch( err => {
+          assert.ok( false );
+          done();
+        })
+      });
+
     });
   });
 
