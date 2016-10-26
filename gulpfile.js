@@ -36,6 +36,14 @@ gulp.task( 'serve', () => {
     proxy: "localhost:8080"
   } );
 
+  gulp.watch( srcPaths.jsPath, [ 'concatScripts', browserSync.reload ] );
+  gulp.watch( srcPaths.thirdPartyJsPath, [ 'compileThirdParty', browserSync.reload ] );
+  gulp.watch( srcPaths.imagesPath, [ 'imageMin' ] );
+  gulp.watch( srcPaths.stylesPath, [ 'sassCompile' ] );
+  gulp.watch( srcPaths.compsPath, ['copyComponents', browserSync.reload ] );
+
+  gulp.watch( distPaths.htmlPath, [ browserSync.reload ] );
+
 });
 
 gulp.task( 'concatScripts', () => {
@@ -74,16 +82,7 @@ gulp.task( 'copyComponents', () => {
   .pipe( gulp.dest( distPaths.compsPath ) );
 });
 
-gulp.task( 'watch', () => {
-  gulp.watch( srcPaths.jsPath, [ 'concatScripts', browserSync.reload ] );
-  gulp.watch( srcPaths.thirdPartyJsPath, [ 'compileThirdParty', browserSync.reload ] );
-  gulp.watch( srcPaths.imagesPath, [ 'imageMin' ] );
-  gulp.watch( srcPaths.stylesPath, [ 'sassCompile' ] );
-  gulp.watch( distPaths.htmlPath, [ browserSync.reload] );
-  gulp.watch( srcPaths.compsPath, ['copyComponents', browserSync.reload ] );
-});
-
-gulp.task( 'default', [ 'serve', 'watch' ] );
+gulp.task( 'default', [ 'serve' ] );
 
 gulp.task( 'pre-test', () => {
   const testFiles = [
