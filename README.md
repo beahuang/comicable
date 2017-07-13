@@ -21,6 +21,7 @@
 
 # Run Tests
 1. `npm test`
+* `mongod` Service needs to be running
 
 # Directory Information
 ```

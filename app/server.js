@@ -10,6 +10,7 @@ server.connection( { port: 8080 } );
 
 
 require('./routes/api.js')( server );
+require('./routes/issue.js')( server );
 
 function register( plugin ) {
   return new Promise( ( resolve, reject ) => {
@@ -48,4 +49,3 @@ Promise.all( plugins ).then( () => {
   });
 })
 .catch( console.error );
-
