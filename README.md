@@ -3,7 +3,7 @@
 # Installation
 1. Install [HomeBrew](http://brew.sh/)
 2. Install `nvm` via `brew install nvm` and follow the prompts
-3. Install `node` via `nvm install v6.1.0` -> `nvm use v6.1.0`
+3. Install `node` via `nvm install v8.2.1` -> `nvm use v8.2.1`
 4. Install `mongodb` via `brew install mongodb`
 5. Install `gulp` via `npm install -g gulp`
 6. Install `mocha` via `npm install -g mocha`
