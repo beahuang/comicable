@@ -29,6 +29,7 @@
     "gulp-sass": "2.2.0",
     "gulp-uglify": "1.5.3",
     "nodemon": "^1.11.0",
+    "sinon": "^3.2.0",
     "vinyl-source-stream": "1.1.0"
   },
   "dependencies": {
@@ -43,7 +44,7 @@
     "inert": "4.0.2",
     "jquery": "2.2.2",
     "mongodb": "2.1.18",
-    "mongoose": "4.4.17",
+    "mongoose": "4.11.7",
     "request": "2.72.0",
     "request-promise": "3.0.0",
     "rewire": "2.5.1"

@@ -7,7 +7,6 @@ const data = {
 }
 
 let get = key => {
-  console.log( process.env.ENV );
   let env = process.env.NODE_ENV || 'development';
   return data[ key ][ env ];
 }
